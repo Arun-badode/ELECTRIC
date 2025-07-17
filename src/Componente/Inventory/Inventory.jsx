@@ -114,7 +114,7 @@ const Inventory = () => {
         <div className="row align-items-center justify-content-between mb-3">
           {/* Left Side: Heading */}
           <div className="col">
-            <h2 className="mb-0">Inventory</h2>
+            <h2 className="h4 fw-bold mb-3">Inventory</h2>
           </div>
 
           {/* Right Side: Buttons */}
@@ -133,27 +133,25 @@ const Inventory = () => {
           <button className="btn btn-outline-secondary">
             <i className="bi bi-upload" /> Export
           </button>
-       <div className="d-flex flex-wrap gap-3">
-  <div className="input-group input-group-sm w-auto">
-  
-    <select className="form-select">
-      <option>All Categories</option>
-      <option>Electronics</option>
-      <option>Office Supplies</option>
-      <option>Furniture</option>
-    </select>
-  </div>
+          <div className="d-flex flex-wrap gap-2">
+            <div className="input-group input-group-sm w-auto">
+              <select className="form-select">
+                <option>All Categories</option>
+                <option>Electronics</option>
+                <option>Office Supplies</option>
+                <option>Furniture</option>
+              </select>
+            </div>
 
-  <div className="input-group input-group-sm w-auto">
-    
-    <select className="form-select">
-      <option>All Warehouses</option>
-      <option>Main Warehouse</option>
-      <option>East Coast</option>
-      <option>West Coast</option>
-    </select>
-  </div>
-</div>
+            <div className="input-group input-group-sm w-auto">
+              <select className="form-select">
+                <option>All Warehouses</option>
+                <option>Main Warehouse</option>
+                <option>East Coast</option>
+                <option>West Coast</option>
+              </select>
+            </div>
+          </div>
 
         </div>
       </div>

@@ -117,14 +117,13 @@ const Orders = () => {
 
   return (
     <div className=''>
-      <div className="container-fluid p-4">
+      <div className="p-4">
         {/* Page Header */}
-        <div className="row mb-4">
+        <div className="row mb-3">
           <div className="col">
-            <h1 className="h2 mb-2">
-              <i className="fas fa-check-circle text-success me-2"></i>
+            <h2 className="h4 fw-bold">
               Orders
-            </h1>
+            </h2>
          
           </div>
           <div className="col-auto">

@@ -9,7 +9,7 @@ const ReportAnalytics = () => {
   const revenueChartInstance = useRef(null);
   const ordersChartInstance = useRef(null);
   const demographicsChartInstance = useRef(null);
-  
+
   // Initialize charts
   useEffect(() => {
     // Cleanup function
@@ -36,7 +36,7 @@ const ReportAnalytics = () => {
       if (revenueChartInstance.current) {
         revenueChartInstance.current.destroy();
       }
-      
+
       revenueChartInstance.current = new Chart(revenueChartRef.current, {
         type: 'line',
         data: {
@@ -74,7 +74,7 @@ const ReportAnalytics = () => {
       if (ordersChartInstance.current) {
         ordersChartInstance.current.destroy();
       }
-      
+
       ordersChartInstance.current = new Chart(ordersChartRef.current, {
         type: 'doughnut',
         data: {
@@ -109,7 +109,7 @@ const ReportAnalytics = () => {
       if (demographicsChartInstance.current) {
         demographicsChartInstance.current.destroy();
       }
-      
+
       demographicsChartInstance.current = new Chart(demographicsChartRef.current, {
         type: 'pie',
         data: {
@@ -140,27 +140,28 @@ const ReportAnalytics = () => {
   }, []);
 
   return (
-    <div className="p-2">
+    <div className="p-3">
+      <h2 className="h4 fw-bold mb-3">Report Analytics</h2>
       {/* Top Control Row */}
-<div className="d-flex flex-column flex-md-row justify-content-between align-items-stretch align-items-md-center gap-3 mb-4">
-  {/* Left Group: Filter & Export */}
-  <div className="d-flex flex-column flex-sm-row gap-2 w-100 w-md-auto">
-    <select className="form-select w-100 w-sm-auto" style={{ minWidth: '150px' }}>
-      <option>Last 7 Days</option>
-      <option>Last 30 Days</option>
-      <option>This Quarter</option>
-      <option>This Year</option>
-    </select>
-    <button className="btn btn-outline-secondary ">
-      <i className="bi bi-download me-2"></i>Export Report
-    </button>
-  </div>
+      <div className="d-flex flex-column flex-md-row justify-content-between align-items-stretch align-items-md-center gap-3 mb-4">
+        {/* Left Group: Filter & Export */}
+        <div className="d-flex flex-column flex-sm-row gap-2 w-100 w-md-auto">
+          <select className="form-select w-100 w-sm-auto" style={{ minWidth: '150px' }}>
+            <option>Last 7 Days</option>
+            <option>Last 30 Days</option>
+            <option>This Quarter</option>
+            <option>This Year</option>
+          </select>
+          <button className="btn btn-outline-secondary ">
+            <i className="bi bi-download me-2"></i>Export Report
+          </button>
+        </div>
 
-  {/* Right: Refresh Button */}
-  <button className="btn btn-primary  ms-md-auto">
-    Refresh Data
-  </button>
-</div>
+        {/* Right: Refresh Button */}
+        <button className="btn btn-primary  ms-md-auto">
+          Refresh Data
+        </button>
+      </div>
 
 
       {/* Metrics Row */}

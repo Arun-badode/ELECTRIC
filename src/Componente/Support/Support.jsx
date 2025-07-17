@@ -3,8 +3,8 @@ import { Card, Form, Button } from 'react-bootstrap';
 
 const Support = () => {
   return (
-    <div className="p-2">
-      <h4 className="mb-4">Support & Help</h4>
+    <div className="p-3">
+      <h2 className="h4 fw-bold mb-3">Support & Help</h2>
 
       <Card className="mb-4 shadow-sm">
         <Card.Body>

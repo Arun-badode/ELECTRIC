@@ -3,8 +3,8 @@ import { Form, Card, Button } from 'react-bootstrap';
 
 const Settings = () => {
   return (
-    <div className="p-2">
-      <h4 className="mb-4">Account Settings</h4>
+    <div className="p-3">
+      <h2 className="h4 fw-bold mb-3">Account Settings</h2>
 
       <Card className="mb-4 shadow-sm">
         <Card.Body>

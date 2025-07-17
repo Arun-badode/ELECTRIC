@@ -145,7 +145,7 @@ const Dashboard = () => {
       {/* Page Header */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
-          <h2 className="fw-bold mb-1">Dashboard Overview</h2>
+          <h2 className="h4 fw-bold mb-3">Dashboard Overview</h2>
           <p className="text-muted mb-0">Key metrics and statistics</p>
         </div>
         <div>
