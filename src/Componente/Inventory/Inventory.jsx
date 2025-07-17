@@ -218,6 +218,7 @@ const Inventory = () => {
                     onClick={() => handleDeleteItem(item.sku)}
                   ></i>
                 </td>
+
               </tr>
             ))}
           </tbody>

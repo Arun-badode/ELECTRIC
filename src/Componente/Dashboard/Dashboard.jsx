@@ -172,8 +172,8 @@ const Dashboard = () => {
                                         <i className="bi bi-arrow-up me-1"></i>5.2% from last month
                                     </span>
                                 </div>
-                                <div className="bg-primary bg-opacity-10 text-primary rounded-circle p-3">
-                                    <i className="bi bi-box-seam fs-4"></i>
+                                <div className="bg-primary bg-opacity-10 text-white rounded-circle p-3">
+                                   <i className="bi bi-box-seam"></i>
                                 </div>
                             </div>
                             <div className="mt-3">
@@ -201,8 +201,8 @@ const Dashboard = () => {
                                         <i className="bi bi-arrow-up me-1"></i>12.8% from last month
                                     </span>
                                 </div>
-                                <div className="bg-danger bg-opacity-10 text-danger rounded-circle p-3">
-                                    <i className="bi bi-cart-check fs-4"></i>
+                                <div className="bg-danger bg-opacity-10 text-white rounded-circle p-3">
+                                   <i className="bi bi-cart-check"></i>
                                 </div>
                             </div>
                             <div className="mt-3">
@@ -230,8 +230,8 @@ const Dashboard = () => {
                                         <i className="bi bi-arrow-up me-1"></i>3.5% from last month
                                     </span>
                                 </div>
-                                <div className="bg-warning bg-opacity-10 text-warning rounded-circle p-3">
-                                    <i className="bi bi-people fs-4"></i>
+                                <div className="bg-warning bg-opacity-10 text-white rounded-circle p-3">
+                                  <i className="bi bi-people"></i>
                                 </div>
                             </div>
                             <div className="mt-3">
@@ -259,8 +259,8 @@ const Dashboard = () => {
                                         <i className="bi bi-arrow-up me-1"></i>18.6% from last month
                                     </span>
                                 </div>
-                                <div className="bg-success bg-opacity-10 text-success rounded-circle p-3">
-                                    <i className="bi bi-currency-dollar fs-4"></i>
+                                <div className="bg-success bg-opacity-10 text-white rounded-circle p-3">
+                                   <i className="bi bi-currency-dollar"></i>
                                 </div>
                             </div>
                             <div className="mt-3">
@@ -481,7 +481,7 @@ const Dashboard = () => {
                                 <div className="list-group-item border-0 px-0 py-3">
                                     <div className="d-flex align-items-center">
                                         <div className="flex-shrink-0">
-                                            <div className="bg-primary bg-opacity-10 text-primary rounded p-2">
+                                            <div className="bg-primary bg-opacity-10 text-white rounded p-2">
                                                 <i className="bi bi-laptop fs-4"></i>
                                             </div>
                                         </div>
@@ -497,7 +497,7 @@ const Dashboard = () => {
                                 <div className="list-group-item border-0 px-0 py-3">
                                     <div className="d-flex align-items-center">
                                         <div className="flex-shrink-0">
-                                            <div className="bg-success bg-opacity-10 text-success rounded p-2">
+                                            <div className="bg-success bg-opacity-10 text-white rounded p-2">
                                                 <i className="bi bi-phone fs-4"></i>
                                             </div>
                                         </div>
@@ -513,7 +513,7 @@ const Dashboard = () => {
                                 <div className="list-group-item border-0 px-0 py-3">
                                     <div className="d-flex align-items-center">
                                         <div className="flex-shrink-0">
-                                            <div className="bg-warning bg-opacity-10 text-warning rounded p-2">
+                                            <div className="bg-warning bg-opacity-10 text-white rounded p-2">
                                                 <i className="bi bi-headphones fs-4"></i>
                                             </div>
                                         </div>
@@ -529,7 +529,7 @@ const Dashboard = () => {
                                 <div className="list-group-item border-0 px-0 py-3">
                                     <div className="d-flex align-items-center">
                                         <div className="flex-shrink-0">
-                                            <div className="bg-info bg-opacity-10 text-info rounded p-2">
+                                            <div className="bg-info bg-opacity-10 text-white rounded p-2">
                                                 <i className="bi bi-smartwatch fs-4"></i>
                                             </div>
                                         </div>
