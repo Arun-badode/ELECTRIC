@@ -102,7 +102,7 @@ const CustomNavbar = () => {
           <img
             src="https://i.postimg.cc/DyqKQj0V/Screenshot-2025-07-17-122021-removebg-preview.png"
             alt="ElectroSupply Logo"
-            height="40"
+            height="60"
             width="100"
             className="me-2"
           />
@@ -121,7 +121,7 @@ const CustomNavbar = () => {
               <FaHome /> Home
             </Button>
             <Link to="/electricalproducts">
-              <Button className="text-dark fw-semibold d-flex align-items-center gap-1 text-decoration-none">
+              <Button className=" text-dark fw-semibold d-flex align-items-center gap-1 text-decoration-none">
                 <FaBoxOpen /> Products
               </Button>
             </Link>
