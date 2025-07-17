@@ -262,7 +262,7 @@ select.form-input {
 /* maindashbord end */
 /* navbar start */
 .navbar {
-  height: 85px;
+  height: 75px;
   border-bottom: 1px solid #949494;
   position: fixed;
   z-index: 5;
@@ -315,7 +315,7 @@ select.form-input {
 
 .nav-taggle-icon {
   margin-left: 35px;
-  font-size: 30px;
+  font-size: 24px;
 }
 
 .nav-taggle-icon a {
@@ -327,8 +327,8 @@ select.form-input {
 }
 
 .nav-main-icon {
-  font-size: 30px;
-  font-size: 30px;
+  font-size: 24px;
+  font-size: 24px;
   display: flex;
   align-items: center;
 }
@@ -983,4 +983,9 @@ select.form-input {
   flex-wrap: nowrap;
   justify-content: space-between;
 }
+
+
+
+
+
 
