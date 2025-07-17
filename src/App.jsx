@@ -9,6 +9,10 @@ import Orders from "./Componente/Orders/Orders";
 import BannerManager from "./Componente/Banner/BannerManager";
 import Users from "./Componente/Users/Users";
 import Productes from "./Componente/Products/Products";
+import ReportAnalytics from "./Componente/ReportAnalytics/ReportAnalytics";
+import Support from "./Componente/Support/Support";
+import Settings from "./Componente/Settings/Settings";
+import Inventory from "./Componente/Inventory/Inventory";
 
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -47,7 +51,11 @@ function App() {
             <Route path="/orders" element={<Orders />} />
             <Route path="/users" element={<Users />} />
             <Route path="/bannermanager" element={<BannerManager />} />
-            <Route path="/products" element={<Productes />}/> 
+            <Route path="/products" element={<Productes />} />
+            <Route path="/reportanalytics" element={<ReportAnalytics />} />
+            <Route path="/support" element={<Support />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/inventory" element={<Inventory />} />
           </Routes>
         </div>
       </div>

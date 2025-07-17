@@ -14,7 +14,7 @@ const Sidebar = ({ collapsed }) => {
     { name: "All Users", path: "/users", icon: "fa-solid fa-users" },
     { name: "Add Banner", path: "/bannermanager", icon: "fa-solid fa-image" },
     { name: "Inventory", path: "/inventory", icon: "fa-solid fa-warehouse" },
-    { name: "Report Analytics", path: "/analytics", icon: "fa-solid fa-chart-line" },
+    { name: "Report Analytics", path: "/reportanalytics", icon: "fa-solid fa-chart-line" },
     { name: "Support", path: "/support", icon: "fa-solid fa-headset" },
     { name: "Setting", path: "/settings", icon: "fa-solid fa-gear" },
   ];

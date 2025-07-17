@@ -29,7 +29,7 @@ const BannerManager = () => {
 
   return (
     <div className="container my-5">
-      <div className="card p-4 mx-auto" style={{ maxWidth: "600px" }}>
+      <div className="card p-4 mx-auto">
         <h3 className="text-center mb-4">Upload Banners</h3>
         <form onSubmit={handleUpload}>
           <div className="mb-3">
@@ -39,7 +39,7 @@ const BannerManager = () => {
               onChange={handleFileChange}
             />
           </div>
-          <button type="submit" className="btn btn-dark w-100">
+          <button type="submit" className="btn btn-outline-secondary w-100">
             Upload
           </button>
         </form>
@@ -49,7 +49,7 @@ const BannerManager = () => {
         <h4>Uploaded Banners</h4>
         <div className="table-responsive">
           <table className="table table-bordered align-middle text-center">
-            <thead className="table-dark">
+            <thead className="bg-white">
               <tr>
                 <th>#</th>
                 <th>Image</th>

@@ -119,11 +119,11 @@ const Users = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
-    <div className="">
+    <div className="p-3">
       <div className="row mb-4">
         <div className="col-12">
-          <div className="card shadow-sm">
-            <div className="card-header bg-white border-0 pb-0">
+          <div className="">
+            <div className="">
               <div className="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
                 <div className="mb-3 mb-md-0">
                   <h2 className="h4 fw-bold mb-1">User Management</h2>
@@ -160,7 +160,7 @@ const Users = () => {
                 </div>
               </div>
             </div>
-            <div className="card-body">
+            <div className="mt-3">
               <div className="row mb-4">
                 <div className="col-md-6 mb-3 mb-md-0">
                   <div className="input-group">
@@ -247,7 +247,7 @@ const Users = () => {
                 </div>
               </div>
 
-              <div className="table-responsive">
+              <div className="table-responsive bg-white">
                 <table className="table table-hover align-middle">
                   <thead className="table-light">
                     <tr>
