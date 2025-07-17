@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Footer from './Footer';
+import CustomNavbar from './Navbar';
+
 const ElectricalProducts = () => {
   // Product data in a const array
   const products = [
@@ -110,6 +113,8 @@ const ElectricalProducts = () => {
   };
 
   return (
+    <>
+    <CustomNavbar/>
     <div className="bg-light ">
       <div className=" p-4">
         <div className="text-center mb-5">
@@ -296,6 +301,8 @@ const ElectricalProducts = () => {
         }
       `}</style>
     </div>
+    <Footer/>
+    </>
   );
 };
 
