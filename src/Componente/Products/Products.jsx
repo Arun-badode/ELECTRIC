@@ -157,7 +157,7 @@ const Productes = () => {
             {/* Header Section */}
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
                 <div>
-                    <h2 className="fw-bold mb-1">Product Management</h2>
+                    <h2 className="h4 fw-bold mb-3">Product Management</h2>
                     <p className="text-muted mb-0">View and manage all your products</p>
                 </div>
 
@@ -258,7 +258,7 @@ const Productes = () => {
                                             </td>
                                             <td>₹{product.price}</td>
                                             <td>
-                                                <span className={`badge ${product.stock > 20 ? 'bg-success' : 'bg-warning'} bg-opacity-10 text-success`}>
+                                                <span className={`badge ${product.stock > 20 ? 'bg-success' : 'bg-warning'} bg-opacity-10 text-white`}>
                                                     {product.stock} in stock
                                                 </span>
                                             </td>
