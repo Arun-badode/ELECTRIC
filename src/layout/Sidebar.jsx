@@ -29,8 +29,8 @@ const Sidebar = ({ collapsed , menuItemClick}) => {
           <li className={`menu-item ${isActive("/aaa") ? "active" : ""}`}>
             <div
               className="menu-link menu-i"
-              onClick={() => {navigate("/kkk"); menuItemClick();} } >
-              <i className="fa-solid fa-cubes"></i>
+              onClick={() => {navigate("/kkk");} } >
+              <i class="fa-solid fa-boxes-stacked"></i>
               <span className="menu-text">Dashboard</span>
             </div>
           </li>
@@ -104,6 +104,14 @@ const Sidebar = ({ collapsed , menuItemClick}) => {
               onClick={() => {navigate("/kkk"); menuItemClick();} } >
               <i className="fa-solid fa-cubes"></i>
               <span className="menu-text">Setting</span>
+            </div>
+          </li>
+           <li className={`menu-item ${isActive("/aaa") ? "active" : ""}`}>
+            <div
+              className="menu-link menu-i"
+              onClick={() => {navigate("/kkk"); menuItemClick();} } >
+              <i className="fa-solid fa-cubes"></i>
+              <span className="menu-text">Logout</span>
             </div>
           </li>
         </ul>

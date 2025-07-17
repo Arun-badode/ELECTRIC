@@ -40,18 +40,15 @@ const Navbar = ({ toggleSidebar }) => {
                     </Link>
                   </li>
                   <li>
+                    <hr className="dropdown-divider" />
+                  </li>
+                  <li>
                     <Link className="dropdown-item" to="/changepassword">
                       Change Password
                     </Link>
                   </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/">
-                      Logout
-                    </Link>
-                  </li>
+                  
+                  
                 </ul>
               </div>
             </div>
