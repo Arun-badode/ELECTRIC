@@ -258,7 +258,7 @@ const Productes = () => {
                                             </td>
                                             <td>₹{product.price}</td>
                                             <td>
-                                                <span className={`badge ${product.stock > 20 ? 'bg-success' : 'bg-warning'} bg-opacity-10 text-success`}>
+                                                <span className={`badge ${product.stock > 20 ? 'bg-success' : 'bg-warning'} bg-opacity-10 text-white`}>
                                                     {product.stock} in stock
                                                 </span>
                                             </td>
