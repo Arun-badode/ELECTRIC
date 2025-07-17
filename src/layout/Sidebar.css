@@ -7,6 +7,7 @@
   margin-top: 75px;
   z-index: 1;
   position: fixed;
+  scrollbar-width: none;
 }
 
 .sidebar-container.collapsed {
@@ -111,3 +112,18 @@
   padding-left: 20px;
 }
 
+@media only screen and (max-width: 768px) {
+  .sidebar-container.collapsed {
+    width: 0px;
+    /* You might also want to add these for proper hiding */
+    overflow: hidden;
+    min-width: 0;
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+  .sidebar-container.collapsed {
+    display: none;
+  }
+}

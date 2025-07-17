@@ -1,119 +1,41 @@
-import React, { useState } from "react";    
+import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./Sidebar.css";
 
-const Sidebar = ({ collapsed , menuItemClick}) => {
-  const [openSubmenu, setOpenSubmenu] = useState(null); // Tracks the open submenu
+const Sidebar = ({ collapsed }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const toggleSubmenu = (menuName) => {
-    setOpenSubmenu((prev) => (prev === menuName ? null : menuName));
-  };
+  const menuItems = [
+    { name: "Dashboard", path: "/dashboard", icon: "fa-solid fa-gauge" },
+    { name: "All Products", path: "/products", icon: "fa-solid fa-boxes-stacked" },
+    // { name: "Create Products", path: "/create-product", icon: "fa-solid fa-plus-square" },
+    { name: "All Orders", path: "/orders", icon: "fa-solid fa-cart-shopping" },
+    { name: "All Users", path: "/users", icon: "fa-solid fa-users" },
+    { name: "Add Banner", path: "/bannermanager", icon: "fa-solid fa-image" },
+    { name: "Inventory", path: "/inventory", icon: "fa-solid fa-warehouse" },
+    { name: "Report Analytics", path: "/reportanalytics", icon: "fa-solid fa-chart-line" },
+    { name: "Support", path: "/support", icon: "fa-solid fa-headset" },
+    { name: "Setting", path: "/settings", icon: "fa-solid fa-gear" },
+  ];
 
-   // Function to check if a path is active
-   const isActive = (path) => {
-    return location.pathname === path;
-  };
-
-    // Function to check if any of the submenu items are active
-    const isSubmenuActive = (paths) => {
-      return paths.some((path) => location.pathname.startsWith(path));
-    };
+  const isActive = (path) => location.pathname === path;
 
   return (
     <div className={`sidebar-container ${collapsed ? "collapsed" : ""}`}>
       <div className="sidebar">
         <ul className="menu">
-          {/* Dashboard Section */}
-          <li className={`menu-item ${isActive("/aaa") ? "active" : ""}`}>
-            <div
-              className="menu-link menu-i"
-              onClick={() => {navigate("/kkk");} } >
-              <i class="fa-solid fa-boxes-stacked"></i>
-              <span className="menu-text">Dashboard</span>
-            </div>
-          </li>
-           <li className={`menu-item ${isActive("/aaa") ? "active" : ""}`}>
-            <div
-              className="menu-link menu-i"
-              onClick={() => {navigate("/kkk"); menuItemClick();} } >
-              <i className="fa-solid fa-cubes"></i>
-              <span className="menu-text">All Products</span>
-            </div>
-          </li>
-           <li className={`menu-item ${isActive("/aaa") ? "active" : ""}`}>
-            <div
-              className="menu-link menu-i"
-              onClick={() => {navigate("/kkk"); menuItemClick();} } >
-              <i className="fa-solid fa-cubes"></i>
-              <span className="menu-text">Create Products</span>
-            </div>
-          </li>
-           <li className={`menu-item ${isActive("/aaa") ? "active" : ""}`}>
-            <div
-              className="menu-link menu-i"
-              onClick={() => {navigate("/kkk"); menuItemClick();} } >
-              <i className="fa-solid fa-cubes"></i>
-              <span className="menu-text">All Orders</span>
-            </div>
-          </li>
-           <li className={`menu-item ${isActive("/aaa") ? "active" : ""}`}>
-            <div
-              className="menu-link menu-i"
-              onClick={() => {navigate("/kkk"); menuItemClick();} } >
-              <i className="fa-solid fa-cubes"></i>
-              <span className="menu-text">All Users</span>
-            </div>
-          </li>
-           <li className={`menu-item ${isActive("/aaa") ? "active" : ""}`}>
-            <div
-              className="menu-link menu-i"
-              onClick={() => {navigate("/kkk"); menuItemClick();} } >
-              <i className="fa-solid fa-cubes"></i>
-              <span className="menu-text">Add Banner</span>
-            </div>
-          </li>
-           <li className={`menu-item ${isActive("/aaa") ? "active" : ""}`}>
-            <div
-              className="menu-link menu-i"
-              onClick={() => {navigate("/kkk"); menuItemClick();} } >
-              <i className="fa-solid fa-cubes"></i>
-              <span className="menu-text">Inventory</span>
-            </div>
-          </li>
-           <li className={`menu-item ${isActive("/aaa") ? "active" : ""}`}>
-            <div
-              className="menu-link menu-i"
-              onClick={() => {navigate("/kkk"); menuItemClick();} } >
-              <i className="fa-solid fa-cubes"></i>
-              <span className="menu-text">Report Analytics</span>
-            </div>
-          </li>
-           <li className={`menu-item ${isActive("/aaa") ? "active" : ""}`}>
-            <div
-              className="menu-link menu-i"
-              onClick={() => {navigate("/kkk"); menuItemClick();} } >
-              <i className="fa-solid fa-cubes"></i>
-              <span className="menu-text">Support</span>
-            </div>
-          </li>
-           <li className={`menu-item ${isActive("/aaa") ? "active" : ""}`}>
-            <div
-              className="menu-link menu-i"
-              onClick={() => {navigate("/kkk"); menuItemClick();} } >
-              <i className="fa-solid fa-cubes"></i>
-              <span className="menu-text">Setting</span>
-            </div>
-          </li>
-           <li className={`menu-item ${isActive("/aaa") ? "active" : ""}`}>
-            <div
-              className="menu-link menu-i"
-              onClick={() => {navigate("/kkk"); menuItemClick();} } >
-              <i className="fa-solid fa-cubes"></i>
-              <span className="menu-text">Logout</span>
-            </div>
-          </li>
+          {menuItems.map((item, index) => (
+            <li key={index} className={`menu-item ${isActive(item.path) ? "active" : ""}`}>
+              <div
+                className="menu-link menu-i"
+                onClick={() => navigate(item.path)}
+              >
+                <i className={item.icon}></i>
+                <span className="menu-text">{item.name}</span>
+              </div>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
