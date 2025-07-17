@@ -275,7 +275,7 @@ select.form-input {
 }
 
 .nav-brand {
-  color: #578E7E;
+  color: black;
   line-height: 54.46px;
   font-size: 45px;
   font-weight: 700;
@@ -297,7 +297,7 @@ select.form-input {
 }
 
 .nav-brand:hover {
-  color: #578E7E;
+  color: rgb(181, 248, 186);
 }
 
 .nav-content {
@@ -319,11 +319,11 @@ select.form-input {
 }
 
 .nav-taggle-icon a {
-  color: #578E7E;
+  color: black;
 }
 
 .nav-taggle-icon a:hover {
-  color: #578E7E;
+  color: rgb(181, 248, 186);
 }
 
 .nav-main-icon {
@@ -338,7 +338,7 @@ select.form-input {
 }
 
 .bell-icon {
-  color: #949494;
+  color: black;
 }
 
 .bell-icon:hover {
@@ -346,7 +346,7 @@ select.form-input {
 }
 
 .user-icon {
-  color: #578E7E;
+  color: black;
 }
 
 .user-icon:hover {
@@ -574,6 +574,9 @@ select.form-input {
   .info-item ul li {
     font-size: 10px;
   }
+  .sidebar-container.collapsed {
+  width: 0px;
+}
 }
 
 /* contract */
@@ -617,6 +620,9 @@ select.form-input {
   .fa-arrow-right{
     display: none ;
   }
+  .sidebar-container.collapsed {
+  width: 0px;
+}
 }
 .workflow-line {
   width: 4px;
@@ -874,6 +880,9 @@ select.form-input {
   .notifi-button-group {
     padding: 0px !important;
   }
+  .sidebar-container.collapsed {
+  width: 0px;
+}
 }
 
 .notifi-button-group {
@@ -927,7 +936,9 @@ select.form-input {
   .notification-container {
     padding: 15px;
   }
-
+.sidebar-container.collapsed {
+  width: 0px;
+}
   .email-template-btn {
     align-self: center;
     margin-bottom: 15px;
@@ -944,7 +955,9 @@ select.form-input {
   .title {
     font-size: 20px;
   }
-
+.sidebar-container.collapsed {
+  width: 0px;
+}
   .form-label {
     font-size: 14px;
   }
