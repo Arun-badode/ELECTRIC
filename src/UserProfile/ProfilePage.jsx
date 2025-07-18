@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
-import CustomNavbar from "../Navbar";
-import Footer from "../Footer";
+import CustomNavbar from "../Home/Navbar";
+import Footer from "../Home/Footer";
 import MyOrders from "./MyOrders";
 import MyProfile from "./MyProfile";
 import { FiUser, FiShoppingBag, FiLogOut } from "react-icons/fi";

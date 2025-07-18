@@ -25,10 +25,10 @@ const Footer = () => {
               Your trusted source for electrical components, tools, and industrial supplies.
             </p>
             <div className="flex gap-3 mt-4">
-              <a href="#" className="hover:text-primary transition"><FaFacebookF /></a>
-              <a href="#" className="hover:text-primary transition"><FaTwitter /></a>
-              <a href="#" className="hover:text-primary transition"><FaInstagram /></a>
-              <a href="#" className="hover:text-primary transition"><FaPinterestP /></a>
+              <a href="#" className="text-white hover:text-primary transition"><FaFacebookF /></a>
+              <a href="#" className="text-white hover:text-primary transition"><FaTwitter /></a>
+              <a href="#" className="text-white hover:text-primary transition"><FaInstagram /></a>
+              <a href="#" className="text-white hover:text-primary transition"><FaPinterestP /></a>
             </div>
           </div>
 

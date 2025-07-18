@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 const bannerImages = [
   "https://i.postimg.cc/zB3QWKSL/0e9c812f40bdac4af33d736255c38afa-1.jpg",
   "https://i.postimg.cc/x1hDCY72/electric-supply-banner.jpg",
-  "https://i.postimg.cc/nzXQnGVW/futuristic-electric-banner.jpg"
+  "https://i.ibb.co/RkxQXTLm/image-1.png",
+  "https://i.ibb.co/cG1CJNP/image.png",
+  "https://i.ibb.co/tM5Q4Pn1/image.png"
 ];
 
 const HeroSection = () => {
@@ -35,7 +37,7 @@ const HeroSection = () => {
             <p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mx-auto">
               Shop high-quality electrical supplies, tools, meters, and more from trusted brands.
             </p>
-            <button className="mt-5 px-6 py-2 rounded-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold shadow-lg transition">
+            <button className="mt-5 px-6 py-2 rounded-full bg-primary font-semibold shadow-lg transition">
               Shop Now
             </button>
           </div>
@@ -47,7 +49,7 @@ const HeroSection = () => {
             <div
               key={i}
               className={`w-3 h-3 rounded-full ${
-                i === currentIndex ? "bg-yellow-400" : "bg-white/50"
+                i === currentIndex ? "bg-primary" : "bg-white"
               }`}
             />
           ))}
