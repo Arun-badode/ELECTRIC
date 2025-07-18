@@ -23,7 +23,7 @@ import ProductPage from "./Home/ProductPage";
 import AddProduct from "./Componente/Products/AddProduct";
 import ProfilePage from "./Home/UserProfile/ProfilePage";
 
-import UserDashboard from "./UserDashboard/UserDashboard";
+
 import AdminProfile from "./Componente/AdminProfile/AdminProfile";
 
 function App() {
