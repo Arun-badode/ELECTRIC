@@ -25,8 +25,8 @@ const testimonials = [
 
 const CustomerTestimonials = () => {
   return (
-    <section className="py-5 bg-light">
-      <div className="container">
+    <section className="bg-light">
+      <div className="p-5">
         <div className="text-center mb-5">
           <h1 className="fw-bold text-dark mb-3">
             Our customers tell it better than we do!
@@ -43,10 +43,13 @@ const CustomerTestimonials = () => {
                 </div>
                 <p className="text-muted mb-4">{testimonial.feedback}</p>
                 <div className="d-flex align-items-center">
-                  <div
-                    className="rounded-circle bg-secondary me-3"
-                    style={{ width: "48px", height: "48px" }}
-                  ></div>
+                  <img
+                    src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                    alt="Profile"
+                    className="rounded-circle me-3"
+                    style={{ width: "48px", height: "48px", objectFit: "cover" }}
+                  />
+
                   <div>
                     <p className="fw-semibold mb-0">{testimonial.name}</p>
                     <p className="text-muted mb-0" style={{ fontSize: "0.875rem" }}>

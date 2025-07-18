@@ -48,8 +48,8 @@ const CategoriesSection = () => {
   ];
 
   return (
-    <section className="py-5 bg-light">
-      <div className="container">
+    <section className="bg-light">
+      <div className="p-5">
         <div className="text-center mb-5">
           <h2 className="fw-bold display-6 text-dark mb-3">
             Professional Electrical Categories

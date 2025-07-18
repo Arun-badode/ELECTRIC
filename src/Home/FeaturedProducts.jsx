@@ -62,8 +62,8 @@ const FeaturedProducts = () => {
   ];
 
   return (
-    <section className="py-5 bg-white">
-      <div className="container">
+    <section className="bg-white">
+      <div className="p-5">
         <div className="text-center mb-5">
           <h2 className="display-5 fw-bold text-dark mb-3">Featured Products</h2>
           <p className="lead text-muted">
