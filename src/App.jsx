@@ -20,6 +20,7 @@ import Login from "./authtication/Login";
 import Signup from "./authtication/Signup";
 import AddCategories from "./Componente/Categories/AddCategories";
 import ProductPage from "./Home/ProductPage";
+import AddProduct from "./Componente/Products/AddProduct";
 
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -63,7 +64,13 @@ function App() {
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/bannermanager" element={<BannerManager />} />
+
+{/* products */}
                 <Route path="/products" element={<Productes />} />
+                <Route path="/addproducts" element={<AddProduct />} />
+
+
+
                 <Route path="/reportanalytics" element={<ReportAnalytics />} />
                 <Route path="/support" element={<Support />} />
                 <Route path="/settings" element={<Settings />} />

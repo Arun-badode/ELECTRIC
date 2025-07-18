@@ -9,6 +9,7 @@ import {
     FaSearch,
     FaTimes
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Productes = () => {
     // State management
@@ -170,6 +171,8 @@ const Productes = () => {
                         <FaFileExcel />
                         <span className="d-none d-md-inline">Export Excel</span>
                     </button>
+
+                   <Link to="/addproducts">
                     <button
                         className="btn btn-primary d-flex align-items-center gap-2"
                         data-bs-toggle="modal"
@@ -178,6 +181,7 @@ const Productes = () => {
                         <FaPlusCircle />
                         <span>Add Product</span>
                     </button>
+                   </Link>
                 </div>
             </div>
 
@@ -345,7 +349,7 @@ const Productes = () => {
             )}
 
             {/* Add Product Modal */}
-            <div className="modal fade" id="addProductModal" tabIndex="-1" aria-hidden="true">
+            {/* <div className="modal fade" id="addProductModal" tabIndex="-1" aria-hidden="true">
                 <div className="modal-dialog modal-lg modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header border-0 pb-0">
@@ -451,7 +455,7 @@ const Productes = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
 
             {/* Product Detail Modal */}
             <div className="modal fade" id="productDetailModal" tabIndex="-1" aria-hidden="true">
