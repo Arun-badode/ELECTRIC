@@ -8,6 +8,7 @@ const Sidebar = ({ collapsed }) => {
 
   const menuItems = [
     { name: "Dashboard", path: "/dashboard", icon: "fa-solid fa-gauge" },
+    { name: "Categories", path: "/categories", icon: "fa-solid fa-gauge" },
     { name: "All Products", path: "/products", icon: "fa-solid fa-boxes-stacked" },
     // { name: "Create Products", path: "/create-product", icon: "fa-solid fa-plus-square" },
     { name: "All Orders", path: "/orders", icon: "fa-solid fa-cart-shopping" },
