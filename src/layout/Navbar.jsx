@@ -11,25 +11,21 @@ const Navbar = ({ toggleSidebar }) => {
 
   return (
     <>
-      <nav
-        className="navbar navbar-light bg-white shadow-sm   fixed-top"
-        style={{ zIndex: 1030 , border:"none"}}
-      >
-        <div className="container-fluid d-flex justify-content-between align-items-center px-3">
-          {/* Left Section: Logo & Sidebar Toggle */}
-          <div className="d-flex align-items-center gap-3">
-            <img
-              height={50}
-              width={60}
-              src="/image/logo.png" // ✅ Assuming public/image/logo.png
-              alt="Logo"
-            />
-            <div
-              className="nav-toggle-icon text-dark fs-4 d-md-none"
-              onClick={toggleSidebar}
-              style={{ cursor: "pointer" }}
-            >
-              <i className="fa fa-bars"></i>
+      <nav className="navbar navbar-light">
+        <div className="container-fluid nav-conte">
+          <div className="nav-content">
+            <div className="nav-bran">
+              <img
+                height={50}
+                width={50}
+                src="https://i.ibb.co/KxM9x9Vd/png-clipart-electricity-electric-power-logo-electrical-engineering-energy-saving-and-environmental-p.png"
+                alt="Logo"
+              />
+              <div className="nav-taggle-icon" onClick={toggleSidebar}>
+                <a href="#">
+                  <i className="fa fa-bars" aria-hidden="true"></i>
+                </a>
+              </div>
             </div>
           </div>
 

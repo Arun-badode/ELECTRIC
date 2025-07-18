@@ -16,7 +16,7 @@ const SubscribeSection = () => {
           <input
             type="email"
             placeholder="Enter your email address"
-            className="w-full sm:w-auto px-4 py-3 rounded-full text-black text-sm focus:outline-none"
+            className="w-full sm:w-auto px-4 py-3 rounded-full text-black text-sm text-dark focus:outline-none"
             required
           />
           <button

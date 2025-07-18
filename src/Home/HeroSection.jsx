@@ -1,23 +1,41 @@
 import React, { useEffect, useState } from "react";
-
-const bannerImages = [
-  "https://i.postimg.cc/zB3QWKSL/0e9c812f40bdac4af33d736255c38afa-1.jpg",
-  "https://i.postimg.cc/x1hDCY72/electric-supply-banner.jpg",
-  "https://i.postimg.cc/nzXQnGVW/futuristic-electric-banner.jpg"
-];
+import axios from "axios";
 
 const HeroSection = () => {
+  const [bannerImages, setBannerImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // 🔽 Fetch banners from API on mount
+  useEffect(() => {
+    const fetchBanners = async () => {
+      try {
+        const response = await axios.get("https://hrb5wx2v-6500.inc1.devtunnels.ms/api/banner/getAllBanners");
+        if (response.data.success) {
+          const images = response.data.data.map(b => b.image[0]); // get first image of each banner
+          setBannerImages(images);
+        }
+      } catch (error) {
+        console.error("Failed to fetch banners:", error);
+      }
+    };
+
+    fetchBanners();
+  }, []);
+
+  // 🔁 Auto-slide
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
     }, 3000);
+
     return () => clearInterval(timer);
-  }, []);
+  }, [bannerImages.length]);
+
+  // ✅ Don't render until images are loaded
+  if (bannerImages.length === 0) return null;
 
   return (
-    <div className="w-full flex justify-center p-4 sm:p-8 mt-5 py-5">
+    <div className="w-full flex justify-center sm:p-8">
       <div className="relative w-full max-w-8xl h-[60vh] sm:h-[50vh] rounded-2xl overflow-hidden shadow-xl">
         {/* Image Carousel */}
         <img
@@ -35,7 +53,7 @@ const HeroSection = () => {
             <p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mx-auto">
               Shop high-quality electrical supplies, tools, meters, and more from trusted brands.
             </p>
-            <button className="mt-5 px-6 py-2 rounded-full bg-yellow-400 hover:bg-yellow-500 text-black font-semibold shadow-lg transition">
+            <button className="mt-5 px-6 py-2 rounded-full bg-primary font-semibold shadow-lg transition">
               Shop Now
             </button>
           </div>
@@ -46,9 +64,7 @@ const HeroSection = () => {
           {bannerImages.map((_, i) => (
             <div
               key={i}
-              className={`w-3 h-3 rounded-full ${
-                i === currentIndex ? "bg-yellow-400" : "bg-white/50"
-              }`}
+              className={`w-3 h-3 rounded-full ${i === currentIndex ? "bg-primary" : "bg-white"}`}
             />
           ))}
         </div>

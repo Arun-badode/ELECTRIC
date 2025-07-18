@@ -21,7 +21,7 @@ import Signup from "./authtication/Signup";
 import AddCategories from "./Componente/Categories/AddCategories";
 import ProductPage from "./Home/ProductPage";
 import AddProduct from "./Componente/Products/AddProduct";
-import ProfilePage from "./Home/UserProfile/ProfilePage";
+import ProfilePage from "./UserProfile/ProfilePage";
 
 
 import AdminProfile from "./Componente/AdminProfile/AdminProfile";
@@ -75,7 +75,6 @@ function App() {
                 {/* products */}
                 <Route path="/products" element={<Productes />} />
                 <Route path="/addproducts" element={<AddProduct />} />
-
                 <Route path="/reportanalytics" element={<ReportAnalytics />} />
                 <Route path="/support" element={<Support />} />
                 <Route path="/settings" element={<Settings />} />

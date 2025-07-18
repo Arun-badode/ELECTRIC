@@ -52,12 +52,12 @@ const Categoriesslider = () => {
   }, []);
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-10 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl font-bold text-gray-800 mb-6">Browse by Categories</h2>
+        <h2 className="text-3xl font-bold text-gray-800 mb-6 mt-4">Browse by Categories</h2>
 
         <div className="overflow-hidden relative" ref={scrollRef}>
-          <div className="flex space-x-6 transition-all duration-700 ease-in-out w-max">
+          <div className="flex mb-4 space-x-6 transition-all duration-700 ease-in-out w-max">
             {categories.map((cat, index) => (
               <div
                 key={index}

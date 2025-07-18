@@ -17,7 +17,7 @@ const Footer = () => {
           {/* Brand Info */}
           <div>
             <img
-              src="https://i.postimg.cc/DyqKQj0V/Screenshot-2025-07-17-122021-removebg-preview.png"
+              src="https://i.ibb.co/KxM9x9Vd/png-clipart-electricity-electric-power-logo-electrical-engineering-energy-saving-and-environmental-p.png"
               alt="ElectroSupply Logo"
               className="h-12 mb-3"
             />
@@ -25,10 +25,10 @@ const Footer = () => {
               Your trusted source for electrical components, tools, and industrial supplies.
             </p>
             <div className="flex gap-3 mt-4">
-              <a href="#" className="hover:text-primary transition"><FaFacebookF /></a>
-              <a href="#" className="hover:text-primary transition"><FaTwitter /></a>
-              <a href="#" className="hover:text-primary transition"><FaInstagram /></a>
-              <a href="#" className="hover:text-primary transition"><FaPinterestP /></a>
+              <a href="#" className="text-white hover:text-primary transition"><FaFacebookF /></a>
+              <a href="#" className="text-white hover:text-primary transition"><FaTwitter /></a>
+              <a href="#" className="text-white hover:text-primary transition"><FaInstagram /></a>
+              <a href="#" className="text-white hover:text-primary transition"><FaPinterestP /></a>
             </div>
           </div>
 
