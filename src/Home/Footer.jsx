@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
 import {
   FaFacebookF,
   FaTwitter,
@@ -7,89 +6,90 @@ import {
   FaPinterestP,
   FaMapMarkerAlt,
   FaPhoneAlt,
-  FaEnvelope
+  FaEnvelope,
 } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer id="contact" className="bg-dark text-light pt-5 pb-3">
-      <Container>
-        <Row className="gy-4">
+    <footer id="contact" className="bg-gray-900 text-white pt-10 pb-6">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand Info */}
-          <Col md={3}>
+          <div>
             <img
               src="https://i.postimg.cc/DyqKQj0V/Screenshot-2025-07-17-122021-removebg-preview.png"
               alt="ElectroSupply Logo"
-              height="60"
-              width="100"
-              className="d-inline-block align-top"
+              className="h-12 mb-3"
             />
-            <p className="text-white mt-2">
+            <p className="text-sm text-gray-300">
               Your trusted source for electrical components, tools, and industrial supplies.
             </p>
-            <div className="d-flex gap-3 mt-3">
-              <a href="#" className="social-icon text-white"><FaFacebookF /></a>
-              <a href="#" className="social-icon text-white"><FaTwitter /></a>
-              <a href="#" className="social-icon text-white"><FaInstagram /></a>
-              <a href="#" className="social-icon text-white"><FaPinterestP /></a>
+            <div className="flex gap-3 mt-4">
+              <a href="#" className="text-white hover:text-primary transition"><FaFacebookF /></a>
+              <a href="#" className="text-white hover:text-primary transition"><FaTwitter /></a>
+              <a href="#" className="text-white hover:text-primary transition"><FaInstagram /></a>
+              <a href="#" className="text-white hover:text-primary transition"><FaPinterestP /></a>
             </div>
-          </Col>
+          </div>
 
-          {/* Categories */}
-          <Col md={3}>
-            <h6 className="fw-bold">Products</h6>
-            <ul className="list-unstyled">
+          {/* Products */}
+          <div>
+            <h6 className="text-lg font-semibold mb-3">Products</h6>
+            <ul className="space-y-2 text-sm text-gray-400">
               <li>Wires & Cables</li>
               <li>Switchgear</li>
               <li>Tools & Testers</li>
               <li>Lighting Solutions</li>
               <li>Safety Equipment</li>
             </ul>
-          </Col>
+          </div>
 
           {/* Support */}
-          <Col md={3}>
-            <h6 className="fw-bold">Support</h6>
-            <ul className="list-unstyled">
+          <div>
+            <h6 className="text-lg font-semibold mb-3">Support</h6>
+            <ul className="space-y-2 text-sm text-gray-400">
               <li>Track Order</li>
               <li>Shipping & Returns</li>
               <li>Bulk Inquiries</li>
               <li>Installation Guides</li>
               <li>Contact Support</li>
             </ul>
-          </Col>
+          </div>
 
           {/* Contact Info */}
-          <Col md={3}>
-            <h6 className="fw-bold">Contact</h6>
-            <p className="mb-1 text-white">
-              <FaMapMarkerAlt className="me-2 text-danger" />
-              456 Powerline Blvd, Houston, TX 77001
-            </p>
-            <p className="mb-1 text-white">
-              <FaPhoneAlt className="me-2 text-danger" />
-              +1 (800) 987-6543
-            </p>
-            <p className="mb-3 text-white">
-              <FaEnvelope className="me-2 text-danger" />
-              support@electrosupply.com
-            </p>
+          <div>
+            <h6 className="text-lg font-semibold mb-3">Contact</h6>
+            <div className="space-y-2 text-sm text-gray-300">
+              <p className="flex items-start gap-2">
+                <FaMapMarkerAlt className="text-red-500 mt-1" />
+                456 Powerline Blvd, Houston, TX 77001
+              </p>
+              <p className="flex items-center gap-2">
+                <FaPhoneAlt className="text-red-500" />
+                +1 (800) 987-6543
+              </p>
+              <p className="flex items-center gap-2">
+                <FaEnvelope className="text-red-500" />
+                support@electrosupply.com
+              </p>
+            </div>
 
-            <h6 className="fw-bold">We Accept</h6>
-            <div className="d-flex gap-2">
+            <h6 className="text-lg font-semibold mt-6 mb-2">We Accept</h6>
+            <div className="flex gap-2">
               <img src="https://img.icons8.com/color/36/visa.png" alt="Visa" />
               <img src="https://img.icons8.com/color/36/mastercard.png" alt="Mastercard" />
               <img src="https://img.icons8.com/color/36/amex.png" alt="Amex" />
               <img src="https://img.icons8.com/color/36/paypal.png" alt="PayPal" />
             </div>
-          </Col>
-        </Row>
-
-        <hr className="border-secondary my-4" />
-        <div className="text-center small text-muted">
-          © 2025 ElectroSupply. All rights reserved.
+          </div>
         </div>
-      </Container>
+
+        <hr className="border-gray-700 my-6" />
+
+        <p className="text-center text-sm text-gray-500">
+          © 2025 ElectroSupply. All rights reserved.
+        </p>
+      </div>
     </footer>
   );
 };

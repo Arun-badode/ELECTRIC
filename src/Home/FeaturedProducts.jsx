@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const FeaturedProducts = () => {
   const products = [
@@ -62,39 +62,38 @@ const FeaturedProducts = () => {
   ];
 
   return (
-    <section className="bg-white">
-      <div className="p-5">
-        <div className="text-center mb-5">
-          <h2 className="display-5 fw-bold text-dark mb-3">Featured Products</h2>
-          <p className="lead text-muted">
+    <section className="bg-white py-12 px-4 sm:px-6 lg:px-8 ">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-10">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-800">Featured Products</h2>
+          <p className="mt-2 text-gray-500 text-sm sm:text-base">
             Top-rated electrical supplies for professionals
           </p>
         </div>
-        <div className="row g-4">
-          {products.map((product, index) => (
-            <div className="col-12 col-md-6 col-lg-3" key={index}>
-              <div className="card h-100 shadow-lg  border-0" style={{ borderRadius: "20px" }}>
-                <div
-                  className="bg-cover bg-center"
-                  style={{
-                    backgroundImage: `url(${product.image})`,
-                    height: '14rem',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    borderTopLeftRadius: '20px',
-                    borderTopRightRadius: '20px'
-                  }}
-                ></div>
-                <div className="card-body d-flex flex-column">
-                  <h5 className="card-title">{product.title}</h5>
-                  <p className="card-text text-muted small mb-3">{product.description}</p>
-                  <div className="mt-auto d-flex justify-content-between align-items-center">
-                    <span className="fw-bold text-primary">{product.price}</span>
 
-                    <Link to="/productpage" className="btn btn-primary btn-sm">
-                      View
-                    </Link>
-                  </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {products.map((product, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 flex flex-col"
+            >
+              <div
+                className="h-56 bg-cover bg-center rounded-t-2xl"
+                style={{ backgroundImage: `url(${product.image})` }}
+              ></div>
+
+              <div className="p-4 flex flex-col flex-grow">
+                <h3 className="text-lg font-semibold text-gray-800 mb-1">{product.title}</h3>
+                <p className="text-sm text-gray-500 mb-3">{product.description}</p>
+
+                <div className="mt-auto flex items-center justify-between">
+                  <span className="text-primary font-bold">{product.price}</span>
+                  <Link
+                    to="/productpage"
+                    className="bg-primary text-white px-3 py-1.5 text-sm rounded-full hover:bg-primary/90 transition"
+                  >
+                    View
+                  </Link>
                 </div>
               </div>
             </div>

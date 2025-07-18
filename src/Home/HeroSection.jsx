@@ -1,53 +1,78 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 
 const HeroSection = () => {
+  const images = [
+    "https://i.postimg.cc/zB3QWKSL/0e9c812f40bdac4af33d736255c38afa-1.jpg",
+    "https://i.postimg.cc/x1hDCY72/9ec3f58b834b966a8b7e5f399aa44692.jpg",
+    "https://i.postimg.cc/zB3QWKSL/0e9c812f40bdac4af33d736255c38afa-1.jpg",
+    "https://i.postimg.cc/x1hDCY72/9ec3f58b834b966a8b7e5f399aa44692.jpg",
+    "https://i.postimg.cc/zB3QWKSL/0e9c812f40bdac4af33d736255c38afa-1.jpg",
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext();
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
   return (
-    <div id='home' style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
-      {/* Background Image */}
+    <div className="relative sm:h-[70vh] md:h-[70vh] overflow-hidden rounded-lg">
+      {/* Slider Images */}
       <div
-        className="position-absolute top-0 start-0 w-100 h-100"
-        style={{
-          background: 'url(https://i.postimg.cc/dV5f75fr/electric-supply-ecomm.jpg) center/cover no-repeat',
-          zIndex: 1,
-        }}
-      ></div>
-
-      {/* Dark Overlay */}
-      <div
-        className="position-absolute top-0 start-0 w-100 h-100"
-        style={{
-          backgroundColor: 'rgba(0, 0, 0, 0.6)',
-          zIndex: 2,
-        }}
-      ></div>
-
-      {/* Content */}
-      <div
-        className="text-white text-center d-flex align-items-center justify-content-center"
-        style={{ minHeight: '100vh', position: 'relative', zIndex: 3 }}
+        className="flex transition-transform duration-700 ease-in-out"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        <div className="container px-3">
-          <h1 className="fw-bold mb-4 display-5">
-            Power Up Your Projects with Top-Quality Electrical Supplies
-          </h1>
-
-          {/* Responsive Input + Buttons */}
-          <div className="row justify-content-center g-2">
-            <div className="col-12 col-md-6">
-              <input
-                type="text"
-                className="form-control py-3"
-                placeholder="Search for Electric products, categories..."
-              />
-            </div>
-            <div className="col-6 col-md-auto">
-              <button className="btn btn-danger w-100 py-3">Search</button>
-            </div>
-            <div className="col-6 col-md-auto">
-              <button className="btn btn-light text-dark w-100 py-3">All Products</button>
-            </div>
+        {images.map((img, index) => (
+          <div key={index} className="w-full flex-shrink-0">
+            <img
+              src={img}
+              alt={`Slide ${index + 1}`}
+              className="w-full h-[60vh] sm:h-[70vh] md:h-[80vh] object-cover"
+            />
           </div>
-        </div>
+        ))}
+      </div>
+
+      {/* Navigation Buttons */}
+      <button
+        onClick={handlePrev}
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 z-10"
+      >
+        <i className="ri-arrow-left-s-line text-2xl" />
+      </button>
+      <button
+        onClick={handleNext}
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 z-10"
+      >
+        <i className="ri-arrow-right-s-line text-2xl" />
+      </button>
+
+      {/* Dots Indicator */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`w-3 h-3 rounded-full ${
+              currentIndex === index ? "bg-white" : "bg-gray-400"
+            }`}
+          />
+        ))}
       </div>
     </div>
   );

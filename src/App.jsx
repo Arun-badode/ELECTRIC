@@ -23,6 +23,8 @@ import ProductPage from "./Home/ProductPage";
 import AddProduct from "./Componente/Products/AddProduct";
 import ProfilePage from "./UserProfile/ProfilePage";
 
+import UserDashboard from "./UserDashboard/UserDashboard";
+
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const menusidebarcollaps = () => {
@@ -40,8 +42,8 @@ function App() {
       {hideLayout ? (
         <Routes>
           <Route path="/" element={<Home />} />
-           <Route path="/login" element={<Login />} />
-           <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/electricalproducts" element={<ElectricalProducts />} />
            <Route path="/shoppingcart" element={<ShoppingCart />} />
            <Route path="/productpage" element={<ProductPage />} />
@@ -58,7 +60,9 @@ function App() {
               menuItemClick={menusidebarcollaps}
             />
             <div
-              className={`right-side-content ${isSidebarCollapsed ? "collapsed" : ""}`}
+              className={`right-side-content ${
+                isSidebarCollapsed ? "collapsed" : ""
+              }`}
             >
               <Routes>
                 <Route path="/admin/dashboard" element={<Dashboard />} />
@@ -67,11 +71,9 @@ function App() {
                 <Route path="/users" element={<Users />} />
                 <Route path="/bannermanager" element={<BannerManager />} />
 
-{/* products */}
+                {/* products */}
                 <Route path="/products" element={<Productes />} />
                 <Route path="/addproducts" element={<AddProduct />} />
-
-
 
                 <Route path="/reportanalytics" element={<ReportAnalytics />} />
                 <Route path="/support" element={<Support />} />
