@@ -48,6 +48,12 @@ const Navbar = ({ toggleSidebar }) => {
                       Change Password
                     </Link>
                   </li>
+
+                   <li>
+                    <Link className="dropdown-item" to="/">
+                      Logout
+                    </Link>
+                  </li>
                   
                   
                 </ul>
