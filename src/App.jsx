@@ -25,6 +25,7 @@ import ProfilePage from "./UserProfile/ProfilePage";
 
 
 import AdminProfile from "./Componente/AdminProfile/AdminProfile";
+import ContactUs from "./Home/ContactUs";
 
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -35,7 +36,7 @@ function App() {
     setIsSidebarCollapsed((prev) => !prev);
   };
   const location = useLocation();
-  const hideLayout = location.pathname === "/" || location.pathname === "/electricalproducts" || location.pathname === "/profilepage" || location.pathname === "/productpage"  || location.pathname === "/shoppingcart" || location.pathname === "/login" || location.pathname === "/signup";
+  const hideLayout = location.pathname === "/" || location.pathname === "/electricalproducts" || location.pathname === "/contactus" || location.pathname === "/profilepage" || location.pathname === "/productpage" || location.pathname === "/shoppingcart" || location.pathname === "/login" || location.pathname === "/signup";
 
   return (
     <>
@@ -46,9 +47,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/electricalproducts" element={<ElectricalProducts />} />
-           <Route path="/shoppingcart" element={<ShoppingCart />} />
-           <Route path="/productpage" element={<ProductPage />} />
-            <Route path="/profilepage" element={<ProfilePage />} />
+          <Route path="/shoppingcart" element={<ShoppingCart />} />
+          <Route path="/productpage" element={<ProductPage />} />
+          <Route path="/profilepage" element={<ProfilePage />} />
+          <Route path="/contactus" element={<ContactUs />} />
 
         </Routes>
       ) : (
@@ -61,9 +63,8 @@ function App() {
               menuItemClick={menusidebarcollaps}
             />
             <div
-              className={`right-side-content ${
-                isSidebarCollapsed ? "collapsed" : ""
-              }`}
+              className={`right-side-content ${isSidebarCollapsed ? "collapsed" : ""
+                }`}
             >
               <Routes>
                 <Route path="/admin/dashboard" element={<Dashboard />} />
