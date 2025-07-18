@@ -42,7 +42,7 @@ const handleSubmit = async (e) => {
       if (role === 'admin') {
         navigate('/admin/dashboard');
       } else {
-        navigate('/dashboard');
+        navigate('/');
       }
     }, 1500);
   } catch (error) {

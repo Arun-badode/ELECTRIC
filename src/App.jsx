@@ -75,7 +75,6 @@ function App() {
                 {/* products */}
                 <Route path="/products" element={<Productes />} />
                 <Route path="/addproducts" element={<AddProduct />} />
-
                 <Route path="/reportanalytics" element={<ReportAnalytics />} />
                 <Route path="/support" element={<Support />} />
                 <Route path="/settings" element={<Settings />} />
