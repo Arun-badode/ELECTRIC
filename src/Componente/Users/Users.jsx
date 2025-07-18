@@ -35,69 +35,9 @@ const Users = () => {
             lastLogin: "2023-05-10 11:20",
             avatar: "https://randomuser.me/api/portraits/men/67.jpg",
         },
-        {
-            id: 4,
-            name: "Emily Davis",
-            email: "emily.d@example.com",
-            role: "Editor",
-            status: "Active",
-            lastLogin: "2023-05-15 08:15",
-            avatar: "https://randomuser.me/api/portraits/women/28.jpg",
-        },
-        {
-            id: 5,
-            name: "Robert Wilson",
-            email: "robert.w@example.com",
-            role: "Viewer",
-            status: "Active",
-            lastLogin: "2023-05-13 16:30",
-            avatar: "https://randomuser.me/api/portraits/men/19.jpg",
-        },
-        {
-            id: 6,
-            name: "Jennifer Lee",
-            email: "jennifer.l@example.com",
-            role: "Admin",
-            status: "Active",
-            lastLogin: "2023-05-15 10:10",
-            avatar: "https://randomuser.me/api/portraits/women/65.jpg",
-        },
-        {
-            id: 7,
-            name: "David Miller",
-            email: "david.m@example.com",
-            role: "Viewer",
-            status: "Inactive",
-            lastLogin: "2023-05-08 13:25",
-            avatar: "https://randomuser.me/api/portraits/men/75.jpg",
-        },
-        {
-            id: 8,
-            name: "Lisa Taylor",
-            email: "lisa.t@example.com",
-            role: "Editor",
-            status: "Active",
-            lastLogin: "2023-05-14 17:50",
-            avatar: "https://randomuser.me/api/portraits/women/33.jpg",
-        },
-        {
-            id: 9,
-            name: "James Anderson",
-            email: "james.a@example.com",
-            role: "Viewer",
-            status: "Active",
-            lastLogin: "2023-05-12 12:15",
-            avatar: "https://randomuser.me/api/portraits/men/42.jpg",
-        },
-        {
-            id: 10,
-            name: "Patricia White",
-            email: "patricia.w@example.com",
-            role: "Editor",
-            status: "Inactive",
-            lastLogin: "2023-05-09 10:40",
-            avatar: "https://randomuser.me/api/portraits/women/50.jpg",
-        },
+    
+     
+       
     ];
 
     // Filter users based on search term
