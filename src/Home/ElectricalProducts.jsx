@@ -14,7 +14,7 @@ const ElectricalProducts = () => {
       name: "Digital Multimeter Pro X2000",
       category: "Testing Equipment",
       price: 299.99,
-      originalPrice: 349.99,
+     
       rating: 4.9,
       description: "Professional-grade digital multimeter with auto-ranging and data logging capabilities",
       image: "https://readdy.ai/api/search-image?query=professional%20digital%20multimeter%20high%20quality%20display%20modern%20design%20clean%20background%20electrical%20testing%20equipment%20detailed%20product%20shot&width=300&height=300&seq=multimeter-pro&orientation=squarish"
@@ -24,7 +24,7 @@ const ElectricalProducts = () => {
       name: "Premium Copper Wire 12AWG",
       category: "Wires & Cables",
       price: 189.99,
-      originalPrice: 219.99,
+    
       rating: 4.8,
       description: "500ft spool, THHN/THWN-2 stranded copper wire for professional installations",
       image: "https://readdy.ai/api/search-image?query=industrial%20grade%20copper%20electrical%20wire%20spool%20professional%20electrical%20supply%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=wire-pro&orientation=squarish"
@@ -34,7 +34,7 @@ const ElectricalProducts = () => {
       name: "Safety Kit Pro Plus",
       category: "Safety Equipment",
       price: 249.99,
-      originalPrice: 299.99,
+     
       rating: 4.7,
       description: "Complete electrical safety gear set with OSHA-approved equipment",
       image: "https://readdy.ai/api/search-image?query=professional%20electrical%20safety%20kit%20hard%20hat%20gloves%20goggles%20voltage%20tester%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=safety-kit-pro&orientation=squarish"
@@ -44,7 +44,7 @@ const ElectricalProducts = () => {
       name: "Cordless Drill Master 20V",
       category: "Power Tools",
       price: 399.99,
-      originalPrice: 449.99,
+    
       rating: 4.8,
       description: "Professional-grade cordless drill with brushless motor and dual batteries",
       image: "https://readdy.ai/api/search-image?query=professional%20cordless%20power%20drill%20modern%20design%20battery%20powered%20tool%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=drill-pro&orientation=squarish"
@@ -54,7 +54,7 @@ const ElectricalProducts = () => {
       name: "LED Panel Pro 2x2",
       category: "Lighting",
       price: 159.99,
-      originalPrice: 189.99,
+   
       rating: 4.6,
       description: "Commercial-grade LED panel with energy-efficient technology",
       image: "https://readdy.ai/api/search-image?query=commercial%20led%20panel%20light%20modern%20slim%20design%20energy%20efficient%20lighting%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=led-panel-pro&orientation=squarish"
@@ -64,7 +64,7 @@ const ElectricalProducts = () => {
       name: "Circuit Breaker 100A",
       category: "Circuit Protection",
       price: 129.99,
-      originalPrice: 149.99,
+    
       rating: 4.9,
       description: "Commercial-grade main circuit breaker with advanced protection",
       image: "https://readdy.ai/api/search-image?query=professional%20circuit%20breaker%20panel%20modern%20electrical%20equipment%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=circuit-breaker-pro&orientation=squarish"
@@ -74,7 +74,7 @@ const ElectricalProducts = () => {
       name: "Pro Crimping Tool Set",
       category: "Hand Tools",
       price: 89.99,
-      originalPrice: 109.99,
+   
       rating: 4.7,
       description: "Heavy-duty wire crimper kit with multiple die sizes",
       image: "https://readdy.ai/api/search-image?query=professional%20wire%20crimping%20tool%20heavy%20duty%20electrical%20crimper%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=crimper-pro&orientation=squarish"
@@ -84,7 +84,7 @@ const ElectricalProducts = () => {
       name: "Smart WiFi Outlet Pro",
       category: "Smart Devices",
       price: 79.99,
-      originalPrice: 99.99,
+   
       rating: 4.8,
       description: "WiFi-enabled power monitoring outlet with app control",
       image: "https://readdy.ai/api/search-image?query=smart%20electrical%20outlet%20modern%20design%20wifi%20enabled%20power%20monitoring%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=smart-outlet-pro&orientation=squarish"
@@ -94,7 +94,7 @@ const ElectricalProducts = () => {
       name: "Hydraulic Conduit Bender",
       category: "Specialty Tools",
       price: 449.99,
-      originalPrice: 499.99,
+    
       rating: 4.9,
       description: "Professional-grade hydraulic conduit bending system",
       image: "https://readdy.ai/api/search-image?query=professional%20electrical%20conduit%20bender%20hydraulic%20powered%20precision%20bending%20tool%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=conduit-bender-pro&orientation=squarish"
@@ -267,10 +267,7 @@ const ElectricalProducts = () => {
                           <span className="badge bg-primary bg-opacity-10 me-auto">
                             {product.category}
                           </span>
-                          <div className="d-flex align-items-center">
-                            <i className="bi bi-star-fill text-warning me-1"></i>
-                            <small className="text-muted">{product.rating}</small>
-                          </div>
+                         
                         </div>
                         <h5 className="card-title fw-semibold mb-2">{product.name}</h5>
                         <p className="card-text text-muted small mb-3 flex-grow-1">
@@ -279,9 +276,7 @@ const ElectricalProducts = () => {
                         <div className="d-flex justify-content-between align-items-center">
                           <div>
                             <span className="fw-bold text-primary">${product.price.toFixed(2)}</span>
-                            <small className="text-decoration-line-through text-muted ms-2">
-                              ${product.originalPrice.toFixed(2)}
-                            </small>
+                          
                           </div>
                           <Link to="/productpage" className="btn btn-primary btn-sm">
                             View
@@ -294,7 +289,7 @@ const ElectricalProducts = () => {
               </div>
 
               {/* Pagination with primary color */}
-              <nav className="d-flex justify-content-center mt-5">
+              <nav className="d-flex justify-content-end mt-5">
                 <ul className="pagination pagination-primary">
                   <li className="page-item">
                     <button className="page-link">Previous</button>

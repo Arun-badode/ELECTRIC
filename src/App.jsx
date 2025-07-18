@@ -21,6 +21,7 @@ import Signup from "./authtication/Signup";
 import AddCategories from "./Componente/Categories/AddCategories";
 import ProductPage from "./Home/ProductPage";
 import AddProduct from "./Componente/Products/AddProduct";
+import ProfilePage from "./Home/UserProfile/ProfilePage";
 
 import UserDashboard from "./UserDashboard/UserDashboard";
 
@@ -33,14 +34,7 @@ function App() {
     setIsSidebarCollapsed((prev) => !prev);
   };
   const location = useLocation();
-  const hideLayout =
-    location.pathname === "/" ||
-    location.pathname === "/electricalproducts" ||
-    location.pathname === "/productpage" ||
-    location.pathname === "/shoppingcart" ||
-    location.pathname === "/login" ||
-    location.pathname === "/signup"||
-   location.pathname === "/userdashboard";
+  const hideLayout = location.pathname === "/" || location.pathname === "/electricalproducts" || location.pathname === "/profilepage" || location.pathname === "/productpage"  || location.pathname === "/shoppingcart" || location.pathname === "/login" || location.pathname === "/signup";
 
   return (
     <>
@@ -51,9 +45,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/electricalproducts" element={<ElectricalProducts />} />
-          <Route path="/shoppingcart" element={<ShoppingCart />} />
-          <Route path="/productpage" element={<ProductPage />} />
-          <Route path="/userdashboard" element={<UserDashboard />} />
+           <Route path="/shoppingcart" element={<ShoppingCart />} />
+           <Route path="/productpage" element={<ProductPage />} />
+            <Route path="/profilepage" element={<ProfilePage />} />
+
         </Routes>
       ) : (
         // Pages with Layout
