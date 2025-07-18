@@ -32,9 +32,19 @@ const HeroSection = () => {
           </h1>
 
           {/* Responsive Input + Buttons */}
-          <div className="justify-content-center g-2">
+          <div className="row justify-content-center g-2">
+            <div className="col-12 col-md-6">
+              <input
+                type="text"
+                className="form-control py-3"
+                placeholder="Search for Electric products, categories..."
+              />
+            </div>
             <div className="col-6 col-md-auto">
-              <button className="btn btn-light text-dark py-3">All Products</button>
+              <button className="btn btn-danger w-100 py-3">Search</button>
+            </div>
+            <div className="col-6 col-md-auto">
+              <button className="btn btn-light text-dark w-100 py-3">All Products</button>
             </div>
           </div>
         </div>
