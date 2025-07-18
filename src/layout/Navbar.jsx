@@ -36,26 +36,18 @@ const Navbar = ({ toggleSidebar }) => {
                 </div>
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
-                    <Link className="dropdown-item" to="/">
+                    <Link to="/Admin-Profile" className="dropdown-item">
                       Update Profile
                     </Link>
                   </li>
                   <li>
                     <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    <Link className="dropdown-item" to="/changepassword">
-                      Change Password
-                    </Link>
-                  </li>
-
+                  </li>              
                    <li>
                     <Link className="dropdown-item" to="/">
                       Logout
                     </Link>
-                  </li>
-                  
-                  
+                  </li> 
                 </ul>
               </div>
             </div>

@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../../Utilities/axiosInstance';
 
 const AddCategories = () => {
   const [categories, setCategories] = useState([]);
+  const [filteredCategories, setFilteredCategories] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const [categoryName, setCategoryName] = useState('');
   const [categoryImage, setCategoryImage] = useState(null);
+  const [editingCategory, setEditingCategory] = useState(null);
   const [showModal, setShowModal] = useState(false);
-
-  const API_BASE = 'https://hrb5wx2v-6500.inc1.devtunnels.ms/api/category';
 
   // Fetch all categories
   const fetchCategories = async () => {
     try {
-      const res = await axios.get(`${API_BASE}/getAllCategories`);
-      setCategories(res.data?.categories || []);
+      const res = await axiosInstance.get(`/category/getAllCategories`);
+      setCategories(res.data?.data || []);
+      setFilteredCategories(res.data?.data || []);
     } catch (error) {
       console.error('Error fetching categories:', error);
     }
@@ -23,36 +25,84 @@ const AddCategories = () => {
     fetchCategories();
   }, []);
 
-  const handleAddCategory = async (e) => {
+  // Handle search
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    const filtered = categories.filter((cat) =>
+      cat.name.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilteredCategories(filtered);
+  };
+
+  const resetForm = () => {
+    setCategoryName('');
+    setCategoryImage(null);
+    setEditingCategory(null);
+  };
+
+  const handleAddOrUpdate = async (e) => {
     e.preventDefault();
 
-    if (!categoryName || !categoryImage) {
-      alert('Please fill all fields');
+    if (!categoryName) {
+      alert('Please enter category name');
       return;
     }
 
     const formData = new FormData();
     formData.append('name', categoryName);
-    formData.append('image', categoryImage);
+    if (categoryImage) formData.append('image', categoryImage);
 
     try {
-      await axios.post(`${API_BASE}/createCategory`, formData);
+      if (editingCategory) {
+        await axiosInstance.patch(`/category/updateCategory/${editingCategory.id}`, formData);
+      } else {
+        await axiosInstance.post(`/category/createCategory`, formData);
+      }
+
       setShowModal(false);
-      setCategoryName('');
-      setCategoryImage(null);
-      fetchCategories(); // Refresh list
+      resetForm();
+      fetchCategories();
     } catch (err) {
-      console.error('Error creating category:', err);
+      console.error('Error saving category:', err);
+    }
+  };
+
+  const handleEdit = (category) => {
+    setEditingCategory(category);
+    setCategoryName(category.name);
+    setShowModal(true);
+  };
+
+  const handleDelete = async (id) => {
+    if (!window.confirm('Are you sure you want to delete this category?')) return;
+
+    try {
+      await axiosInstance.delete(`/category/deleteCategory/${id}`);
+      fetchCategories();
+    } catch (err) {
+      console.error('Error deleting category:', err);
     }
   };
 
   return (
     <div className="container py-4">
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <h3 className="mb-0 fw-bold">Categories</h3>
-        <button className="btn btn-primary" onClick={() => setShowModal(true)}>
+        <h3 className="fw-bold">Categories</h3>
+        <button className="btn btn-primary" onClick={() => { resetForm(); setShowModal(true); }}>
           Add Category
         </button>
+      </div>
+
+      {/* Search Input */}
+      <div className="mb-3">
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Search categories..."
+          value={searchTerm}
+          onChange={handleSearch}
+        />
       </div>
 
       {/* Category Table */}
@@ -63,17 +113,18 @@ const AddCategories = () => {
               <th>#</th>
               <th>Category Name</th>
               <th>Image</th>
+              <th style={{ width: '180px' }}>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {categories.length === 0 ? (
+            {filteredCategories.length === 0 ? (
               <tr>
-                <td colSpan="3" className="text-center text-muted">
+                <td colSpan="4" className="text-center text-muted">
                   No Category Found
                 </td>
               </tr>
             ) : (
-              categories.map((cat, index) => (
+              filteredCategories.map((cat, index) => (
                 <tr key={cat._id || index}>
                   <td>{index + 1}</td>
                   <td>{cat.name}</td>
@@ -85,6 +136,14 @@ const AddCategories = () => {
                       className="rounded"
                     />
                   </td>
+                  <td>
+                    <button className="btn btn-sm btn-warning me-2" onClick={() => handleEdit(cat)}>
+                      Edit
+                    </button>
+                    <button className="btn btn-sm btn-danger" onClick={() => handleDelete(cat.id)}>
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))
             )}
@@ -94,54 +153,63 @@ const AddCategories = () => {
 
       {/* Modal */}
       {showModal && (
-        <div className="modal show fade d-block" tabIndex="-1">
-          <div className="modal-dialog modal-lg">
-            <div className="modal-content">
-              <form onSubmit={handleAddCategory}>
-                <div className="modal-header">
-                  <h5 className="modal-title">Add New Category</h5>
-                  <button type="button" className="btn-close" onClick={() => setShowModal(false)}></button>
-                </div>
-                <div className="modal-body">
-                  <div className="row g-3">
-                    <div className="col-md-6">
-                      <label className="form-label">Category Name</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={categoryName}
-                        onChange={(e) => setCategoryName(e.target.value)}
-                        placeholder="Enter category name"
-                      />
-                    </div>
-
-                    <div className="col-md-6">
-                      <label className="form-label">Category Image</label>
-                      <input
-                        type="file"
-                        className="form-control"
-                        onChange={(e) => setCategoryImage(e.target.files[0])}
-                        accept="image/*"
-                      />
+        <>
+          <div className="modal show fade d-block" tabIndex="-1">
+            <div className="modal-dialog modal-lg">
+              <div className="modal-content">
+                <form onSubmit={handleAddOrUpdate}>
+                  <div className="modal-header">
+                    <h5 className="modal-title">
+                      {editingCategory ? 'Edit Category' : 'Add New Category'}
+                    </h5>
+                    <button
+                      type="button"
+                      className="btn-close"
+                      onClick={() => { setShowModal(false); resetForm(); }}
+                    ></button>
+                  </div>
+                  <div className="modal-body">
+                    <div className="row g-3">
+                      <div className="col-md-6">
+                        <label className="form-label">Category Name</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          value={categoryName}
+                          onChange={(e) => setCategoryName(e.target.value)}
+                          placeholder="Enter category name"
+                        />
+                      </div>
+                      <div className="col-md-6">
+                        <label className="form-label">Category Image</label>
+                        <input
+                          type="file"
+                          className="form-control"
+                          onChange={(e) => setCategoryImage(e.target.files[0])}
+                          accept="image/*"
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="modal-footer">
-                  <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)}>
-                    Cancel
-                  </button>
-                  <button type="submit" className="btn btn-primary">
-                    Add Category
-                  </button>
-                </div>
-              </form>
+                  <div className="modal-footer">
+                    <button
+                      type="button"
+                      className="btn btn-secondary"
+                      onClick={() => { setShowModal(false); resetForm(); }}
+                    >
+                      Cancel
+                    </button>
+                    <button type="submit" className="btn btn-primary">
+                      {editingCategory ? 'Update' : 'Add'} Category
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
+          <div className="modal-backdrop fade show"></div>
+        </>
       )}
-
-      {/* Modal Backdrop */}
-      {showModal && <div className="modal-backdrop fade show"></div>}
     </div>
   );
 };
