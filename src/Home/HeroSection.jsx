@@ -28,23 +28,13 @@ const HeroSection = () => {
       >
         <div className="container px-3">
           <h1 className="fw-bold mb-4 display-5">
-            ⚡ Power Up Your Projects with Top-Quality Electrical Supplies
+            Power Up Your Projects with Top-Quality Electrical Supplies
           </h1>
 
           {/* Responsive Input + Buttons */}
-          <div className="row justify-content-center g-2">
-            <div className="col-12 col-md-6">
-              <input
-                type="text"
-                className="form-control py-3"
-                placeholder="Search for Electric products, categories..."
-              />
-            </div>
+          <div className="justify-content-center g-2">
             <div className="col-6 col-md-auto">
-              <button className="btn btn-chago w-100 py-3">Search</button>
-            </div>
-            <div className="col-6 col-md-auto">
-              <button className="btn btn-light text-dark w-100 py-3">All Products</button>
+              <button className="btn btn-light text-dark py-3">All Products</button>
             </div>
           </div>
         </div>

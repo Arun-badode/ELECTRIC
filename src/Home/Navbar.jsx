@@ -3,19 +3,20 @@ import {
   Container,
   Navbar,
   Nav,
-  Dropdown,
   Form,
   FormControl,
   Button,
 } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FaUserCircle,
   FaSearch,
   FaBoxOpen,
   FaHome,
   FaPhoneAlt,
+  FaShoppingCart,
 } from "react-icons/fa";
+import { motion, AnimatePresence } from "framer-motion";
 
 const user = {
   name: "John Doe",
@@ -28,6 +29,7 @@ const user = {
 const CustomNavbar = () => {
   const [showProfileCard, setShowProfileCard] = useState(false);
   const profileCardRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -42,77 +44,22 @@ const CustomNavbar = () => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const renderProfileCard = () => (
-    <div
-      ref={profileCardRef}
-      className="shadow"
-      style={{
-        position: "absolute",
-        top: 60,
-        right: 0,
-        minWidth: 300,
-        zIndex: 1050,
-        backgroundColor: "#ffffff",
-        borderRadius: "16px",
-        boxShadow: "0 8px 24px rgba(0,0,0,0.12)",
-        border: "1px solid #f0f0f0",
-      }}
-    >
-      <div className="p-4 d-flex flex-column align-items-center text-center">
-        <div
-          className="rounded-circle text-white d-flex align-items-center justify-content-center mb-3 shadow-sm"
-          style={{
-            width: 60,
-            height: 60,
-            fontSize: 26,
-            fontWeight: "bold",
-            backgroundColor: "#4a90e2",
-          }}
-        >
-          {user.name
-            .split(" ")
-            .map((n) => n[0])
-            .join("")
-            .toUpperCase()}
-        </div>
-        <h5 className="mb-1 fw-bold">{user.name}</h5>
-        <p className="text-secondary mb-3 small">{user.role}</p>
-
-        <div className="w-100 mb-2 text-start">
-          <small className="text-muted">Email</small>
-          <div className="fw-medium text-dark">{user.email}</div>
-        </div>
-        <div className="w-100 mb-2 text-start">
-          <small className="text-muted">Phone</small>
-          <div className="fw-medium text-dark">{user.phone}</div>
-        </div>
-        <div className="w-100 text-start">
-          <small className="text-muted">Address</small>
-          <div className="fw-medium text-dark">{user.address}</div>
-        </div>
-      </div>
-    </div>
-  );
-
   return (
-    <Navbar expand="lg" className="fixed-top shadow-sm py-3 bg-white">
-      <Container className="d-flex justify-content-between align-items-center">
-        {/* Logo */}
-        <Navbar.Brand as={Link} to="/" className="d-flex align-items-center">
+    <Navbar expand="lg" className="fixed-top bg-white shadow-sm py-3">
+      <Container>
+        <Navbar.Brand as={Link} to="/">
           <img
             src="https://i.postimg.cc/DyqKQj0V/Screenshot-2025-07-17-122021-removebg-preview.png"
-            alt="ElectroSupply Logo"
+            alt="Logo"
             height="60"
             width="100"
-            className="me-2"
           />
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbar-nav" />
 
         <Navbar.Collapse id="navbar-nav" className="justify-content-between">
-          {/* Navigation Links */}
-          <Nav className="gap-4 mx-auto align-items-center">
+          <Nav className="gap-3 mx-auto">
             <Button
               variant="link"
               className="text-dark fw-semibold d-flex align-items-center gap-1 text-decoration-none"
@@ -120,11 +67,16 @@ const CustomNavbar = () => {
             >
               <FaHome /> Home
             </Button>
-            <Link to="/electricalproducts">
-              <Button className=" text-dark fw-semibold d-flex align-items-center gap-1 text-decoration-none">
+
+            <Link to="/electricalproducts" className="text-decoration-none">
+              <Button
+                variant="link"
+                className="text-dark fw-semibold d-flex align-items-center gap-1 text-decoration-none"
+              >
                 <FaBoxOpen /> Products
               </Button>
             </Link>
+
             <Button
               variant="link"
               className="text-dark fw-semibold d-flex align-items-center gap-1 text-decoration-none"
@@ -132,43 +84,76 @@ const CustomNavbar = () => {
             >
               <FaPhoneAlt /> Contact
             </Button>
+
+
           </Nav>
 
-          {/* Search and Profile */}
           <div className="d-flex align-items-center gap-3 position-relative">
             <Form className="d-flex align-items-center">
               <FormControl
                 type="search"
                 placeholder="Search products"
-                className="me-2 px-3 "
-                style={{ minWidth: 180 }}
+                className="me-2"
+                style={{ minWidth: 200 }}
               />
               <Button variant="secondary">
                 <FaSearch />
               </Button>
             </Form>
 
-            {/* Profile Icon & Dropdown */}
-            <Dropdown align="end">
-              <Dropdown.Toggle
-                variant="link"
-                className="text-dark p-0 border-0 shadow-none"
-                id="dropdown-profile"
+            {/* Cart Icon */}
+            <div
+              style={{ cursor: "pointer", position: "relative" }}
+              onClick={() => navigate("/cart")}
+            >
+              <FaShoppingCart size={24} />
+              {/* Example Badge */}
+              <span
+                style={{
+                  position: "absolute",
+                  top: "-5px",
+                  right: "-10px",
+                  background: "red",
+                  color: "white",
+                  borderRadius: "50%",
+                  padding: "2px 6px",
+                  fontSize: "12px",
+                }}
               >
-                <FaUserCircle size={24} />
-              </Dropdown.Toggle>
-              <Dropdown.Menu style={{ backgroundColor: "#fffefc" }}>
-                <Dropdown.Item
-                  onClick={() => setShowProfileCard((prev) => !prev)}
-                >
-                  My Profile
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to="/login">
-                  Login
-                </Dropdown.Item>
-              </Dropdown.Menu>
-              {showProfileCard && renderProfileCard()}
-            </Dropdown>
+                2
+              </span>
+            </div>
+
+            {/* Profile Icon */}
+            <div
+              className="position-relative"
+              style={{ cursor: "pointer" }}
+              onClick={() => setShowProfileCard((prev) => !prev)}
+            >
+              <FaUserCircle size={28} />
+              <AnimatePresence>
+                {showProfileCard && (
+                  <motion.div
+                    ref={profileCardRef}
+                    initial={{ opacity: 0, scale: 0.9, y: -10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="shadow position-absolute end-0 mt-2"
+                    style={{
+                      minWidth: 280,
+                      zIndex: 1050,
+                      backgroundColor: "#ffffff",
+                      borderRadius: "16px",
+                      border: "1px solid #f0f0f0",
+                      overflow: "hidden",
+                    }}
+                  >
+                    {/* Profile content... */}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </Navbar.Collapse>
       </Container>
