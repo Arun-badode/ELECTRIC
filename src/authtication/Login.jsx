@@ -1,157 +1,64 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import Login from "../authtication/Login"
-
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Login = () => {
-  const [showSignUp, setShowSignUp] = useState(false);
-
-  const toggleForm = () => {
-    setShowSignUp(!showSignUp);
-  };
-
   return (
-    <>
-      <main>
-        <div className="login-container">
-          <h1 className="fw-bold">ProcXa-AI</h1>
-          <p className="text-start text-secondary mb-5">Welcome!</p>
-
-          {!showSignUp ? (
-            // Login Form
+    <div className="d-flex justify-content-center align-items-center vh-100 bg-light px-3">
+      <div className="card shadow-lg rounded-4 border-0 w-100" style={{ maxWidth: '900px' }}>
+        <div className="row g-0 flex-column flex-md-row">
+          {/* Form Section */}
+          <div className="col-md-6 p-4 p-md-5 bg-white rounded-top rounded-md-start mt-5">
+            <h3 className="mb-4 text-primary fw-bold text-center text-md-start">Welcome Back</h3>
             <form>
               <div className="mb-3">
+                <label htmlFor="email" className="form-label">Email address</label>
                 <input
                   type="email"
-                  className="form-control p-3"
-                  placeholder="Email"
-                  required=""
-                  style={{ color: "#578e7e" }}
+                  className="form-control"
+                  id="email"
+                  required
+                  placeholder="Enter your email"
                 />
               </div>
-              <div className="mb-3 mt-3">
+
+              <div className="mb-3">
+                <label htmlFor="password" className="form-label">Password</label>
                 <input
                   type="password"
-                  className="form-control p-3"
-                  placeholder="Password"
-                  required=""
-                  style={{ color: "#578e7e" }}
+                  className="form-control"
+                  id="password"
+                  required
+                  placeholder="Enter your password"
                 />
               </div>
-              <div className="d-flex justify-content-end mb-4">
-                <a href="#" className="text-decoration-none text-secondary">
-                  Forgot Password?
-                </a>
+
+              <div className="mb-3 form-check">
+                <input type="checkbox" className="form-check-input" id="remember" />
+                <label className="form-check-label" htmlFor="remember">Remember me</label>
               </div>
-              <div className="d-flex">
-                <Link style={{ color: "white" }} to="/dashboard">
-                  <button
-                    type="submit"
-                    className="px-4 py-2 ms-1 btn-primary shadow">
-                    Login
-                  </button>
-                </Link>
-                <button
-                  type="button"
-                  onClick={toggleForm}
-                  className="px-4 py-2 ms-4 btn-outline-primary">
-                  Sign Up
-                </button>
-              </div>
+
+              <button type="submit" className="btn btn-primary w-100 rounded-pill">
+                Login
+              </button>
             </form>
-          ) : (
-            // Sign-Up Form
-            <form className="signup-form">
-              <div className="form-row">
-                <input
-                  type="text"
-                  placeholder="First Name *"
-                  className="form-input"
-                />
-                <input
-                  type="text"
-                  placeholder="Last Name *"
-                  className="form-input"
-                />
-              </div>
-              <div className="form-row">
-                <input
-                  type="email"
-                  placeholder="Email *"
-                  className="form-input"
-                />
-                <input
-                  type="text"
-                  placeholder="Phone Number *"
-                  className="form-input"
-                />
-              </div>
-              <div className="form-row">
-                <select className="form-input">
-                  <option value="" disabled selected>
-                    Gender *
-                  </option>
-                  <option value="male">Male</option>
-                  <option value="female">Female</option>
-                  <option value="other">Other</option>
-                </select>
-                <input
-                  type="text"
-                  placeholder="City *"
-                  className="form-input "
-                />
-              </div>
-              <div className="form-row ">
-                <input
-                  type="text"
-                  placeholder="State *"
-                  className="form-input "
-                />
-                <input
-                  type="text"
-                  placeholder="Country *"
-                  className="form-input"
-                />
-              </div>
-              <div className="form-row">
-                <select className="form-input">
-                  <option value="" disabled selected>
-                    User Type *
-                  </option>
-                  <option value="admin">Admin</option>
-                  <option value="user">User</option>
-                </select>
-                <input
-                  type="password"
-                  placeholder="Password *"
-                  className="form-input"
-                />
-              </div>
-              <div className="form-row ">
-                <input
-                  type="password"
-                  placeholder="Confirm Password *"
-                  className="form-input"
-                />
-              </div>
-              <div className="d-flex">
-                <button
-                  type="submit"
-                  className="px-4 py-2 ms-1 btn-primary shadow" style={{border:'none'}}>
-                  Sign Up
-                </button>
-                <button
-                  type="button"
-                  onClick={toggleForm}
-                  className="px-4 py-2 ms-4 "style={{border:'2px solid #578e7e', color:'#578e7e'}}>
-                   Login
-                </button>
-              </div>
-            </form>
-          )}
+
+            <p className="mt-4 text-center text-muted">
+              Don't have an account? <a href="/signup">Register</a>
+            </p>
+          </div>
+
+          {/* Image Section (Hidden on mobile) */}
+          <div className="col-md-6 d-none d-md-flex align-items-center justify-content-center bg-light rounded-bottom rounded-md-end">
+            <img
+              src="https://i.postimg.cc/x1hDCY72/9ec3f58b834b966a8b7e5f399aa44692.jpg"
+              alt="Login Visual"
+              className="img-fluid rounded-bottom rounded-md-end"
+              style={{ objectFit: 'cover', maxHeight: '100%', width: '100%' }}
+            />
+          </div>
         </div>
-      </main>
-    </>
+      </div>
+    </div>
   );
 };
 
