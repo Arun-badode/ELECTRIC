@@ -141,7 +141,7 @@ const CustomNavbar = () => {
                     variant="outline-success"
                     size="sm"
                     className="w-100 mt-2"
-                    onClick={() => navigate("/logout")}
+                    onClick={() => navigate("/admin/dashboard")}
                   >
                     Login
                   </Button>
