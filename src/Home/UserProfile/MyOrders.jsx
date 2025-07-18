@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-import CustomNavbar from "../Navbar";
-import Footer from "../Footer";
-import ProfileSetting from "./ProfileSetting";
 
 const MyOrders = () => {
      const [activeTab, setActiveTab] = useState("profile");
