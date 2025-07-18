@@ -90,7 +90,7 @@ const FeaturedProducts = () => {
                   <p className="card-text text-muted small mb-3">{product.description}</p>
                   <div className="mt-auto d-flex justify-content-between align-items-center">
                     <span className="fw-bold text-primary">{product.price}</span>
-                    <button className="btn btn-primary btn-sm">Add to Cart</button>
+                    <button className="btn btn-primary btn-sm">View</button>
                   </div>
                 </div>
               </div>

@@ -118,7 +118,7 @@ const ElectricalProducts = () => {
     <div className="bg-light ">
       <div className=" p-4">
         <div className="text-center mb-5">
-          <h1 className="display-4 fw-bold text-dark mb-3">
+          <h1 className="display-4 fw-bold text-dark mt-5 py-4">
             Professional Electrical Products
           </h1>
           <p className="lead text-muted">
@@ -129,7 +129,7 @@ const ElectricalProducts = () => {
         <div className="row g-4">
           {/* Filter Sidebar */}
           <div className="col-lg-3">
-            <div className="card shadow-sm h-100 sticky-top" style={{top: '20px',borderRadius:'20px'}}>
+            <div className="card shadow-sm" style={{ borderRadius:'20px'}}>
               <div className="card-body">
                 <h2 className="h4 fw-semibold mb-4">Filter Products</h2>
                 
@@ -193,7 +193,7 @@ const ElectricalProducts = () => {
             <div className="row mb-4 g-3">
               <div className="col-md-8">
                 <div className="input-group">
-                  <span className="input-group-text bg-white rounded-pill">
+                  <span className="input-group-text bg-white rounded-pill me-2">
                     <i className="bi bi-search text-muted"></i>
                   </span>
                   <input type="text" className="form-control py-2 rounded-pill" placeholder="Search products..." />
@@ -228,7 +228,7 @@ const ElectricalProducts = () => {
                     ></div>
                     <div className="card-body d-flex flex-column">
                       <div className="d-flex align-items-center mb-2">
-                        <span className="badge bg-primary bg-opacity-10 text-primary me-auto">
+                        <span className="badge bg-primary bg-opacity-10 me-auto">
                           {product.category}
                         </span>
                         <div className="d-flex align-items-center">
