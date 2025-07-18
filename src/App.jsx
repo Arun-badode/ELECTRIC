@@ -24,6 +24,7 @@ import AddProduct from "./Componente/Products/AddProduct";
 import ProfilePage from "./Home/UserProfile/ProfilePage";
 
 import UserDashboard from "./UserDashboard/UserDashboard";
+import AdminProfile from "./Componente/AdminProfile/AdminProfile";
 
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -79,6 +80,7 @@ function App() {
                 <Route path="/support" element={<Support />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/inventory" element={<Inventory />} />
+                <Route path="/Admin-Profile" element={<AdminProfile />} />
               </Routes>
             </div>
           </div>

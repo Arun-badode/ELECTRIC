@@ -29,76 +29,8 @@ const ElectricalProducts = () => {
       description: "500ft spool, THHN/THWN-2 stranded copper wire for professional installations",
       image: "https://readdy.ai/api/search-image?query=industrial%20grade%20copper%20electrical%20wire%20spool%20professional%20electrical%20supply%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=wire-pro&orientation=squarish"
     },
-    {
-      id: 3,
-      name: "Safety Kit Pro Plus",
-      category: "Safety Equipment",
-      price: 249.99,
-     
-      rating: 4.7,
-      description: "Complete electrical safety gear set with OSHA-approved equipment",
-      image: "https://readdy.ai/api/search-image?query=professional%20electrical%20safety%20kit%20hard%20hat%20gloves%20goggles%20voltage%20tester%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=safety-kit-pro&orientation=squarish"
-    },
-    {
-      id: 4,
-      name: "Cordless Drill Master 20V",
-      category: "Power Tools",
-      price: 399.99,
-    
-      rating: 4.8,
-      description: "Professional-grade cordless drill with brushless motor and dual batteries",
-      image: "https://readdy.ai/api/search-image?query=professional%20cordless%20power%20drill%20modern%20design%20battery%20powered%20tool%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=drill-pro&orientation=squarish"
-    },
-    {
-      id: 5,
-      name: "LED Panel Pro 2x2",
-      category: "Lighting",
-      price: 159.99,
    
-      rating: 4.6,
-      description: "Commercial-grade LED panel with energy-efficient technology",
-      image: "https://readdy.ai/api/search-image?query=commercial%20led%20panel%20light%20modern%20slim%20design%20energy%20efficient%20lighting%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=led-panel-pro&orientation=squarish"
-    },
-    {
-      id: 6,
-      name: "Circuit Breaker 100A",
-      category: "Circuit Protection",
-      price: 129.99,
-    
-      rating: 4.9,
-      description: "Commercial-grade main circuit breaker with advanced protection",
-      image: "https://readdy.ai/api/search-image?query=professional%20circuit%20breaker%20panel%20modern%20electrical%20equipment%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=circuit-breaker-pro&orientation=squarish"
-    },
-    {
-      id: 7,
-      name: "Pro Crimping Tool Set",
-      category: "Hand Tools",
-      price: 89.99,
    
-      rating: 4.7,
-      description: "Heavy-duty wire crimper kit with multiple die sizes",
-      image: "https://readdy.ai/api/search-image?query=professional%20wire%20crimping%20tool%20heavy%20duty%20electrical%20crimper%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=crimper-pro&orientation=squarish"
-    },
-    {
-      id: 8,
-      name: "Smart WiFi Outlet Pro",
-      category: "Smart Devices",
-      price: 79.99,
-   
-      rating: 4.8,
-      description: "WiFi-enabled power monitoring outlet with app control",
-      image: "https://readdy.ai/api/search-image?query=smart%20electrical%20outlet%20modern%20design%20wifi%20enabled%20power%20monitoring%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=smart-outlet-pro&orientation=squarish"
-    },
-    {
-      id: 9,
-      name: "Hydraulic Conduit Bender",
-      category: "Specialty Tools",
-      price: 449.99,
-    
-      rating: 4.9,
-      description: "Professional-grade hydraulic conduit bending system",
-      image: "https://readdy.ai/api/search-image?query=professional%20electrical%20conduit%20bender%20hydraulic%20powered%20precision%20bending%20tool%20clean%20background%20detailed%20product%20photography&width=300&height=300&seq=conduit-bender-pro&orientation=squarish"
-    }
   ];
 
   // Function to render star ratings
