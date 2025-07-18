@@ -22,6 +22,8 @@ import AddCategories from "./Componente/Categories/AddCategories";
 import ProductPage from "./Home/ProductPage";
 import AddProduct from "./Componente/Products/AddProduct";
 
+import UserDashboard from "./UserDashboard/UserDashboard";
+
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const menusidebarcollaps = () => {
@@ -31,7 +33,14 @@ function App() {
     setIsSidebarCollapsed((prev) => !prev);
   };
   const location = useLocation();
-  const hideLayout = location.pathname === "/" || location.pathname === "/electricalproducts" || location.pathname === "/productpage"  || location.pathname === "/shoppingcart" || location.pathname === "/login" || location.pathname === "/signup";
+  const hideLayout =
+    location.pathname === "/" ||
+    location.pathname === "/electricalproducts" ||
+    location.pathname === "/productpage" ||
+    location.pathname === "/shoppingcart" ||
+    location.pathname === "/login" ||
+    location.pathname === "/signup"||
+   location.pathname === "/userdashboard";
 
   return (
     <>
@@ -39,12 +48,12 @@ function App() {
       {hideLayout ? (
         <Routes>
           <Route path="/" element={<Home />} />
-           <Route path="/login" element={<Login />} />
-           <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
           <Route path="/electricalproducts" element={<ElectricalProducts />} />
-           <Route path="/shoppingcart" element={<ShoppingCart />} />
-           <Route path="/productpage" element={<ProductPage />} />
-
+          <Route path="/shoppingcart" element={<ShoppingCart />} />
+          <Route path="/productpage" element={<ProductPage />} />
+          <Route path="/userdashboard" element={<UserDashboard />} />
         </Routes>
       ) : (
         // Pages with Layout
@@ -56,7 +65,9 @@ function App() {
               menuItemClick={menusidebarcollaps}
             />
             <div
-              className={`right-side-content ${isSidebarCollapsed ? "collapsed" : ""}`}
+              className={`right-side-content ${
+                isSidebarCollapsed ? "collapsed" : ""
+              }`}
             >
               <Routes>
                 <Route path="/admin/dashboard" element={<Dashboard />} />
@@ -65,11 +76,9 @@ function App() {
                 <Route path="/users" element={<Users />} />
                 <Route path="/bannermanager" element={<BannerManager />} />
 
-{/* products */}
+                {/* products */}
                 <Route path="/products" element={<Productes />} />
                 <Route path="/addproducts" element={<AddProduct />} />
-
-
 
                 <Route path="/reportanalytics" element={<ReportAnalytics />} />
                 <Route path="/support" element={<Support />} />
