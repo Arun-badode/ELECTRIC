@@ -1,8 +1,6 @@
 import React from 'react';
-
 import HeroSection from './HeroSection';
 import FeaturedProducts from './FeaturedProducts';
-
 import Footer from './Footer';
 import CategoriesSection from './CategoriesSection';
 import FeatureHighlights from './FeatureHighlights ';
