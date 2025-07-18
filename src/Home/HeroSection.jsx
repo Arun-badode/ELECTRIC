@@ -19,7 +19,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <div className="w-full flex justify-center p-4 sm:p-8 mt-5 py-5">
+    <div className="w-full flex justify-center sm:p-8">
       <div className="relative w-full max-w-8xl h-[60vh] sm:h-[50vh] rounded-2xl overflow-hidden shadow-xl">
         {/* Image Carousel */}
         <img

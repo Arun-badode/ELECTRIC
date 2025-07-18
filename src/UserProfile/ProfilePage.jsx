@@ -50,50 +50,55 @@ const ProfilePage = () => {
 
       <div className="container-fluid px-0">
         {/* Banner */}
-        <div className="profile-banner bg-primary text-white py-5 mt-5">
+        {/* <div className="profile-banner bg-primary text-white py-5 mt-5">
           <div className="container">
             <h2 className="mb-0">My Account</h2>
           </div>
-        </div>
+        </div> */}
 
         {/* Layout */}
-        <div className="container py-5">
+        <div className="p-4">
           <div className="row">
             {/* Sidebar */}
             <div className="col-lg-3 mb-4">
               <aside className="account-card card shadow-sm border-0 rounded-4">
                 <div className="card-body p-0">
-                  <nav
-                    className="account-tab-container"
-                    style={{ "--indicator-top": indicatorTop }}
-                  >
-                    {items.map((item, idx) => (
-                      <button
-                        key={item.key}
-                        type="button"
-                        onClick={() => handleClick(item.key)}
-                        className={`account-tab-btn ${
-                          activeTab === item.key ? "is-active" : ""
-                        } ${item.danger ? "is-danger" : ""}`}
-                        aria-current={activeTab === item.key ? "page" : undefined}
-                      >
-                        <span className="account-tab-icon">{item.icon}</span>
-                        <span className="account-tab-text">
-                          {item.label}
-                          {item.sub && (
-                            <span className="account-tab-subtext">{item.sub}</span>
-                          )}
-                        </span>
-                      </button>
-                    ))}
+                  <div className="max-h-[600px] "> {/* Add scroll within this div */}
+                    <nav
+                      className="account-tab-container"
+                      style={{ "--indicator-top": indicatorTop }}
+                    >
+                      {items.map((item, idx) => (
+                        <button
+                          key={item.key}
+                          type="button"
+                          onClick={() => handleClick(item.key)}
+                          className={`account-tab-btn ${activeTab === item.key ? "is-active" : ""
+                            } ${item.danger ? "is-danger" : ""}`}
+                          aria-current={activeTab === item.key ? "page" : undefined}
+                        >
+                          <span className="account-tab-icon">{item.icon}</span>
+                          <span className="account-tab-text">
+                            {item.label}
+                            {item.sub && (
+                              <span className="account-tab-subtext">{item.sub}</span>
+                            )}
+                          </span>
+                        </button>
+                      ))}
 
-                    {/* Visual track + indicator */}
-                    <span className="account-tab-track" />
-                    <span className="account-tab-indicator" />
-                  </nav>
+                      {/* Visual track + indicator */}
+                      {/* <div className="">
+                        <span className="account-tab-track" />
+                        <span className="account-tab-indicator" />
+                      </div> */}
+
+                    </nav>
+                  </div>
                 </div>
               </aside>
             </div>
+
 
             {/* Main Content */}
             <div className="col-lg-9">
