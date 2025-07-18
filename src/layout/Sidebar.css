@@ -95,7 +95,7 @@
   transform: rotate(360deg);
 }
 .menu-item.active .menu-link {
-  background-color: #578E7E; /* Highlight active menu item */
+  background-color: #2581f3; /* Highlight active menu item */
   color: white; /* Active text color */
   border-radius: 12px;
 }
