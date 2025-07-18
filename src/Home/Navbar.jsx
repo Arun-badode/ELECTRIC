@@ -46,7 +46,7 @@ const CustomNavbar = () => {
 
   return (
     <Navbar expand="lg" className="fixed-top bg-white shadow-sm py-3">
-      <Container>
+      <Container fluid>
         <Navbar.Brand as={Link} to="/">
           <img
             src="https://i.postimg.cc/DyqKQj0V/Screenshot-2025-07-17-122021-removebg-preview.png"
@@ -62,31 +62,30 @@ const CustomNavbar = () => {
           <Nav className="gap-3 mx-auto">
             <Button
               variant="link"
-              className="text-dark fw-semibold d-flex align-items-center gap-1 text-decoration-none"
+              className="text-dark fw-bold d-flex align-items-center gap-1 text-decoration-none"
               onClick={() => navigate("/")}
             >
-              <FaHome /> Home
+              Home
             </Button>
 
             <Link to="/electricalproducts" className="text-decoration-none">
               <Button
                 variant="link"
-                className="text-dark fw-semibold d-flex align-items-center gap-1 text-decoration-none"
+                className="text-dark fw-bold d-flex align-items-center gap-1 text-decoration-none"
               >
-                <FaBoxOpen /> Products
+                Products
               </Button>
             </Link>
 
             <Button
               variant="link"
-              className="text-dark fw-semibold d-flex align-items-center gap-1 text-decoration-none"
+              className="text-dark fw-bold d-flex align-items-center gap-1 text-decoration-none"
               onClick={() => navigate("/contact")}
             >
-              <FaPhoneAlt /> Contact
+              Contact
             </Button>
-
-
           </Nav>
+
 
           <div className="d-flex align-items-center gap-3 position-relative">
             <Form className="d-flex align-items-center">
@@ -139,7 +138,8 @@ const CustomNavbar = () => {
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.9, y: -10 }}
                     transition={{ duration: 0.2 }}
-                    className="shadow position-absolute end-0 mt-2"
+                    className="shadow position-absolute end-0 mt-3"
+
                     style={{
                       minWidth: 280,
                       zIndex: 1050,
@@ -149,7 +149,42 @@ const CustomNavbar = () => {
                       overflow: "hidden",
                     }}
                   >
-                    {/* Profile content... */}
+                    <div className="p-4 text-center">
+                      <div
+                        className="rounded-circle mx-auto mb-3 d-flex justify-content-center align-items-center"
+                        style={{
+                          width: 60,
+                          height: 60,
+                          background: "#4a90e2",
+                          color: "#fff",
+                          fontWeight: "bold",
+                          fontSize: 26,
+                        }}
+                      >
+                        {user.name
+                          .split(" ")
+                          .map((n) => n[0])
+                          .join("")
+                          .toUpperCase()}
+                      </div>
+                      <h5 className="fw-bold">{user.name}</h5>
+                      <p className="text-secondary mb-2">{user.role}</p>
+                      <div className="text-start">
+                        <small className="text-muted">Email</small>
+                        <div>{user.email}</div>
+                        <small className="text-muted mt-2 d-block">Phone</small>
+                        <div>{user.phone}</div>
+                        <small className="text-muted mt-2 d-block">Address</small>
+                        <div>{user.address}</div>
+                      </div>
+                      <Button
+                        variant="outline-primary"
+                        className="w-100 mt-3"
+                        onClick={() => navigate("/login")}
+                      >
+                        Login
+                      </Button>
+                    </div>
                   </motion.div>
                 )}
               </AnimatePresence>
