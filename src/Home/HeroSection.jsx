@@ -1,78 +1,59 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+
+const bannerImages = [
+  "https://i.postimg.cc/zB3QWKSL/0e9c812f40bdac4af33d736255c38afa-1.jpg",
+  "https://i.postimg.cc/x1hDCY72/electric-supply-banner.jpg",
+  "https://i.ibb.co/RkxQXTLm/image-1.png",
+  "https://i.ibb.co/cG1CJNP/image.png",
+  "https://i.ibb.co/tM5Q4Pn1/image.png"
+];
 
 const HeroSection = () => {
-  const images = [
-    "https://i.postimg.cc/zB3QWKSL/0e9c812f40bdac4af33d736255c38afa-1.jpg",
-    "https://i.postimg.cc/x1hDCY72/9ec3f58b834b966a8b7e5f399aa44692.jpg",
-    "https://i.postimg.cc/zB3QWKSL/0e9c812f40bdac4af33d736255c38afa-1.jpg",
-    "https://i.postimg.cc/x1hDCY72/9ec3f58b834b966a8b7e5f399aa44692.jpg",
-    "https://i.postimg.cc/zB3QWKSL/0e9c812f40bdac4af33d736255c38afa-1.jpg",
-  ];
-
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      handleNext();
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [currentIndex]);
-
-  const handlePrev = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
-    );
-  };
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
-  };
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
-    <div className="relative sm:h-[70vh] md:h-[70vh] overflow-hidden rounded-lg">
-      {/* Slider Images */}
-      <div
-        className="flex transition-transform duration-700 ease-in-out"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-      >
-        {images.map((img, index) => (
-          <div key={index} className="w-full flex-shrink-0">
-            <img
-              src={img}
-              alt={`Slide ${index + 1}`}
-              className="w-full h-[60vh] sm:h-[70vh] md:h-[80vh] object-cover"
-            />
+    <div className="w-full flex justify-center p-4 sm:p-8 mt-5 py-5">
+      <div className="relative w-full max-w-8xl h-[60vh] sm:h-[50vh] rounded-2xl overflow-hidden shadow-xl">
+        {/* Image Carousel */}
+        <img
+          src={bannerImages[currentIndex]}
+          alt="Banner"
+          className="w-full h-full object-cover transition-all duration-1000"
+        />
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-2xl">
+          <div className="text-center text-white px-4 md:px-10">
+            <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-wider mb-3 drop-shadow-lg">
+              Powering the Future of Electricity
+            </h1>
+            <p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mx-auto">
+              Shop high-quality electrical supplies, tools, meters, and more from trusted brands.
+            </p>
+            <button className="mt-5 px-6 py-2 rounded-full bg-primary font-semibold shadow-lg transition">
+              Shop Now
+            </button>
           </div>
-        ))}
-      </div>
+        </div>
 
-      {/* Navigation Buttons */}
-      <button
-        onClick={handlePrev}
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 z-10"
-      >
-        <i className="ri-arrow-left-s-line text-2xl" />
-      </button>
-      <button
-        onClick={handleNext}
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-black/50 text-white p-3 rounded-full hover:bg-black/70 z-10"
-      >
-        <i className="ri-arrow-right-s-line text-2xl" />
-      </button>
-
-      {/* Dots Indicator */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
-            className={`w-3 h-3 rounded-full ${
-              currentIndex === index ? "bg-white" : "bg-gray-400"
-            }`}
-          />
-        ))}
+        {/* Slide Indicators */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+          {bannerImages.map((_, i) => (
+            <div
+              key={i}
+              className={`w-3 h-3 rounded-full ${
+                i === currentIndex ? "bg-primary" : "bg-white"
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

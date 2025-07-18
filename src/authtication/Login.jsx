@@ -31,6 +31,7 @@ const handleSubmit = async (e) => {
     // Save token and role to localStorage
     localStorage.setItem('token', token);
     localStorage.setItem('role', role);
+    localStorage.setItem('user', JSON.stringify(response.data.data));
 
     toast.success('Login successful!', {
       position: 'top-center',
