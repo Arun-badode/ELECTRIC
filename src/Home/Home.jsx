@@ -7,6 +7,7 @@ import FeatureHighlights from './FeatureHighlights ';
 import CustomerTestimonials from './CustomerTestimonials';
 import SubscribeSection from './SubscribeSection';
 import Navbar from './Navbar';
+import Categoriesslider from './Categoriesslider';
 
 const Home = () => {
   return (
@@ -14,6 +15,7 @@ const Home = () => {
     <Navbar/>
       <div >
         <HeroSection />
+        <Categoriesslider/>
         <FeaturedProducts />
         {/* <CategoriesSection /> */}
         <FeatureHighlights />

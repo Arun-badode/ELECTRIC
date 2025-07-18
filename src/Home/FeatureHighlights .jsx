@@ -1,43 +1,45 @@
 import React from "react";
+import "remixicon/fonts/remixicon.css"; // Ensure Remix Icon is available
 
-import "remixicon/fonts/remixicon.css"; // Make sure Remix Icon CDN or npm package is included
+const features = [
+  {
+    icon: "ri-truck-line",
+    title: "Free Shipping",
+    description: "On bulk orders over $500",
+  },
+  {
+    icon: "ri-shield-check-line",
+    title: "Money Back Guarantee",
+    description: "30-day return policy",
+  },
+  {
+    icon: "ri-customer-service-2-line",
+    title: "24/7 Technical Support",
+    description: "Expert electrician assistance",
+  },
+  {
+    icon: "ri-secure-payment-line",
+    title: "Secure Payment",
+    description: "SSL encrypted transactions",
+  },
+];
 
 const FeatureHighlights = () => {
   return (
-    <section className="bg-white">
-      <div className="p-4">
-        <div className="row text-center g-4">
-          <div className="col-md-6 col-lg-3">
-            <div className="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-3" style={{ width: "64px", height: "64px" }}>
-              <i className="ri-truck-line text-white fs-4"></i>
+    <section className="bg-white py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          {features.map((feature, index) => (
+            <div key={index} className="flex flex-col items-center">
+              <div className="w-16 h-16 bg-primary/10 text-primary rounded-full flex items-center justify-center text-2xl mb-4">
+                <i className={`${feature.icon}`}></i>
+              </div>
+              <h5 className="text-lg font-semibold text-gray-800 mb-1">
+                {feature.title}
+              </h5>
+              <p className="text-sm text-gray-500">{feature.description}</p>
             </div>
-            <h5 className="fw-semibold text-dark mb-2">Free Shipping</h5>
-            <p className="text-muted small">On bulk orders over $500</p>
-          </div>
-
-          <div className="col-md-6 col-lg-3">
-            <div className="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-3" style={{ width: "64px", height: "64px" }}>
-              <i className="ri-shield-check-line text-white fs-4"></i>
-            </div>
-            <h5 className="fw-semibold text-dark mb-2">Money Back Guarantee</h5>
-            <p className="text-muted small">30-day return policy</p>
-          </div>
-
-          <div className="col-md-6 col-lg-3">
-            <div className="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-3" style={{ width: "64px", height: "64px" }}>
-              <i className="ri-customer-service-2-line text-white fs-4"></i>
-            </div>
-            <h5 className="fw-semibold text-dark mb-2">24/7 Technical Support</h5>
-            <p className="text-muted small">Expert electrician assistance</p>
-          </div>
-
-          <div className="col-md-6 col-lg-3">
-            <div className="rounded-circle bg-primary bg-opacity-10 d-flex align-items-center justify-content-center mx-auto mb-3" style={{ width: "64px", height: "64px" }}>
-              <i className="ri-secure-payment-line text-white fs-4"></i>
-            </div>
-            <h5 className="fw-semibold text-dark mb-2">Secure Payment</h5>
-            <p className="text-muted small">SSL encrypted transactions</p>
-          </div>
+          ))}
         </div>
       </div>
     </section>

@@ -1,6 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 const Navbar = ({ toggleSidebar }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // ✅ Clear all localStorage or specific keys as needed
+    localStorage.clear();
+    // Navigate to home/login page
+    navigate("/");
+  };
+
   return (
     <>
       <nav className="navbar navbar-light">
@@ -8,9 +18,11 @@ const Navbar = ({ toggleSidebar }) => {
           <div className="nav-content">
             <div className="nav-bran">
               <img
-              height={65}
-              width={80}
-                src="public/image/logo.png"/>
+                height={65}
+                width={80}
+                src="public/image/logo.png"
+                alt="Logo"
+              />
               <div className="nav-taggle-icon" onClick={toggleSidebar}>
                 <a href="#">
                   <i className="fa fa-bars" aria-hidden="true"></i>
@@ -26,7 +38,8 @@ const Navbar = ({ toggleSidebar }) => {
                   className="me-2 fw-bold p-1 rounded-4 profile d-flex align-items-center"
                   style={{ cursor: "pointer" }}
                   data-bs-toggle="dropdown"
-                  aria-expanded="false">
+                  aria-expanded="false"
+                >
                   <div className="profile-element">
                     <div className="avatar online">
                       <i className="fa-solid user-icon fa-circle-user"></i>
@@ -37,17 +50,18 @@ const Navbar = ({ toggleSidebar }) => {
                 <ul className="dropdown-menu dropdown-menu-end">
                   <li>
                     <Link to="/Admin-Profile" className="dropdown-item">
-                      Update Profile
+                      My Profile
                     </Link>
                   </li>
                   <li>
                     <hr className="dropdown-divider" />
-                  </li>              
-                   <li>
-                    <Link className="dropdown-item" to="/">
+                  </li>
+                  <li>
+                    {/* 👇 Logout Link with clear and redirect */}
+                    <button className="dropdown-item" onClick={handleLogout}>
                       Logout
-                    </Link>
-                  </li> 
+                    </button>
+                  </li>
                 </ul>
               </div>
             </div>
