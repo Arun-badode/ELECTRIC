@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 const AddCategories = () => {
   const [categories, setCategories] = useState([]);
@@ -7,7 +7,23 @@ const AddCategories = () => {
   const [categoryImage, setCategoryImage] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  const handleAddCategory = (e) => {
+  const API_BASE = 'https://hrb5wx2v-6500.inc1.devtunnels.ms/api/category';
+
+  // Fetch all categories
+  const fetchCategories = async () => {
+    try {
+      const res = await axios.get(`${API_BASE}/getAllCategories`);
+      setCategories(res.data?.categories || []);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const handleAddCategory = async (e) => {
     e.preventDefault();
 
     if (!categoryName || !categoryImage) {
@@ -15,16 +31,19 @@ const AddCategories = () => {
       return;
     }
 
-    const newCategory = {
-      id: categories.length + 1,
-      name: categoryName,
-      image: URL.createObjectURL(categoryImage),
-    };
+    const formData = new FormData();
+    formData.append('name', categoryName);
+    formData.append('image', categoryImage);
 
-    setCategories([...categories, newCategory]);
-    setCategoryName('');
-    setCategoryImage(null);
-    setShowModal(false); // close modal
+    try {
+      await axios.post(`${API_BASE}/createCategory`, formData);
+      setShowModal(false);
+      setCategoryName('');
+      setCategoryImage(null);
+      fetchCategories(); // Refresh list
+    } catch (err) {
+      console.error('Error creating category:', err);
+    }
   };
 
   return (
@@ -37,22 +56,26 @@ const AddCategories = () => {
       </div>
 
       {/* Category Table */}
-      {categories.length === 0 ? (
-        <p className="text-muted">No categories added yet.</p>
-      ) : (
-        <div className="table-responsive">
-          <table className="table table-bordered align-middle">
-            <thead className="table-light">
+      <div className="table-responsive">
+        <table className="table table-bordered align-middle">
+          <thead className="table-light">
+            <tr>
+              <th>#</th>
+              <th>Category Name</th>
+              <th>Image</th>
+            </tr>
+          </thead>
+          <tbody>
+            {categories.length === 0 ? (
               <tr>
-                <th>#</th>
-                <th>Category Name</th>
-                <th>Image</th>
+                <td colSpan="3" className="text-center text-muted">
+                  No Category Found
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {categories.map((cat) => (
-                <tr key={cat.id}>
-                  <td>{cat.id}</td>
+            ) : (
+              categories.map((cat, index) => (
+                <tr key={cat._id || index}>
+                  <td>{index + 1}</td>
                   <td>{cat.name}</td>
                   <td>
                     <img
@@ -63,13 +86,13 @@ const AddCategories = () => {
                     />
                   </td>
                 </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
 
-      {/* Bootstrap Modal */}
+      {/* Modal */}
       {showModal && (
         <div className="modal show fade d-block" tabIndex="-1">
           <div className="modal-dialog modal-lg">

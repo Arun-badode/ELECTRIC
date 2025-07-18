@@ -7,7 +7,7 @@ const Sidebar = ({ collapsed }) => {
   const location = useLocation();
 
   const menuItems = [
-    { name: "Dashboard", path: "/dashboard", icon: "fa-solid fa-gauge" },
+    { name: "Dashboard", path: "/admin/dashboard", icon: "fa-solid fa-gauge" },
     { name: "Categories", path: "/categories", icon: "fa-solid fa-gauge" },
     { name: "Add Products", path: "/addproducts", icon: "fa-solid fa-gauge" },
     { name: "All Products", path: "/products", icon: "fa-solid fa-boxes-stacked" },

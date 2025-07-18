@@ -59,7 +59,7 @@ function App() {
               className={`right-side-content ${isSidebarCollapsed ? "collapsed" : ""}`}
             >
               <Routes>
-                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/admin/dashboard" element={<Dashboard />} />
                 <Route path="/categories" element={<AddCategories />} />
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/users" element={<Users />} />
