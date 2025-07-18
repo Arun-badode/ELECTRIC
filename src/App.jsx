@@ -47,7 +47,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/electricalproducts" element={<ElectricalProducts />} />
            <Route path="/shoppingcart" element={<ShoppingCart />} />
-           <Route path="/productpage/" element={<ProductPage />} />
+           <Route path="/productpage" element={<ProductPage />} />
             <Route path="/profilepage" element={<ProfilePage />} />
 
         </Routes>
@@ -75,7 +75,6 @@ function App() {
                 {/* products */}
                 <Route path="/products" element={<Productes />} />
                 <Route path="/addproducts" element={<AddProduct />} />
-
                 <Route path="/reportanalytics" element={<ReportAnalytics />} />
                 <Route path="/support" element={<Support />} />
                 <Route path="/settings" element={<Settings />} />

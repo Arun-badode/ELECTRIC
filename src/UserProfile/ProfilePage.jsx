@@ -5,11 +5,8 @@ import MyOrders from "./MyOrders";
 import MyProfile from "./MyProfile";
 import { FiUser, FiShoppingBag, FiLogOut } from "react-icons/fi";
 import "./UserProfile.css";
-
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("profile");
-
-  // Sidebar items config
   const items = useMemo(
     () => [
       { key: "profile", label: "Profile", icon: <FiUser />, sub: "Account" },
@@ -18,16 +15,12 @@ const ProfilePage = () => {
     ],
     []
   );
-
-  // Compute indicator position (index * itemHeight)
-  // Must match --tab-height in CSS (default 48px)
   const activeIndex = items.findIndex((i) => i.key === activeTab);
   const indicatorTop = `calc(${activeIndex} * var(--tab-height) + var(--indicator-offset))`;
 
   const handleClick = (key) => {
     if (key === "logout") {
-      // TODO: plug in your logout logic
-      console.log("Logout clicked");
+
       return;
     }
     setActiveTab(key);
@@ -47,17 +40,10 @@ const ProfilePage = () => {
   return (
     <>
       <CustomNavbar />
-
       <div className="container-fluid px-0">
         {/* Banner */}
-        <div className="profile-banner bg-primary text-white py-5 mt-5">
-          <div className="container">
-            <h2 className="mb-0">My Account</h2>
-          </div>
-        </div>
 
-        {/* Layout */}
-        <div className="container py-5">
+        <div className="container mt-5 py-5">
           <div className="row">
             {/* Sidebar */}
             <div className="col-lg-3 mb-4">
