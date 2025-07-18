@@ -18,6 +18,7 @@ import ElectricalProducts from "./Home/ElectricalProducts";
 import ShoppingCart from "./Home/ShoppingCart";
 import Login from "./authtication/Login";
 import Signup from "./authtication/Signup";
+import AddCategories from "./Componente/Categories/AddCategories";
 
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -56,6 +57,7 @@ function App() {
             >
               <Routes>
                 <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/categories" element={<AddCategories />} />
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/bannermanager" element={<BannerManager />} />
