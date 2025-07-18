@@ -4,6 +4,7 @@ import Footer from "../Footer";
 import MyOrders from "./MyOrders";
 import MyProfile from "./MyProfile";
 import { FiUser, FiShoppingBag, FiHeart, FiSettings, FiLogOut } from "react-icons/fi";
+import "./UserProfile.css"
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("profile");
@@ -14,10 +15,6 @@ const ProfilePage = () => {
         return <MyProfile />;
       case "orders":
         return <MyOrders />;
-      // case "wishlist":
-      //   return <Wishlist />;
-      // case "settings":
-      //   return <ProfileSetting />;
       default:
         return null;
     }
@@ -59,24 +56,6 @@ const ProfilePage = () => {
                       <FiShoppingBag className="me-2" />
                       My Orders
                     </button>
-                    {/* <button
-                      onClick={() => setActiveTab("wishlist")}
-                      className={`list-group-item list-group-item-action border-0 d-flex align-items-center ${
-                        activeTab === "wishlist" ? "active bg-light-primary" : ""
-                      }`}
-                    >
-                      <FiHeart className="me-2" />
-                      Wishlist
-                    </button>
-                    <button
-                      onClick={() => setActiveTab("settings")}
-                      className={`list-group-item list-group-item-action border-0 d-flex align-items-center ${
-                        activeTab === "settings" ? "active bg-light-primary" : ""
-                      }`}
-                    >
-                      <FiSettings className="me-2" />
-                      Settings
-                    </button> */}
                     <button className="list-group-item list-group-item-action border-0 d-flex align-items-center text-danger">
                       <FiLogOut className="me-2" />
                       Logout
@@ -98,44 +77,6 @@ const ProfilePage = () => {
         </div>
       </div>
       <Footer />
-
-      <style jsx>{`
-        .profile-banner {
-          background: linear-gradient(90deg, #2874f0 0%, #1a5bb9 100%);
-        }
-        
-        .bg-light-primary {
-          background-color: rgba(40, 116, 240, 0.1) !important;
-          color: #2874f0 !important;
-          font-weight: 500;
-        }
-        
-        .list-group-item.active {
-          border-left: 3px solid #2874f0;
-        }
-        
-        .list-group-item {
-          padding: 12px 20px;
-          transition: all 0.3s ease;
-        }
-        
-        .list-group-item:hover {
-          background-color: #f8f9fa;
-        }
-        
-        .card {
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .card:hover {
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-        
-        .rounded-lg {
-          border-radius: 12px !important;
-        }
-      `}</style>
     </>
   );
 };
