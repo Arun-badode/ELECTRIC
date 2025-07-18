@@ -1,198 +1,208 @@
 import React, { useState, useRef, useEffect } from "react";
-import {
-  Container,
-  Navbar,
-  Nav,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { Navbar, Container, Button, Nav, Form, FormControl } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  FaUserCircle,
-  FaSearch,
-  FaBoxOpen,
-  FaHome,
-  FaPhoneAlt,
-  FaShoppingCart,
-} from "react-icons/fa";
+import { FaUserCircle, FaShoppingCart, FaBars, FaTimes, FaSearch } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 
-const user = {
-  name: "John Doe",
-  email: "john.doe@email.com",
-  phone: "+1 (800) 987-6543",
-  address: "456 Powerline Blvd, Houston, TX",
-  role: "Customer",
-};
+
 
 const CustomNavbar = () => {
-  const [showProfileCard, setShowProfileCard] = useState(false);
-  const profileCardRef = useRef(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
-
+  const [profileOpen, setProfileOpen] = useState(false);
+const profileRef = useRef(null);
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        profileCardRef.current &&
-        !profileCardRef.current.contains(event.target)
-      ) {
-        setShowProfileCard(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const handleClickOutside = (event) => {
+    if (profileRef.current && !profileRef.current.contains(event.target)) {
+      setProfileOpen(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, []);
 
   return (
-    <Navbar expand="lg" className="fixed-top bg-white shadow-sm p-2 py-4">
-      <Container fluid>
-        <Navbar.Brand as={Link} to="/">
-          <img
-            src="https://i.postimg.cc/DyqKQj0V/Screenshot-2025-07-17-122021-removebg-preview.png"
-            alt="Logo"
-            height="70"
-            width="100"
-          />
-        </Navbar.Brand>
+    <>
+      <Navbar className="fixed-top bg-white shadow-sm px-3 py-2">
+        <Container fluid className="d-flex justify-content-between align-items-center">
+          <Navbar.Brand as={Link} to="/">
+            <img
+              src="https://i.postimg.cc/DyqKQj0V/Screenshot-2025-07-17-122021-removebg-preview.png"
+              alt="Logo"
+              height="60"
+              width="100"
+            />
+          </Navbar.Brand>
 
-        <Navbar.Toggle aria-controls="navbar-nav" />
-
-        <Navbar.Collapse id="navbar-nav" className="justify-content-between">
-          <Nav className="gap-3 mx-auto">
-            <Button
-              variant="link"
-              className="text-dark fw-bold d-flex align-items-center gap-1 text-decoration-none"
-              onClick={() => navigate("/")}
-            >
-              Home
-            </Button>
-
-            <Link to="/electricalproducts" className="text-decoration-none">
-              <Button
-                variant="link"
-                className="text-dark fw-bold d-flex align-items-center gap-1 text-decoration-none"
+          {/* Desktop Nav Links */}
+          <Nav className="gap-4 d-none d-lg-flex align-items-center">
+            {["/", "/electricalproducts", "/contact"].map((path, index) => (
+              <Nav.Link
+                key={index}
+                as={Link}
+                to={path}
+                className="fw-bold"
+                style={{ transition: "color 0.3s", color: 'black' }}
               >
-                Products
-              </Button>
-            </Link>
-
-            <Button
-              variant="link"
-              className="text-dark fw-bold d-flex align-items-center gap-1 text-decoration-none"
-              onClick={() => navigate("/contact")}
-            >
-              Contact
-            </Button>
+                {path === "/" ? "Home" : path === "/electricalproducts" ? "Products" : "Contact"}
+              </Nav.Link>
+            ))}
           </Nav>
 
-
-          <div className="d-flex align-items-center gap-3 position-relative">
-            <Form className="d-flex align-items-center">
+          <div className="d-flex align-items-center gap-3">
+            {/* Search Bar for Desktop */}
+            <Form className="d-flex">
               <FormControl
                 type="search"
                 placeholder="Search products"
                 className="me-2"
-                style={{ minWidth: 200 }}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
               />
               <Button variant="secondary">
                 <FaSearch />
               </Button>
             </Form>
-
-            {/* Cart Icon */}
             <div
               style={{ cursor: "pointer", position: "relative" }}
               onClick={() => navigate("/shoppingcart")}
             >
-              <FaShoppingCart size={24} />
-              {/* Example Badge */}
-              <span
-                style={{
-                  position: "absolute",
-                  top: "-5px",
-                  right: "-10px",
-                  background: "red",
-                  color: "white",
-                  borderRadius: "50%",
-                  padding: "2px 6px",
-                  fontSize: "12px",
-                }}
-              >
+              <FaShoppingCart size={22} />
+              <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 2
               </span>
             </div>
 
-            {/* Profile Icon */}
-            <div
-              className="position-relative"
+            <FaUserCircle
+              size={24}
               style={{ cursor: "pointer" }}
-              onClick={() => setShowProfileCard((prev) => !prev)}
-            >
-              <FaUserCircle size={28} />
-              <AnimatePresence>
-                {showProfileCard && (
-                  <motion.div
-                    ref={profileCardRef}
-                    initial={{ opacity: 0, scale: 0.9, y: -10 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.9, y: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="shadow position-absolute end-0 mt-3"
+              onClick={() => setProfileOpen(!profileOpen)}
+              className="d-none d-lg-block"
+            />
 
-                    style={{
-                      minWidth: 280,
-                      zIndex: 1050,
-                      backgroundColor: "#ffffff",
-                      borderRadius: "16px",
-                      border: "1px solid #f0f0f0",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <div className="p-4 text-center">
-                      <div
-                        className="rounded-circle mx-auto mb-3 d-flex justify-content-center align-items-center"
-                        style={{
-                          width: 60,
-                          height: 60,
-                          background: "#4a90e2",
-                          color: "#fff",
-                          fontWeight: "bold",
-                          fontSize: 26,
-                        }}
-                      >
-                        {user.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")
-                          .toUpperCase()}
-                      </div>
-                      <h5 className="fw-bold">{user.name}</h5>
-                      <p className="text-secondary mb-2">{user.role}</p>
-                      <div className="text-start">
-                        <small className="text-muted">Email</small>
-                        <div>{user.email}</div>
-                        <small className="text-muted mt-2 d-block">Phone</small>
-                        <div>{user.phone}</div>
-                        <small className="text-muted mt-2 d-block">Address</small>
-                        <div>{user.address}</div>
-                      </div>
-                      <Button
-                        variant="outline-primary"
-                        className="w-100 mt-3"
-                        onClick={() => navigate("/login")}
-                      >
-                        Login
-                      </Button>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+           {profileOpen && (
+  <div
+    ref={profileRef}
+    className="position-absolute end-0 bg-white shadow rounded p-3"
+    style={{ width: "200px", zIndex: 999, marginTop: '210px' }}
+  >
+    <h6 className="fw-bold mb-2">John Doe</h6>
+    <p className="mb-1">john.doe@email.com</p>
+    <Button
+      variant="outline-success"
+      size="sm"
+      className="w-100 mt-2"
+      onClick={() => navigate("/logout")}
+    >
+      Login
+    </Button>
+  </div>
+)}
+
+
+            {/* Mobile Menu Toggle */}
+            <div onClick={() => setMenuOpen(!menuOpen)} className="d-lg-none">
+              <FaBars size={24} />
             </div>
           </div>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+        </Container>
+      </Navbar>
+
+      {/* Mobile Drawer Menu */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.3 }}
+            className="position-fixed top-0 end-0 bg-white shadow-lg d-lg-none"
+            style={{
+              width: "80%",
+              height: "100vh",
+              zIndex: 9999,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <div className="p-4">
+              <div className="d-flex justify-content-between align-items-center mb-3 w-100">
+                <FaTimes
+                  size={24}
+                  onClick={() => setMenuOpen(false)}
+                  style={{ cursor: "pointer", position: "absolute", top: 15, right: 15 }}
+                />
+              </div>
+
+              {/* Profile Details */}
+              <div className="text-center mb-4">
+                <div
+                  className="rounded-circle mx-auto mb-2 d-flex justify-content-center align-items-center"
+                  style={{
+                    width: 60,
+                    height: 60,
+                    background: "#4a90e2",
+                    color: "#fff",
+                    fontWeight: "bold",
+                    fontSize: 26,
+                  }}
+                >
+                  JD
+                </div>
+                <h6 className="fw-bold mb-0">John Doe</h6>
+                <small className="text-muted">Customer</small>
+              </div>
+              <hr />
+              <ul className="list-unstyled text-center mt-3">
+                <li
+                  className="fw-bold mb-3"
+                  onClick={() => {
+                    navigate("/");
+                    setMenuOpen(false);
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  Home
+                </li>
+                <li
+                  className="fw-bold mb-3"
+                  onClick={() => {
+                    navigate("/electricalproducts");
+                    setMenuOpen(false);
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  Products
+                </li>
+                <li
+                  className="fw-normal mb-3"
+                  onClick={() => {
+                    navigate("/contact");
+                    setMenuOpen(false);
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  Contact
+                </li>
+              </ul>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+
+      {/* Hover Styling */}
+      <style>{`
+        .nav-link:hover, .btn-link:hover {
+          color: #0d6efd !important;
+        }
+      `}</style>
+    </>
   );
 };
 
