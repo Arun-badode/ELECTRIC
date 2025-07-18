@@ -45,7 +45,7 @@ const CustomNavbar = () => {
   }, []);
 
   return (
-    <Navbar expand="lg" className="fixed-top bg-white shadow-sm py-5">
+    <Navbar expand="lg" className="fixed-top bg-white shadow-sm p-2 py-4">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
           <img
@@ -103,7 +103,7 @@ const CustomNavbar = () => {
             {/* Cart Icon */}
             <div
               style={{ cursor: "pointer", position: "relative" }}
-              onClick={() => navigate("/cart")}
+              onClick={() => navigate("/shoppingcart")}
             >
               <FaShoppingCart size={24} />
               {/* Example Badge */}

@@ -19,6 +19,7 @@ import ShoppingCart from "./Home/ShoppingCart";
 import Login from "./authtication/Login";
 import Signup from "./authtication/Signup";
 import AddCategories from "./Componente/Categories/AddCategories";
+import ProductPage from "./Home/ProductPage";
 
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -29,7 +30,7 @@ function App() {
     setIsSidebarCollapsed((prev) => !prev);
   };
   const location = useLocation();
-  const hideLayout = location.pathname === "/" || location.pathname === "/electricalproducts"  || location.pathname === "/shoppingcart" || location.pathname === "/login" || location.pathname === "/signup";
+  const hideLayout = location.pathname === "/" || location.pathname === "/electricalproducts" || location.pathname === "/productpage"  || location.pathname === "/shoppingcart" || location.pathname === "/login" || location.pathname === "/signup";
 
   return (
     <>
@@ -41,6 +42,7 @@ function App() {
            <Route path="/signup" element={<Signup />} />
           <Route path="/electricalproducts" element={<ElectricalProducts />} />
            <Route path="/shoppingcart" element={<ShoppingCart />} />
+           <Route path="/productpage" element={<ProductPage />} />
 
         </Routes>
       ) : (

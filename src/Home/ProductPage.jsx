@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Footer from './Footer';
+import CustomNavbar from './Navbar';
 
 
 const ProductPage = () => {
@@ -12,16 +14,16 @@ const ProductPage = () => {
     stockQuantity: 25,
     shippingInfo: "Free shipping on orders $75+",
     returnPolicy: "30-day returns",
-    mainImage: "https://readdy.ai/api/search-image?query=professional%20industrial%20circuit%20breaker%20electrical%20switch%20device%20on%20clean%20white%20background&width=600&height=600&seq=main_product",
+    mainImage: "https://readdy.ai/api/search-image?query=professional%20industrial%20circuit%20breaker%20electrical%20switch%20device%20on%20clean%20white%20background%2C%20product%20photography%2C%20high%20quality%2C%20detailed%20view%2C%20modern%20electrical%20equipment&width=600&height=600&seq=main_product&orientation=squarish",
     thumbnails: [
       {
         id: 1,
-        src: "https://readdy.ai/api/search-image?query=circuit%20breaker%20front%20view%20on%20white%20background&width=100&height=100&seq=thumb1",
+        src: "https://readdy.ai/api/search-image?query=circuit%20breaker%20front%20view%20on%20white%20background%2C%20electrical%20component%2C%20professional%20product%20photo&width=100&height=100&seq=thumb1&orientation=squarish",
         alt: "Front view"
       },
       {
         id: 2,
-        src: "https://readdy.ai/api/search-image?query=circuit%20breaker%20side%20view%20on%20white%20background&width=100&height=100&seq=thumb2",
+        src: "https://readdy.ai/api/search-image?query=circuit%20breaker%20side%20view%20on%20white%20background%2C%20electrical%20component%2C%20professional%20product%20photo&width=100&height=100&seq=thumb2&orientation=squarish",
         alt: "Side view"
       }
     ],
@@ -51,8 +53,10 @@ const ProductPage = () => {
   };
 
   return (
+    <>
+    <CustomNavbar />
     <div className="bg-white">
-      <div className="container py-5">
+      <div className="p-5 mt-5 py-5">
         <div className="row g-4">
           {/* Product Images */}
           <div className="col-lg-6">
@@ -163,6 +167,8 @@ const ProductPage = () => {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 
