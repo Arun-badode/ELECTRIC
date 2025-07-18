@@ -23,7 +23,7 @@ import ProductPage from "./Home/ProductPage";
 import AddProduct from "./Componente/Products/AddProduct";
 import ProfilePage from "./Home/UserProfile/ProfilePage";
 
-import UserDashboard from "./UserDashboard/UserDashboard";
+
 import AdminProfile from "./Componente/AdminProfile/AdminProfile";
 
 function App() {
@@ -47,7 +47,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/electricalproducts" element={<ElectricalProducts />} />
            <Route path="/shoppingcart" element={<ShoppingCart />} />
-           <Route path="/productpage" element={<ProductPage />} />
+           <Route path="/productpage/" element={<ProductPage />} />
             <Route path="/profilepage" element={<ProfilePage />} />
 
         </Routes>
