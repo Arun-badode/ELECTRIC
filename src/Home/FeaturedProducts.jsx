@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Link } from "react-router-dom";
 
 const FeaturedProducts = () => {
   const products = [
@@ -73,7 +73,7 @@ const FeaturedProducts = () => {
         <div className="row g-4">
           {products.map((product, index) => (
             <div className="col-12 col-md-6 col-lg-3" key={index}>
-              <div className="card h-100 shadow-lg  border-0" style={{borderRadius:"20px"}}>
+              <div className="card h-100 shadow-lg  border-0" style={{ borderRadius: "20px" }}>
                 <div
                   className="bg-cover bg-center"
                   style={{
@@ -81,8 +81,8 @@ const FeaturedProducts = () => {
                     height: '14rem',
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
-                     borderTopLeftRadius: '20px',
-                        borderTopRightRadius: '20px'
+                    borderTopLeftRadius: '20px',
+                    borderTopRightRadius: '20px'
                   }}
                 ></div>
                 <div className="card-body d-flex flex-column">
@@ -90,7 +90,10 @@ const FeaturedProducts = () => {
                   <p className="card-text text-muted small mb-3">{product.description}</p>
                   <div className="mt-auto d-flex justify-content-between align-items-center">
                     <span className="fw-bold text-primary">{product.price}</span>
-                    <button className="btn btn-primary btn-sm">View</button>
+
+                    <Link to="/productpage" className="btn btn-primary btn-sm">
+                      View
+                    </Link>
                   </div>
                 </div>
               </div>

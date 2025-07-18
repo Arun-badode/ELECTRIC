@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Footer from './Footer';
+import CustomNavbar from './Navbar';
 
 
 const ProductPage = () => {
@@ -51,8 +53,10 @@ const ProductPage = () => {
   };
 
   return (
+    <>
+    <CustomNavbar />
     <div className="bg-white">
-      <div className="container py-5">
+      <div className="p-5 mt-5 py-5">
         <div className="row g-4">
           {/* Product Images */}
           <div className="col-lg-6">
@@ -163,6 +167,8 @@ const ProductPage = () => {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 
