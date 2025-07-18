@@ -45,13 +45,13 @@ const CustomNavbar = () => {
   }, []);
 
   return (
-    <Navbar expand="lg" className="fixed-top bg-white shadow-sm py-3">
+    <Navbar expand="lg" className="fixed-top bg-white shadow-sm py-5">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
           <img
             src="https://i.postimg.cc/DyqKQj0V/Screenshot-2025-07-17-122021-removebg-preview.png"
             alt="Logo"
-            height="60"
+            height="70"
             width="100"
           />
         </Navbar.Brand>

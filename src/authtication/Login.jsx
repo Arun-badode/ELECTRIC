@@ -1,5 +1,5 @@
 import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   return (
@@ -37,9 +37,11 @@ const Login = () => {
                 <label className="form-check-label" htmlFor="remember">Remember me</label>
               </div>
 
+           <Link to="/dashboard">
               <button type="submit" className="btn btn-primary w-100 rounded-pill">
                 Login
               </button>
+           </Link>
             </form>
 
             <p className="mt-4 text-center text-muted">

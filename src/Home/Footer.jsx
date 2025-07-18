@@ -18,7 +18,7 @@ const Footer = () => {
           {/* Brand Info */}
           <Col md={3}>
             <img
-              src="https://i.ibb.co/hQXHbxq/Whats-App-Image-2025-06-12-at-11-36-54-4b11e3ec.jpg"
+              src="https://i.postimg.cc/DyqKQj0V/Screenshot-2025-07-17-122021-removebg-preview.png"
               alt="ElectroSupply Logo"
               height="60"
               width="100"
