@@ -18,9 +18,9 @@ const Navbar = ({ toggleSidebar }) => {
           <div className="nav-content">
             <div className="nav-bran">
               <img
-                height={65}
-                width={80}
-                src="public/image/logo.png"
+                height={50}
+                width={50}
+                src="https://i.ibb.co/KxM9x9Vd/png-clipart-electricity-electric-power-logo-electrical-engineering-energy-saving-and-environmental-p.png"
                 alt="Logo"
               />
               <div className="nav-taggle-icon" onClick={toggleSidebar}>
