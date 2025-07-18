@@ -222,7 +222,7 @@ const ShoppingCart = () => {
 
                     {/* Order Summary */}
                     <div className="col-lg-4">
-                        <div className="card shadow-sm sticky-top" style={{ top: '20px' }}>
+                        <div className="card shadow-sm sticky-top" style={{ top: '20px', zIndex: "0" }}>
                             <div className="card-header bg-white py-3">
                                 <h2 className="h5 mb-0">Order Summary</h2>
                             </div>

@@ -45,13 +45,13 @@ const CustomNavbar = () => {
   }, []);
 
   return (
-    <Navbar expand="lg" className="fixed-top bg-white shadow-sm py-3">
+    <Navbar expand="lg" className="fixed-top bg-white shadow-sm p-2 py-4">
       <Container fluid>
         <Navbar.Brand as={Link} to="/">
           <img
             src="https://i.postimg.cc/DyqKQj0V/Screenshot-2025-07-17-122021-removebg-preview.png"
             alt="Logo"
-            height="60"
+            height="70"
             width="100"
           />
         </Navbar.Brand>
@@ -62,7 +62,7 @@ const CustomNavbar = () => {
           <Nav className="gap-3 mx-auto">
             <Button
               variant="link"
-              className="nav-link-button d-flex align-items-center gap-1 text-decoration-none"
+              className="text-dark fw-bold d-flex align-items-center gap-1 text-decoration-none"
               onClick={() => navigate("/")}
             >
               Home
@@ -71,7 +71,7 @@ const CustomNavbar = () => {
             <Link to="/electricalproducts" className="text-decoration-none">
               <Button
                 variant="link"
-                className="nav-link-button d-flex align-items-center gap-1 text-decoration-none"
+                className="text-dark fw-bold d-flex align-items-center gap-1 text-decoration-none"
               >
                 Products
               </Button>
@@ -79,12 +79,13 @@ const CustomNavbar = () => {
 
             <Button
               variant="link"
-              className="nav-link-button d-flex align-items-center gap-1 text-decoration-none"
+              className="text-dark fw-bold d-flex align-items-center gap-1 text-decoration-none"
               onClick={() => navigate("/contact")}
             >
               Contact
             </Button>
           </Nav>
+
 
           <div className="d-flex align-items-center gap-3 position-relative">
             <Form className="d-flex align-items-center">
@@ -105,6 +106,7 @@ const CustomNavbar = () => {
               onClick={() => navigate("/shoppingcart")}
             >
               <FaShoppingCart size={24} />
+              {/* Example Badge */}
               <span
                 style={{
                   position: "absolute",
@@ -120,7 +122,6 @@ const CustomNavbar = () => {
                 2
               </span>
             </div>
-
 
             {/* Profile Icon */}
             <div
