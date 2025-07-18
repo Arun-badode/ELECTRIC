@@ -89,7 +89,7 @@ const CustomNavbar = () => {
                   paddingLeft: "35px",
                   height: "40px",
                   borderRadius: "20px",
-                  
+                  border: "1px solid #ccc",
                   width: "250px",
                 }}
               />
