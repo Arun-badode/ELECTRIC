@@ -117,17 +117,26 @@ const ElectricalProducts = () => {
     <>
       <CustomNavbar />
       <div className="bg-light ">
-        <div className=" p-4">
-          <div className="text-center mb-5">
-            <h1 className="display-4 fw-bold text-dark mt-5 py-4">
+        <div className="">
+          <div
+            className="text-center text-white d-flex flex-column justify-content-center align-items-center mt-4"
+            style={{
+               minHeight: "60vh",
+              background: "linear-gradient(to right, #0f2027, #203a43, #2c5364)",
+              padding: "60px 20px",
+            }}
+          >
+            <h1 className="display-4 fw-bold mb-3">
               Professional Electrical Products
             </h1>
-            <p className="lead text-muted">
-              Browse our extensive collection of high-quality electrical supplies
+            <p className="lead text-light" style={{ maxWidth: "600px" }}>
+              Browse our extensive collection of high-quality electrical supplies designed to meet both residential and industrial needs.
             </p>
+            <button className="btn btn-primary btn-lg mt-4">Shop Now</button>
           </div>
 
-          <div className="row g-4">
+
+          <div className="row g-4 p-4">
             {/* Filter Sidebar */}
             <div className="col-lg-3">
               <div className="card shadow-sm" style={{ borderRadius: '20px' }}>
