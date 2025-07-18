@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import axiosInstance from "../Utilities/axiosInstance";
 
 const HeroSection = () => {
   const [bannerImages, setBannerImages] = useState([]);
@@ -9,7 +10,7 @@ const HeroSection = () => {
   useEffect(() => {
     const fetchBanners = async () => {
       try {
-        const response = await axios.get("https://hrb5wx2v-6500.inc1.devtunnels.ms/api/banner/getAllBanners");
+        const response = await axiosInstance.get(`/banner/getAllBanners`);
         if (response.data.success) {
           const images = response.data.data.map(b => b.image[0]); // get first image of each banner
           setBannerImages(images);
