@@ -33,9 +33,9 @@ const Navbar = () => {
           <div className="flex-shrink-0">
             <Link to="/">
               <img 
-                src="https://i.ibb.co/KxM9x9Vd/png-clipart-electricity-electric-power-logo-electrical-engineering-energy-saving-and-environmental-p.png" 
+                src="https://i.postimg.cc/zXVchZ1Z/2-removebg-preview-1.png" 
                 alt="logo" 
-                className="h-10 w-auto"
+                className="h-14 "
               />
             </Link>
           </div>

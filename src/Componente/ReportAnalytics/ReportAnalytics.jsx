@@ -1,328 +1,338 @@
-import React, { useRef, useEffect } from 'react';
-import Chart from 'chart.js/auto';
+import React from 'react';
+import { FaClipboardList, FaCheckCircle, FaTimesCircle, FaHourglassHalf, FaSearch } from 'react-icons/fa';
+import { Line, Pie, Bar } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  BarElement,
+} from 'chart.js';
+
+ChartJS.register(
+  LineElement,
+  PointElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  BarElement
+);
 
 const ReportAnalytics = () => {
-  // Chart refs and instances
-  const revenueChartRef = useRef(null);
-  const ordersChartRef = useRef(null);
-  const demographicsChartRef = useRef(null);
-  const revenueChartInstance = useRef(null);
-  const ordersChartInstance = useRef(null);
-  const demographicsChartInstance = useRef(null);
+  // Chart data
+  const lineData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+    datasets: [{
+      label: 'Reports Generated',
+      data: [10, 20, 15, 30, 25, 40],
+      fill: true,
+      backgroundColor: 'rgba(54, 162, 235, 0.2)',
+      borderColor: 'rgba(54, 162, 235, 1)',
+      tension: 0.4,
+    }],
+  };
 
-  // Initialize charts
-  useEffect(() => {
-    // Cleanup function
-    return () => {
-      if (revenueChartInstance.current) {
-        revenueChartInstance.current.destroy();
-        revenueChartInstance.current = null;
-      }
-      if (ordersChartInstance.current) {
-        ordersChartInstance.current.destroy();
-        ordersChartInstance.current = null;
-      }
-      if (demographicsChartInstance.current) {
-        demographicsChartInstance.current.destroy();
-        demographicsChartInstance.current = null;
-      }
-    };
-  }, []);
+  const pieData = {
+    labels: ['Approved', 'Rejected', 'Pending'],
+    datasets: [{
+      data: [60, 15, 25],
+      backgroundColor: ['#28a745', '#dc3545', '#ffc107'],
+      borderWidth: 1,
+    }],
+  };
 
-  useEffect(() => {
-    // Revenue Trend Line Chart
-    if (revenueChartRef.current) {
-      // Destroy previous instance if exists
-      if (revenueChartInstance.current) {
-        revenueChartInstance.current.destroy();
-      }
+  const barData = {
+    labels: ['Sales', 'HR', 'IT', 'Finance', 'Operations'],
+    datasets: [{
+      label: 'Reports by Department',
+      data: [12, 9, 7, 5, 4],
+      backgroundColor: [
+        'rgba(75, 192, 192, 0.6)',
+        'rgba(153, 102, 255, 0.6)',
+        'rgba(255, 159, 64, 0.6)',
+        'rgba(255, 99, 132, 0.6)',
+        'rgba(54, 162, 235, 0.6)',
+      ],
+      borderColor: [
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+      ],
+      borderWidth: 1,
+    }],
+  };
 
-      revenueChartInstance.current = new Chart(revenueChartRef.current, {
-        type: 'line',
-        data: {
-          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-          datasets: [{
-            label: 'Revenue',
-            data: [12000, 19000, 15000, 20000, 18000, 22000, 24589],
-            borderColor: 'rgba(13, 110, 253, 1)',
-            backgroundColor: 'rgba(13, 110, 253, 0.1)',
-            borderWidth: 2,
-            tension: 0.4,
-            fill: true
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              display: false
-            }
-          },
-          scales: {
-            y: {
-              beginAtZero: false
-            }
-          }
-        }
-      });
-    }
+  const lineAvgTime = {
+    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+    datasets: [{
+      label: 'Avg Processing Time (Days)',
+      data: [2, 3, 1.5, 2.5],
+      fill: false,
+      borderColor: '#17a2b8',
+      backgroundColor: '#17a2b8',
+      tension: 0.4,
+    }],
+  };
 
-    // Orders by Status Donut Chart
-    if (ordersChartRef.current) {
-      // Destroy previous instance if exists
-      if (ordersChartInstance.current) {
-        ordersChartInstance.current.destroy();
-      }
-
-      ordersChartInstance.current = new Chart(ordersChartRef.current, {
-        type: 'doughnut',
-        data: {
-          labels: ['Completed', 'Processing', 'Pending', 'Cancelled'],
-          datasets: [{
-            data: [850, 250, 150, 34],
-            backgroundColor: [
-              'rgba(13, 110, 253, 0.8)',
-              'rgba(13, 202, 240, 0.8)',
-              'rgba(255, 193, 7, 0.8)',
-              'rgba(220, 53, 69, 0.8)'
-            ],
-            borderWidth: 0
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          cutout: '70%',
-          plugins: {
-            legend: {
-              display: false
-            }
-          }
-        }
-      });
-    }
-
-    // Demographics Pie Chart
-    if (demographicsChartRef.current) {
-      // Destroy previous instance if exists
-      if (demographicsChartInstance.current) {
-        demographicsChartInstance.current.destroy();
-      }
-
-      demographicsChartInstance.current = new Chart(demographicsChartRef.current, {
-        type: 'pie',
-        data: {
-          labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
-          datasets: [{
-            data: [15, 35, 25, 15, 10],
-            backgroundColor: [
-              'rgba(13, 110, 253, 0.8)',
-              'rgba(111, 66, 193, 0.8)',
-              'rgba(214, 51, 132, 0.8)',
-              'rgba(253, 126, 20, 0.8)',
-              'rgba(25, 135, 84, 0.8)'
-            ],
-            borderWidth: 0
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            legend: {
-              position: 'right'
-            }
-          }
-        }
-      });
-    }
-  }, []);
+  // Chart options
+  const chartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+    },
+  };
 
   return (
-    <div className="p-3">
-      <h2 className="h4 fw-bold mb-3">Report Analytics</h2>
-      {/* Top Control Row */}
-      <div className="d-flex flex-column flex-md-row justify-content-between align-items-stretch align-items-md-center gap-3 mb-4">
-        {/* Left Group: Filter & Export */}
-        <div className="d-flex flex-column flex-sm-row gap-2 w-100 w-md-auto">
-          <select className="form-select w-100 w-sm-auto" style={{ minWidth: '150px' }}>
-            <option>Last 7 Days</option>
-            <option>Last 30 Days</option>
-            <option>This Quarter</option>
-            <option>This Year</option>
-          </select>
-          <button className="btn btn-outline-secondary ">
-            <i className="bi bi-download me-2"></i>Export Report
+    <div className="container-fluid py-4">
+      {/* Page Header */}
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2 className="mb-0">Report Analytics Dashboard</h2>
+        <div className="d-flex">
+          <div className="input-group" style={{ width: '250px' }}>
+            <input type="text" className="form-control" placeholder="Search reports..." />
+            <button className="btn btn-primary" type="button">
+              <FaSearch />
+            </button>
+          </div>
+          <button className="btn btn-outline-primary ms-3">
+            Export Data
           </button>
         </div>
-
-        {/* Right: Refresh Button */}
-        <button className="btn btn-primary  ms-md-auto">
-          Refresh Data
-        </button>
       </div>
 
-
-      {/* Metrics Row */}
-      <div className="row g-3 mb-4">
-        <div className="col-12 col-sm-6 col-lg-3">
-          <div className="card shadow-sm h-100 p-3">
-            <div className="d-flex justify-content-between align-items-center">
-              <div>
-                <div className="text-muted small">Total Revenue</div>
-                <h5 className="mb-0 text-success">$24,589.99</h5>
-                <small className="text-success">▲ 12.5% vs last period</small>
+      {/* Stats Cards */}
+      <div className="row g-4 mb-4">
+        {[
+          { 
+            title: "Total Reports", 
+            value: 123, 
+            change: "+12% from last month",
+            icon: <FaClipboardList className="fs-3" />,
+            color: "primary"
+          },
+          { 
+            title: "Approved", 
+            value: 78, 
+            change: "+8% from last month",
+            icon: <FaCheckCircle className="fs-3" />,
+            color: "success"
+          },
+          { 
+            title: "Rejected", 
+            value: 15, 
+            change: "-3% from last month",
+            icon: <FaTimesCircle className="fs-3" />,
+            color: "danger"
+          },
+          { 
+            title: "Pending", 
+            value: 30, 
+            change: "+5% from last month",
+            icon: <FaHourglassHalf className="fs-3" />,
+            color: "warning"
+          },
+        ].map((card, idx) => (
+          <div className="col-12 col-sm-6 col-lg-3" key={idx}>
+            <div className={`card border-${card.color} border-top-3 shadow-sm h-100`}>
+              <div className="card-body">
+                <div className="d-flex justify-content-between align-items-center">
+                  <div>
+                    <h6 className="text-muted mb-2">{card.title}</h6>
+                    <h2 className={`text-${card.color}`}>{card.value}</h2>
+                    <small className="text-muted">{card.change}</small>
+                  </div>
+                  <div className={`bg-${card.color}-light rounded-circle p-3`}>
+                    {React.cloneElement(card.icon, { className: `text-${card.color} fs-3` })}
+                  </div>
+                </div>
               </div>
-              <i className="bi bi-currency-dollar fs-3 text-primary"></i>
             </div>
           </div>
-        </div>
-
-        <div className="col-12 col-sm-6 col-lg-3">
-          <div className="card shadow-sm h-100 p-3">
-            <div className="d-flex justify-content-between align-items-center">
-              <div>
-                <div className="text-muted small">Total Orders</div>
-                <h5 className="mb-0">1,284</h5>
-                <small className="text-success">▲ 8.2% vs last period</small>
-              </div>
-              <i className="bi bi-cart fs-3 text-success"></i>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-12 col-sm-6 col-lg-3">
-          <div className="card shadow-sm h-100 p-3">
-            <div className="d-flex justify-content-between align-items-center">
-              <div>
-                <div className="text-muted small">Average Order Value</div>
-                <h5 className="mb-0 text-danger">$189.50</h5>
-                <small className="text-danger">▼ 3.1% vs last period</small>
-              </div>
-              <i className="bi bi-bar-chart-line fs-3 text-danger"></i>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-12 col-sm-6 col-lg-3">
-          <div className="card shadow-sm h-100 p-3">
-            <div className="d-flex justify-content-between align-items-center">
-              <div>
-                <div className="text-muted small">Customer Satisfaction</div>
-                <h5 className="mb-0">94.8%</h5>
-                <small className="text-success">▲ 1.2% vs last period</small>
-              </div>
-              <i className="bi bi-emoji-smile fs-3 text-warning"></i>
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
 
-      {/* Charts Row */}
-      <div className="row g-3 mb-3">
-        <div className="col-md-6">
-          <div className="card shadow-sm p-3 h-100">
-            <div className="text-muted mb-2 fw-semibold">Revenue Trend</div>
-            <div className="position-relative" style={{ height: '250px' }}>
-              <canvas ref={revenueChartRef}></canvas>
+      {/* Main Charts Section */}
+      <div className="row g-4 mb-4">
+        {/* Reports Over Time */}
+        <div className="col-12 col-lg-8">
+          <div className="card shadow-sm h-100">
+            <div className="card-header bg-white border-bottom-0">
+              <h5 className="mb-0">Reports Over Time</h5>
+            </div>
+            <div className="card-body">
+              <div style={{ height: '300px' }}>
+                <Line data={lineData} options={chartOptions} />
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="col-md-6">
-          <div className="card shadow-sm p-3 h-100">
-            <div className="text-muted mb-2 fw-semibold">Orders by Status</div>
-            <div className="position-relative" style={{ height: '200px' }}>
-              <canvas ref={ordersChartRef}></canvas>
+        {/* Status Distribution */}
+        <div className="col-12 col-lg-4">
+          <div className="card shadow-sm h-100">
+            <div className="card-header bg-white border-bottom-0">
+              <h5 className="mb-0">Status Distribution</h5>
             </div>
-            <div className="d-flex flex-wrap justify-content-center gap-3 mt-3 small text-muted">
-              <span><i className="bi bi-circle-fill text-primary me-1"></i>Completed</span>
-              <span><i className="bi bi-circle-fill text-info me-1"></i>Processing</span>
-              <span><i className="bi bi-circle-fill text-warning me-1"></i>Pending</span>
-              <span><i className="bi bi-circle-fill text-danger me-1"></i>Cancelled</span>
+            <div className="card-body">
+              <div style={{ height: '300px' }}>
+                <Pie data={pieData} options={chartOptions} />
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Product + Demographics Row */}
-      <div className="row g-3">
-        <div className="col-lg-8">
-          <div className="card shadow-sm p-3 h-100">
-            <div className="d-flex justify-content-between align-items-center mb-2">
-              <span className="fw-semibold text-muted">Top Products</span>
-              <a href="#" className="small">View All</a>
+      {/* Secondary Charts Section */}
+      <div className="row g-4 mb-4">
+        {/* Reports by Department */}
+        <div className="col-12 col-lg-6">
+          <div className="card shadow-sm h-100">
+            <div className="card-header bg-white border-bottom-0">
+              <h5 className="mb-0">Reports by Department</h5>
             </div>
-            <div className="table-responsive">
-              <table className="table align-middle table-borderless">
-                <thead className="text-muted small">
-                  <tr>
-                    <th>Product</th>
-                    <th>Orders</th>
-                    <th>Revenue</th>
-                    <th>Growth</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <div className="d-flex align-items-center">
-                        <img src="https://via.placeholder.com/40" className="me-2 rounded" alt="" />
-                        <div>
-                          <div className="fw-semibold">Premium Headphones</div>
-                          <div className="text-muted small">Electronics</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>458</td>
-                    <td>$45,800</td>
-                    <td className="text-success">▲ 24%</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div className="d-flex align-items-center">
-                        <img src="https://via.placeholder.com/40" className="me-2 rounded" alt="" />
-                        <div>
-                          <div className="fw-semibold">Smart Watch Pro</div>
-                          <div className="text-muted small">Wearables</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>312</td>
-                    <td>$31,200</td>
-                    <td className="text-success">▲ 18%</td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div className="d-flex align-items-center">
-                        <img src="https://via.placeholder.com/40" className="me-2 rounded" alt="" />
-                        <div>
-                          <div className="fw-semibold">Leather Wallet</div>
-                          <div className="text-muted small">Accessories</div>
-                        </div>
-                      </div>
-                    </td>
-                    <td>287</td>
-                    <td>$14,350</td>
-                    <td className="text-danger">▼ 5%</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="card-body">
+              <div style={{ height: '250px' }}>
+                <Bar data={barData} options={chartOptions} />
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="col-lg-4">
-          <div className="card shadow-sm p-3 h-100">
-            <div className="d-flex justify-content-between align-items-center mb-2">
-              <span className="fw-semibold text-muted">Customer Demographics</span>
-              <a href="#" className="small">View Details</a>
+        {/* Average Processing Time */}
+        <div className="col-12 col-lg-6">
+          <div className="card shadow-sm h-100">
+            <div className="card-header bg-white border-bottom-0">
+              <h5 className="mb-0">Average Processing Time</h5>
             </div>
-            <div className="position-relative" style={{ height: '300px' }}>
-              <canvas ref={demographicsChartRef}></canvas>
+            <div className="card-body">
+              <div style={{ height: '250px' }}>
+                <Line data={lineAvgTime} options={chartOptions} />
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Reports Table */}
+      <div className="card shadow-sm">
+        <div className="card-header bg-white border-bottom-0 d-flex justify-content-between align-items-center">
+          <h5 className="mb-0">Detailed Reports</h5>
+          <div>
+            <select className="form-select form-select-sm me-2" style={{ width: '150px' }}>
+              <option>All Status</option>
+              <option>Approved</option>
+              <option>Pending</option>
+              <option>Rejected</option>
+            </select>
+            <button className="btn btn-sm btn-outline-secondary">
+              Filter
+            </button>
+          </div>
+        </div>
+        <div className="card-body">
+          <div className="table-responsive">
+            <table className="table table-hover">
+              <thead className="table-light">
+                <tr>
+                  <th>Report ID</th>
+                  <th>Title</th>
+                  <th>Department</th>
+                  <th>Status</th>
+                  <th>Created By</th>
+                  <th>Created Date</th>
+                  <th>Processing Time</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  {
+                    id: 'RPT001',
+                    title: 'Monthly Sales Report',
+                    department: 'Sales',
+                    status: 'Approved',
+                    createdBy: 'John Doe',
+                    date: '2025-07-18',
+                    time: '2 days'
+                  },
+                  {
+                    id: 'RPT002',
+                    title: 'HR Attendance',
+                    department: 'HR',
+                    status: 'Pending',
+                    createdBy: 'Jane Smith',
+                    date: '2025-07-17',
+                    time: '--'
+                  },
+                  {
+                    id: 'RPT003',
+                    title: 'IT Infrastructure',
+                    department: 'IT',
+                    status: 'Approved',
+                    createdBy: 'Mike Johnson',
+                    date: '2025-07-16',
+                    time: '1 day'
+                  },
+                  {
+                    id: 'RPT004',
+                    title: 'Financial Q2 Report',
+                    department: 'Finance',
+                    status: 'Rejected',
+                    createdBy: 'Sarah Williams',
+                    date: '2025-07-15',
+                    time: '3 days'
+                  },
+                ].map((report, index) => (
+                  <tr key={index}>
+                    <td>{report.id}</td>
+                    <td>{report.title}</td>
+                    <td>{report.department}</td>
+                    <td>
+                      <span className={`badge bg-${
+                        report.status === 'Approved' ? 'success' : 
+                        report.status === 'Rejected' ? 'danger' : 'warning'
+                      }`}>
+                        {report.status}
+                      </span>
+                    </td>
+                    <td>{report.createdBy}</td>
+                    <td>{report.date}</td>
+                    <td>{report.time}</td>
+                    <td>
+                      <button className="btn btn-sm btn-outline-primary me-1">View</button>
+                      <button className="btn btn-sm btn-outline-secondary">Download</button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <nav aria-label="Table pagination" className="mt-3">
+            <ul className="pagination justify-content-end">
+              <li className="page-item disabled">
+                <a className="page-link" href="#" tabIndex="-1">Previous</a>
+              </li>
+              <li className="page-item active"><a className="page-link" href="#">1</a></li>
+              <li className="page-item"><a className="page-link" href="#">2</a></li>
+              <li className="page-item"><a className="page-link" href="#">3</a></li>
+              <li className="page-item">
+                <a className="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>

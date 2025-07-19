@@ -31,7 +31,7 @@ const FeaturedProducts = () => {
         <div className="row">
           {products.slice(0, 8).map((product, index) => (
             <div key={index} className="col-12 col-sm-6 col-lg-3 mb-4 d-flex">
-              <div className="card shadow-sm w-100  d-flex flex-column" style={{ borderRadius: "20px" }}>
+              <div className="card shadow-lg w-100  d-flex flex-column" style={{ borderRadius: "20px" }}>
                 <div
                   className="card-img-top rounded-top-3"
                   style={{
