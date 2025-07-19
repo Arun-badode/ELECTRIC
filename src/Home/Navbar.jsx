@@ -31,7 +31,7 @@ useEffect(() => {
           <div className="flex-shrink-0 flex items-center">
              <Link to="/">
             <img  src="https://i.ibb.co/KxM9x9Vd/png-clipart-electricity-electric-power-logo-electrical-engineering-energy-saving-and-environmental-p.png"
-              alt="logo"   className="h-20 w-auto"/> </Link>
+              alt="logo"   className="h-10 w-auto"/> </Link>
           </div>
 
           <div className="hidden md:flex items-center space-x-8">
