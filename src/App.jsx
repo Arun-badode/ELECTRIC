@@ -48,8 +48,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/electricalproducts" element={<ElectricalProducts />} />
           <Route path="/shoppingcart" element={<ShoppingCart />} />
-          <Route path="/productpage" element={<ProductPage />} />
-          <Route path="/profilepage/:id" element={<ProfilePage />} />
+          <Route path="/productpage/:id" element={<ProductPage />} />
+          <Route path="/profilepage" element={<ProfilePage />} />
           <Route path="/contactus" element={<ContactUs />} />
 
         </Routes>

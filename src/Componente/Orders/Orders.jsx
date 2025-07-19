@@ -220,7 +220,7 @@ const Orders = () => {
             </div>
           </div>
           <div className="card-body ">
-            <div className="table-responsive" style={{ maxHeight: '400px', overflowY: 'auto' }}>
+            <div className="table-responsive " style={{ maxHeight: '400px', overflowY: 'auto' }}>
               <table className="table table-hover mb-0 ">
                 <thead className="table-light">
                   <tr>
