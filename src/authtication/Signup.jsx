@@ -37,7 +37,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(`${BaseUrl}/user/signUp`, payload);
-      toast.success(response.data.message || 'Signup successful');
+      toast.info(response.data.message || 'Signup successful');
 
       setFormData({
         firstName: '',

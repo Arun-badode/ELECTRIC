@@ -2,28 +2,35 @@ import React, { useEffect, useState } from 'react';
 import Footer from './Footer';
 import CustomNavbar from './Navbar';
 import axiosInstance from '../Utilities/axiosInstance';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import RelatedProducts from './ProductDetails';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const ProductPage = () => {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null)
+  const navigate = useNavigate();
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
+
   const decreaseQuantity = () =>
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+
   const handleQuantityChange = (e) => {
     const value = parseInt(e.target.value) || 1;
     setQuantity(value > 0 ? value : 1);
   };
-
+// Fetch product details by ID
   useEffect(() => {
     const fetchProductById = async () => {
       try {
         const res = await axiosInstance.get(`/product/getProductById/${id}`);
+        // console.log(res.data);
         const data = res.data?.data;
         setProduct(data);
         if (data?.image?.length > 0) {
-          setSelectedImage(data.image[0]); 
+          setSelectedImage(data.image[0]);
         }
       } catch (error) {
         console.error('Error fetching product by ID:', error);
@@ -33,9 +40,47 @@ const ProductPage = () => {
   }, [id]);
 
   if (!product) return <div className="text-center p-5">Loading...</div>;
+// Handle adding product to cart
+const addtocart = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user?.id;
+
+    if (!userId) {
+      toast.error("Please log in first to add this product to your cart.", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
+      return;
+    }
+
+    try {
+      const response = await axiosInstance.post("/cart/addToCart", {
+        userId: parseInt(userId),
+        productId: product.id,
+        price: parseFloat(product.price*quantity),
+        quantity: quantity.toString(),
+      });
+
+      // Handle by HTTP status code
+      if (response.status === 200) {
+        toast.info("Product added to cart!");
+      } else if (response.status === 409) {
+        toast.info("Product is already in the cart.");
+      } else {
+        toast.error("Failed to add to cart.");
+      }
+    } catch (error) {
+      console.error("Add to cart error:", error);
+    }
+  };
+
 
   return (
     <>
+    <ToastContainer />
       <CustomNavbar />
       <div className="bg-white">
         <div className="p-5 mt-5 py-5">
@@ -48,8 +93,12 @@ const ProductPage = () => {
               </div>
               <div className="d-flex flex-wrap gap-3">
                 {product?.image?.map((imgSrc, index) => (
-                  <div key={index} className={`border rounded ${
-                      selectedImage === imgSrc ? 'border-primary border-2' : 'border-light' }`}
+                  <div
+                    key={index}
+                    className={`border rounded ${selectedImage === imgSrc
+                        ? 'border-primary border-2'
+                        : 'border-light'
+                      }`}
                     onClick={() => setSelectedImage(imgSrc)}
                     style={{ width: '80px',  height: '80px',    cursor: 'pointer',  }}>
                     <img   src={imgSrc}  alt={`Product Thumbnail ${index + 1}`}
@@ -62,39 +111,28 @@ const ProductPage = () => {
             {/* Product Info */}
             <div className="col-lg-6">
               <h1 className="fw-bold mb-2">{product?.name}</h1>
-              <p className="text-muted mb-3">SKU: {product.sku}</p>
-
-              <div className="mb-4">
+              <p className="text-muted mb-2">SKU: {product.sku}</p>
+              <p className="text-muted mb-2">Category: {product.category_name}</p>
+                <p className="text-muted small mb-0">  {product?.description} {product?.category_name} </p>
+                 
+              <div className="mb-3 mt-2">
                 <span className="fs-3 fw-bold text-primary">
                   ${parseFloat(product.price).toFixed(2)}
                 </span>
-                <p className="text-muted small mb-0">
-               {product?.description}
-                </p>
               </div>
 
               <div className="mb-4">
                 <label className="form-label">Quantity</label>
                 <div className="d-flex align-items-center gap-3">
                   <div className="d-flex align-items-center border rounded">
-                    <button
-                      className="btn btn-outline-secondary border-0 rounded-0"
-                      onClick={decreaseQuantity}
-                    >
+                    <button   className="btn btn-outline-secondary border-0 rounded-0"
+                      onClick={decreaseQuantity} >
                       <i className="bi bi-dash"></i>
                     </button>
-                    <input
-                      type="number"
-                      value={quantity}
-                      onChange={handleQuantityChange}
-                      min="1"
+                    <input  type="number"  value={quantity}  onChange={handleQuantityChange}  min="1"
                       className="form-control text-center border-0 shadow-none"
-                      style={{ width: '60px' }}
-                    />
-                    <button
-                      className="btn btn-outline-secondary border-0 rounded-0"
-                      onClick={increaseQuantity}
-                    >
+                      style={{ width: '60px' }}/>
+                    <button className="btn btn-outline-secondary border-0 rounded-0"   onClick={increaseQuantity}>
                       <i className="bi bi-plus"></i>
                     </button>
                   </div>
@@ -105,12 +143,8 @@ const ProductPage = () => {
               </div>
 
               <div className="d-grid gap-3 mb-4">
-                <button className="btn btn-primary py-3 fw-medium">
-                  Add to Cart - $
-                  {(parseFloat(product.price) * quantity).toFixed(2)}
-                </button>
-                <button className="btn btn-outline-primary py-3 fw-medium">
-                  Buy Now
+                <button className="btn btn-primary py-3 fw-medium" onClick={addtocart}>
+                  Add to Cart - ${(parseFloat(product.price) * quantity).toFixed(2)}
                 </button>
               </div>
 
@@ -127,22 +161,12 @@ const ProductPage = () => {
             </div>
           </div>
 
-          {/* Product Description Section */}
-          <div className="mt-5">
-            <h3 className="fw-bold mb-3">Product Description</h3>
-            <p className="text-muted">{product.description}</p>
-
-            If features were available from backend:
-              <h4 className="fw-semibold mt-4 mb-3">Key Features</h4>
-              <ul className="list-unstyled">
-                {product.features?.map((feature, index) => (
-                  <li key={index} className="mb-2 d-flex align-items-start">
-                    <i className="bi bi-check2 text-success me-2 mt-1"></i>
-                    <span className="text-muted">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-           
+          {/* Related Products */}
+          <div className='mt-5'>
+            <RelatedProducts
+              categoryId={product.categoryId}
+              currentProductId={product.id}
+            />
           </div>
         </div>
       </div>

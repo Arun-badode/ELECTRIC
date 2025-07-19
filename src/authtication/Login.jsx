@@ -33,7 +33,7 @@ const handleSubmit = async (e) => {
     localStorage.setItem('role', role);
     localStorage.setItem('user', JSON.stringify(response.data.data));
 
-    toast.success('Login successful!', {
+    toast.info('Login successful!', {
       position: 'top-center',
     });
 

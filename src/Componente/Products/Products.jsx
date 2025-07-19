@@ -112,7 +112,8 @@ const Productes = () => {
             filteredProducts?.map((product, index) => (
               <tr key={product.id}>
                 <td className="ps-4 fw-semibold">{index + 1}</td>
-                <td>{product?.name}</td>
+              <td>{product?.name?.slice(0, 40)}{product?.name?.length > 100 ? "..." : ""}</td>
+
                 <td>${product?.price}</td>
                 <td>{product?.sku}</td>
                 <td>{product?.category_name || "N/A"}</td>
