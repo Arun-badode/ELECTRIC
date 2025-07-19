@@ -1,40 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import CustomNavbar from './Navbar';
 import Footer from './Footer';
-import { Link } from "react-router-dom";
-const ShoppingCart = () => {
-    const [cartItems, setCartItems] = useState([
-        {
-            id: 'item1',
-            name: '12 AWG Copper Wire',
-            description: 'THHN/THWN-2 Solid Copper Conductor',
-            details: '500 ft Spool | Red Insulation',
-            price: 24.99,
-            originalPrice: 29.99,
-            quantity: 2,
-            image: 'https://readdy.ai/api/search-image?query=Professional%20electrical%20wire%20cable%2012%20AWG%20copper%20conductor%20high%20quality%20industrial%20grade%20white%20background%20product%20photography%20clean%20minimal%20detailed%20view&width=120&height=120&seq=cartitem1&orientation=squarish'
-        },
-        {
-            id: 'item2',
-            name: 'Safety Hard Hat',
-            description: 'ANSI Z89.1 Type I Class E',
-            details: 'White | Adjustable Suspension',
-            price: 39.99,
-            quantity: 1,
-            image: 'https://readdy.ai/api/search-image?query=Professional%20electrical%20safety%20hard%20hat%20helmet%20ANSI%20approved%20industrial%20protection%20gear%20white%20background%20product%20photography%20clean%20minimal%20detailed%20view&width=120&height=120&seq=cartitem2&orientation=squarish'
-        },
-        {
-            id: 'item3',
-            name: 'Digital Multimeter',
-            description: 'True RMS AC/DC Voltage Current',
-            details: '600V CAT III Safety Rating',
-            price: 89.99,
-            originalPrice: 109.99,
-            quantity: 1,
-            image: 'https://readdy.ai/api/search-image?query=Professional%20electrical%20digital%20multimeter%20testing%20instrument%20LCD%20display%20industrial%20measurement%20tool%20white%20background%20product%20photography%20clean%20minimal%20detailed%20view&width=120&height=120&seq=cartitem3&orientation=squarish'
-        }
-    ]);
+import { Link, useParams } from "react-router-dom";
+import axiosInstance from '../Utilities/axiosInstance';
 
+const ShoppingCart = () => {
+    const [cartItems, setCartItems] = useState([]);
+    const { id } = useParams();
     const [shippingOption, setShippingOption] = useState('0');
     const [couponCode, setCouponCode] = useState('');
     const [couponMessage, setCouponMessage] = useState('');
@@ -48,7 +20,7 @@ const ShoppingCart = () => {
     };
 
     const calculateSubtotal = () => {
-        return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+        return cartItems.reduce((total, item) => total + (Number(item.price) * item.quantity), 0);
     };
 
     const calculateTax = () => {
@@ -84,10 +56,18 @@ const ShoppingCart = () => {
         ));
     };
 
-    const removeItem = (id) => {
-        setCartItems(cartItems.filter(item => item.id !== id));
+    const removeItem = async (id) => {
+        try {
+            const res = await axiosInstance.delete(`/cart/deleteCartItem/${id}`);
+            if (res.status === 200 || res.data?.message === "Deleted successfully") {
+                setCartItems(cartItems.filter(item => item.id !== id));
+            } else {
+                console.error("Failed to delete item from cart:", res);
+            }
+        } catch (error) {
+            console.error("Error deleting cart item:", error);
+        }
     };
-
     const clearCart = () => {
         setCartItems([]);
     };
@@ -113,6 +93,33 @@ const ShoppingCart = () => {
             applyCoupon();
         }
     };
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'));
+        const userId = user?.id;
+
+        const fetchCartById = async () => {
+            try {
+                const res = await axiosInstance.get(`/cart/getCartByUserId/${userId}`);
+                console.log(res);
+
+                const data = res.data?.data || [];
+                // Ensure price is treated as a number
+                const processedData = data.map(item => ({
+                    ...item,
+                    price: Number(item.price),
+                    originalPrice: item.originalPrice ? Number(item.originalPrice) : null
+                }));
+                setCartItems(processedData);
+            } catch (error) {
+                console.error('Error fetching cart data:', error);
+            }
+        };
+
+        if (userId) {
+            fetchCartById();
+        }
+    }, []);
 
     return (
         <>
@@ -166,10 +173,10 @@ const ShoppingCart = () => {
                                                         <p className="small text-muted mb-1">{item.description}</p>
                                                         <p className="small text-muted mb-0">{item.details}</p>
                                                         <div className="mt-2">
-                                                            <span className="fw-bold">${item.price.toFixed(2)}</span>
+                                                            <span className="fw-bold">${Number(item.price).toFixed(2)}</span>
                                                             {item.originalPrice && (
                                                                 <span className="text-muted text-decoration-line-through ms-2">
-                                                                    ${item.originalPrice.toFixed(2)}
+                                                                    ${Number(item.originalPrice).toFixed(2)}
                                                                 </span>
                                                             )}
                                                         </div>
@@ -200,7 +207,7 @@ const ShoppingCart = () => {
                                                             </div>
                                                             <div className="text-end">
                                                                 <div className="fw-bold">
-                                                                    ${(item.price * item.quantity).toFixed(2)}
+                                                                    ${(Number(item.price) * item.quantity).toFixed(2)}
                                                                 </div>
                                                                 <button
                                                                     className="btn btn-link text-danger p-0 small"

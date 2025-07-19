@@ -27,6 +27,8 @@ import ProfilePage from "./UserProfile/ProfilePage";
 import AdminProfile from "./Componente/AdminProfile/AdminProfile";
 import ContactUs from "./Home/ContactUs";
 
+import RelatedProducts from "./Home/ProductDetails";
+
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const menusidebarcollaps = () => {
@@ -47,10 +49,14 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/electricalproducts" element={<ElectricalProducts />} />
+           <Route path="/shoppingcart" element={<ShoppingCart />} />
+           <Route path="/productpage/:id" element={<ProductPage />} />
+            <Route path="/profilepage" element={<ProfilePage />} />
           <Route path="/shoppingcart" element={<ShoppingCart />} />
           <Route path="/productpage/:id" element={<ProductPage />} />
           <Route path="/profilepage" element={<ProfilePage />} />
           <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/productdetails" element={<RelatedProducts />} />
 
         </Routes>
       ) : (

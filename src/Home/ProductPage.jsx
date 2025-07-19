@@ -3,6 +3,8 @@ import Footer from './Footer';
 import CustomNavbar from './Navbar';
 import axiosInstance from '../Utilities/axiosInstance';
 import { useParams } from 'react-router-dom';
+import RelatedProducts from './ProductDetails';
+import { toast } from "react-toastify";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -25,7 +27,7 @@ const ProductPage = () => {
         const data = res.data?.data;
         setProduct(data);
         if (data?.image?.length > 0) {
-          setSelectedImage(data.image[0]); // set first image as default
+          setSelectedImage(data.image[0]);
         }
       } catch (error) {
         console.error('Error fetching product by ID:', error);
@@ -36,6 +38,34 @@ const ProductPage = () => {
   }, [id]);
 
   if (!product) return <div className="text-center p-5">Loading...</div>;
+
+  const addtocart = async () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user?.id;
+
+    if (!userId) {
+      toast.error("Please login first!");
+      return;
+    }
+
+    try {
+      const response = await axiosInstance.post("/cart/addToCart", {
+        userId: parseInt(userId),
+        productId: product.id,
+        price: parseFloat(product.price),
+        quantity: quantity.toString(),
+      });
+
+      if (response.data.success) {
+        toast.success("Product added to cart!");
+      } else {
+        toast.error("Failed to add to cart.");
+      }
+    } catch (error) {
+      console.error("Add to cart error:", error);
+      toast.error("Something went wrong while adding to cart.");
+    }
+  };
 
   return (
     <>
@@ -61,11 +91,10 @@ const ProductPage = () => {
                 {product?.image?.map((imgSrc, index) => (
                   <div
                     key={index}
-                    className={`border rounded ${
-                      selectedImage === imgSrc
+                    className={`border rounded ${selectedImage === imgSrc
                         ? 'border-primary border-2'
                         : 'border-light'
-                    }`}
+                      }`}
                     onClick={() => setSelectedImage(imgSrc)}
                     style={{
                       width: '80px',
@@ -129,12 +158,8 @@ const ProductPage = () => {
               </div>
 
               <div className="d-grid gap-3 mb-4">
-                <button className="btn btn-primary py-3 fw-medium">
-                  Add to Cart - $
-                  {(parseFloat(product.price) * quantity).toFixed(2)}
-                </button>
-                <button className="btn btn-outline-primary py-3 fw-medium">
-                  Buy Now
+                <button className="btn btn-primary py-3 fw-medium" onClick={addtocart}>
+                  Add to Cart - ${(parseFloat(product.price) * quantity).toFixed(2)}
                 </button>
               </div>
 
@@ -151,22 +176,12 @@ const ProductPage = () => {
             </div>
           </div>
 
-          {/* Product Description Section */}
-          <div className="mt-5">
-            <h3 className="fw-bold mb-3">Product Description</h3>
-            <p className="text-muted">{product.description}</p>
-
-            If features were available from backend:
-              <h4 className="fw-semibold mt-4 mb-3">Key Features</h4>
-              <ul className="list-unstyled">
-                {product.features?.map((feature, index) => (
-                  <li key={index} className="mb-2 d-flex align-items-start">
-                    <i className="bi bi-check2 text-success me-2 mt-1"></i>
-                    <span className="text-muted">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-           
+          {/* Related Products */}
+          <div className='mt-5'>
+            <RelatedProducts
+              categoryId={product.categoryId}
+              currentProductId={product.id}
+            />
           </div>
         </div>
         
