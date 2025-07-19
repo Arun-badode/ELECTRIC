@@ -63,7 +63,7 @@ const MyProfile = () => {
 
   return (
     <div className="card shadow-sm rounded p-4 mb-4">
-      <h4 className="mb-4">My Profile</h4>
+      <h4 className="mb-4 fw-bold">My Profile</h4>
 
       <div className="row g-3">
         <div className="col-md-6">

@@ -25,19 +25,9 @@ const ProfilePage = () => {
 
   const handleClick = (key) => {
     if (key === "logout") {
-      +     // (Optional) Confirmation
-        +     // if (!window.confirm("Are you sure you want to logout?")) return;
-        +
-        +     // Clear auth related storage (adjust keys as per your app)
-        +     localStorage.removeItem("authToken");
-      +     localStorage.removeItem("user");
-      +     sessionStorage.removeItem("authToken");
-      +
-        +     // If you use any global auth context, reset it here:
-        +     // authDispatch({ type: "LOGOUT" });
-        +
-        +     // Redirect to login page
-        +     navigate("/login");
+       // Clear all relevant storage
+      localStorage.clear();
+        +     navigate("/");
       return;
     }
     setActiveTab(key);
@@ -64,10 +54,8 @@ const ProfilePage = () => {
               <aside className="account-card card shadow-sm border-0 rounded-4">
                 <div className="card-body p-0">
                   <div className="max-h-[600px] ">
-                    <nav
-                      className="account-tab-container"
-                      style={{ "--indicator-top": indicatorTop }}
-                    >
+                    <nav  className="account-tab-container"
+                      style={{ "--indicator-top": indicatorTop }}>
                       {items.map((item) => (
                         <button
                           key={item.key}
