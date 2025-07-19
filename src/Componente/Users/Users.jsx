@@ -79,11 +79,11 @@ const Users = () => {
         </div>
       </div>
 
-      <div className="table-responsive bg-white rounded shadow-sm">
+      <div className="table-responsive bg-white rounded shadow-sm p-3">
         {loading ? (
-          <div className="text-center py-4">Loading users...</div>
+          <div className="text-center py-4 ">Loading users...</div>
         ) : (
-          <table className="table table-hover align-middle mb-0">
+          <table className="table table-hover align-middle mb-0 ">
             <thead className="table-light">
               <tr>
                 <th>#</th>
