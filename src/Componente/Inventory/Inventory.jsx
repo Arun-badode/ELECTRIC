@@ -79,7 +79,7 @@ const Inventory = () => {
             <i className="bi bi-box-seam fs-5"></i>
           </div>
          {item?.name?.split(" ").length > 4
-    ? item.name.split(" ").slice(0, 4).join(" ") + "..."
+    ? item.name.split(" ").slice(0, 3).join(" ") + "..."
     : item.name}
         </div>
       </td>
