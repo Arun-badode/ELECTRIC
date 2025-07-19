@@ -160,9 +160,9 @@ const ProductPage = () => {
                 <button className="btn btn-primary py-3 fw-medium" onClick={addtocart}>
                   Add to Cart - ${(parseFloat(product.price) * quantity).toFixed(2)}
                 </button>
-                <button className="btn btn-outline-primary py-3 fw-medium">
+                {/* <button className="btn btn-outline-primary py-3 fw-medium">
                   Buy Now
-                </button>
+                </button> */}
               </div>
 
               <div className="d-flex justify-content-between small text-muted pt-3 border-top">
@@ -179,7 +179,7 @@ const ProductPage = () => {
           </div>
 
           {/* Product Description Section */}
-          <div className="mt-5">
+          {/* <div className="mt-5">
             <h3 className="fw-bold mb-3">Product Description</h3>
             <p className="text-muted">{product.description}</p>
 
@@ -194,7 +194,7 @@ const ProductPage = () => {
               ))}
             </ul>
 
-          </div>
+          </div> */}
         </div>
         <div className='mb-4'>
           <RelatedProducts categoryId={product.categoryId} currentProductId={product.id} className='' />
