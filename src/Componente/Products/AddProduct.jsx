@@ -93,7 +93,7 @@ const AddProduct = () => {
               />
             </div>
             <div className="col-md-6">
-              <label className="form-label">Price (₹) *</label>
+              <label className="form-label">Price ($) *</label>
               <input
                 type="number"
                 className="form-control"

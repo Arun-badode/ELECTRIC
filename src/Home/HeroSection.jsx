@@ -46,7 +46,7 @@ const HeroSection = () => {
         />
 
         {/* Overlay */}
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-2xl">
+        {/* <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-2xl">
           <div className="text-center text-white px-4 md:px-10">
             <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-wider mb-3 drop-shadow-lg">
               Powering the Future of Electricity
@@ -58,7 +58,7 @@ const HeroSection = () => {
               Shop Now
             </button>
           </div>
-        </div>
+        </div> */}
 
         {/* Slide Indicators */}
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">

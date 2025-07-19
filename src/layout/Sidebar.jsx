@@ -13,11 +13,11 @@
     { name: " Products List", path: "/products", icon: "fa-solid fa-boxes-stacked" },
     { name: "All Orders", path: "/orders", icon: "fa-solid fa-cart-shopping" },
     { name: "Manage Users", path: "/users", icon: "fa-solid fa-users" },
-    { name: "Manage Banner", path: "/bannermanager", icon: "fa-solid fa-image" },
     { name: "Manage Inventory", path: "/inventory", icon: "fa-solid fa-warehouse" },
+    { name: "Manage Banner", path: "/bannermanager", icon: "fa-solid fa-image" },
     { name: "Report Analytics", path: "/reportanalytics", icon: "fa-solid fa-chart-line" },
     { name: "Support", path: "/support", icon: "fa-solid fa-headset" },
-    { name: "Setting", path: "/settings", icon: "fa-solid fa-gear" }
+    // { name: "Setting", path: "/settings", icon: "fa-solid fa-gear" }
   ];
 
 
