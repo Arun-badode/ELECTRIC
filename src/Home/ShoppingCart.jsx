@@ -48,13 +48,33 @@ const ShoppingCart = () => {
         return total;
     };
 
-    const handleQuantityChange = (id, newQuantity) => {
-        if (newQuantity < 1) return;
+   const handleQuantityChange = async (id, newQuantity, userId, productId) => {
+  // Prevent less than 1
+  if (newQuantity < 1) return;
 
-        setCartItems(cartItems.map(item =>
-            item.id === id ? { ...item, quantity: newQuantity } : item
-        ));
-    };
+  // Determine action: "+1" or "-1"
+  const item = cartItems.find(item => item.id === id);
+  const action = newQuantity > item.quantity ? "+1" : "-1";
+
+  try {
+    const res = await axiosInstance.post('/cart/updateCart', {
+      id,
+      userId,
+      productId,
+      action,
+    });
+
+    if (res.status === 200) {
+      // Refetch updated cart from server
+      const cartRes = await axiosInstance.get(`/cart/getCartByUserId/${userId}`);
+      const updatedCart = cartRes.data?.data || [];
+      setCartItems(updatedCart);
+    }
+  } catch (error) {
+    console.error('Error updating cart quantity:', error);
+  }
+};
+
 
     const removeItem = async (id) => {
         try {
@@ -184,26 +204,30 @@ const ShoppingCart = () => {
                                                     <div className="col-md-5">
                                                         <div className="d-flex align-items-center justify-content-between">
                                                             <div className="d-flex align-items-center">
-                                                                <button
-                                                                    className="btn btn-outline-secondary btn-sm"
-                                                                    onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                                                                >
-                                                                    <i className="bi bi-dash"></i>
-                                                                </button>
-                                                                <input
-                                                                    type="number"
-                                                                    min="1"
-                                                                    value={item.quantity}
-                                                                    onChange={(e) => handleQuantityChange(item.id, parseInt(e.target.value))}
-                                                                    className="form-control form-control-sm text-center mx-2"
-                                                                    style={{ width: '60px' }}
-                                                                />
-                                                                <button
-                                                                    className="btn btn-outline-secondary btn-sm"
-                                                                    onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                                                                >
-                                                                    <i className="bi bi-plus"></i>
-                                                                </button>
+                                                               <button
+  className="btn btn-outline-secondary btn-sm"
+  onClick={() => handleQuantityChange(item.id, item.quantity - 1, item.userId, item.productId)}
+>
+  <i className="bi bi-dash"></i>
+</button>
+
+<input
+  type="number"
+  min="1"
+  value={item.quantity}
+  onChange={(e) =>
+    handleQuantityChange(item.id, parseInt(e.target.value), item.userId, item.productId)
+  }
+  className="form-control form-control-sm text-center mx-2"
+  style={{ width: '60px' }}
+/>
+
+<button
+  className="btn btn-outline-secondary btn-sm"
+  onClick={() => handleQuantityChange(item.id, item.quantity + 1, item.userId, item.productId)}
+>
+  <i className="bi bi-plus"></i>
+</button>
                                                             </div>
                                                             <div className="text-end">
                                                                 <div className="fw-bold">
