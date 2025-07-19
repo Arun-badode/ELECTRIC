@@ -27,7 +27,7 @@ const ProductPage = () => {
         const data = res.data?.data;
         setProduct(data);
         if (data?.image?.length > 0) {
-          setSelectedImage(data.image[0]); // set first image as default
+          setSelectedImage(data.image[0]);
         }
       } catch (error) {
         console.error('Error fetching product by ID:', error);
@@ -39,9 +39,9 @@ const ProductPage = () => {
 
   if (!product) return <div className="text-center p-5">Loading...</div>;
 
-
   const addtocart = async () => {
-    const userId = localStorage.getItem("userId"); // ya jahan se aap userId le rahe ho
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user?.id;
 
     if (!userId) {
       toast.error("Please login first!");
@@ -66,6 +66,7 @@ const ProductPage = () => {
       toast.error("Something went wrong while adding to cart.");
     }
   };
+
   return (
     <>
       <CustomNavbar />
@@ -160,9 +161,6 @@ const ProductPage = () => {
                 <button className="btn btn-primary py-3 fw-medium" onClick={addtocart}>
                   Add to Cart - ${(parseFloat(product.price) * quantity).toFixed(2)}
                 </button>
-                {/* <button className="btn btn-outline-primary py-3 fw-medium">
-                  Buy Now
-                </button> */}
               </div>
 
               <div className="d-flex justify-content-between small text-muted pt-3 border-top">
@@ -178,27 +176,13 @@ const ProductPage = () => {
             </div>
           </div>
 
-          {/* Product Description Section */}
-          {/* <div className="mt-5">
-            <h3 className="fw-bold mb-3">Product Description</h3>
-            <p className="text-muted">{product.description}</p>
-
-            If features were available from backend:
-            <h4 className="fw-semibold mt-4 mb-3">Key Features</h4>
-            <ul className="list-unstyled">
-              {product.features?.map((feature, index) => (
-                <li key={index} className="mb-2 d-flex align-items-start">
-                  <i className="bi bi-check2 text-success me-2 mt-1"></i>
-                  <span className="text-muted">{feature}</span>
-                </li>
-              ))}
-            </ul>
-
-          </div> */}
-        </div>
-        <div className='mb-4'>
-          <RelatedProducts categoryId={product.categoryId} currentProductId={product.id} className='' />
-
+          {/* Related Products */}
+          <div className='mt-5'>
+            <RelatedProducts
+              categoryId={product.categoryId}
+              currentProductId={product.id}
+            />
+          </div>
         </div>
       </div>
       <Footer />
