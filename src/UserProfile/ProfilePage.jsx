@@ -1,12 +1,16 @@
 import React, { useState, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import CustomNavbar from "../Home/Navbar";
 import Footer from "../Home/Footer";
 import MyOrders from "./MyOrders";
 import MyProfile from "./MyProfile";
 import { FiUser, FiShoppingBag, FiLogOut } from "react-icons/fi";
 import "./UserProfile.css";
+
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("profile");
+  const navigate = useNavigate();
+
   const items = useMemo(
     () => [
       { key: "profile", label: "Profile", icon: <FiUser />, sub: "Account" },
@@ -15,12 +19,25 @@ const ProfilePage = () => {
     ],
     []
   );
+
   const activeIndex = items.findIndex((i) => i.key === activeTab);
   const indicatorTop = `calc(${activeIndex} * var(--tab-height) + var(--indicator-offset))`;
 
   const handleClick = (key) => {
     if (key === "logout") {
-
+      +     // (Optional) Confirmation
+        +     // if (!window.confirm("Are you sure you want to logout?")) return;
+        +
+        +     // Clear auth related storage (adjust keys as per your app)
+        +     localStorage.removeItem("authToken");
+      +     localStorage.removeItem("user");
+      +     sessionStorage.removeItem("authToken");
+      +
+        +     // If you use any global auth context, reset it here:
+        +     // authDispatch({ type: "LOGOUT" });
+        +
+        +     // Redirect to login page
+        +     navigate("/login");
       return;
     }
     setActiveTab(key);
@@ -41,20 +58,17 @@ const ProfilePage = () => {
     <>
       <CustomNavbar />
       <div className="px-0">
-        {/* Banner */}
-
         <div className="p-4">
           <div className="row">
-            {/* Sidebar */}
             <div className="col-lg-3 mb-4">
               <aside className="account-card card shadow-sm border-0 rounded-4">
                 <div className="card-body p-0">
-                  <div className="max-h-[600px] "> {/* Add scroll within this div */}
+                  <div className="max-h-[600px] ">
                     <nav
                       className="account-tab-container"
                       style={{ "--indicator-top": indicatorTop }}
                     >
-                      {items.map((item, idx) => (
+                      {items.map((item) => (
                         <button
                           key={item.key}
                           type="button"
@@ -72,21 +86,12 @@ const ProfilePage = () => {
                           </span>
                         </button>
                       ))}
-
-                      {/* Visual track + indicator */}
-                      {/* <div className="">
-                        <span className="account-tab-track" />
-                        <span className="account-tab-indicator" />
-                      </div> */}
-
                     </nav>
                   </div>
                 </div>
               </aside>
             </div>
 
-
-            {/* Main Content */}
             <div className="col-lg-9">
               <div className="card shadow-sm border-0 rounded-4">
                 <div className="card-body p-4">{renderTabContent()}</div>
