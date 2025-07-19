@@ -83,7 +83,7 @@ const ElectricalProducts = () => {
     <>
       <CustomNavbar />
       <div className="">
-        <div className="container-fluid">
+        <div className="container-fluid mt-2">
           <div className="row p-4">
             {/* Sidebar */}
             <div className="col-lg-3">
@@ -163,16 +163,17 @@ const ElectricalProducts = () => {
                         />
                         <div className="card-body d-flex flex-column">
                           <div className="d-flex align-items-center mb-2">
-                            <span className="badge bg-primary bg-opacity-10 me-auto">
+                            <span className="badge bg-primary bg-opacity-10 me-auto mb-2">
                               {product.category_name}
                             </span>
                           </div>
-                          <h5 className="card-title fw-semibold mb-2">{product.name}</h5>
-                          <p className="card-text text-muted small mb-3 flex-grow-1">
-                            {product.description}
+                          <h5 className="card-title fw-semibold mb-2 fw-bold">{product.name}</h5>
+                        <p className="card-text mb-3 flex-grow-1">{product.description.length > 100
+                            ? product.description.slice(0, 200) + "..." : product.description}
                           </p>
+
                           <div className="d-flex justify-content-between align-items-center">
-                            <span className="fw-bold text-primary">₹{product.price}</span>
+                            <span className="fw-bold text-primary">${product.price}</span>
                             <Link to={`/productpage/${product.id}`} className="btn btn-primary btn-sm">
                               View
                             </Link>

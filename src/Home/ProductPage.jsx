@@ -3,6 +3,7 @@ import Footer from './Footer';
 import CustomNavbar from './Navbar';
 import axiosInstance from '../Utilities/axiosInstance';
 import { useParams } from 'react-router-dom';
+import RelatedProducts from './ProductDetails';
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -169,6 +170,7 @@ const ProductPage = () => {
            
           </div>
         </div>
+         <RelatedProducts categoryId={product.categoryId} currentProductId={product.id} />
       </div>
       <Footer />
     </>

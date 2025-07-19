@@ -27,6 +27,8 @@ import ProfilePage from "./UserProfile/ProfilePage";
 import AdminProfile from "./Componente/AdminProfile/AdminProfile";
 import ContactUs from "./Home/ContactUs";
 
+import RelatedProducts from "./Home/ProductDetails";
+
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
   const menusidebarcollaps = () => {
@@ -36,7 +38,7 @@ function App() {
     setIsSidebarCollapsed((prev) => !prev);
   };
   const location = useLocation();
-  const hideLayout = location.pathname === "/" || location.pathname === "/electricalproducts" || location.pathname === "/profilepage" ||  location.pathname === "/shoppingcart" || location.pathname === "/login" || location.pathname === "/signup"  || location.pathname.startsWith("/productpage");
+  const hideLayout = location.pathname === "/" || location.pathname === "/electricalproducts" || location.pathname === "/contactus" || location.pathname === "/profilepage" || location.pathname === "/productpage" || location.pathname === "/shoppingcart" || location.pathname === "/login" || location.pathname === "/signup" || location.pathname.startsWith("/productpage");
 
   return (
     <>
@@ -52,8 +54,9 @@ function App() {
             <Route path="/profilepage" element={<ProfilePage />} />
           <Route path="/shoppingcart" element={<ShoppingCart />} />
           <Route path="/productpage" element={<ProductPage />} />
-          <Route path="/profilepage" element={<ProfilePage />} />
+          <Route path="/profilepage/:id" element={<ProfilePage />} />
           <Route path="/contactus" element={<ContactUs />} />
+          <Route path="/productdetails" element={<RelatedProducts />} />
 
         </Routes>
       ) : (

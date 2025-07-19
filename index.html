@@ -5,15 +5,9 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Electrical</title>
-
-  <!-- tailwing -->
+  <title>Electrical-Ecommerce</title>
      <script src="https://cdn.tailwindcss.com"></script>
-
-     <!-- remix icons -->
-
-     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet" />
-
+    <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
@@ -28,10 +22,7 @@
   rel="stylesheet"
   href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.min.css"
 />
-
-
-
-  <!-- ////////// -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 </head>
 
@@ -39,128 +30,7 @@
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    const ctx1 = document.getElementById('spendTrendsChart').getContext('2d');
-    new Chart(ctx1, {
-      type: 'line',
-      data: {
-        labels: ['May', 'June', 'July', 'August', 'September'],
-        datasets: [
-          {
-            label: 'Category 1',
-            data: [5, 15, 10, 12, 8],
-            borderColor: 'blue',
-            borderWidth: 2,
-            pointStyle: 'circle',
-            pointRadius: 4,
-            pointBackgroundColor: 'blue',
-            fill: false,
-            tension: 0, // Straight lines
-          },
-          {
-            label: 'Category 2',
-            data: [10, 18, 12, 15, 13],
-            borderColor: 'red',
-            borderWidth: 2,
-            pointStyle: 'circle',
-            pointRadius: 4,
-            pointBackgroundColor: 'red',
-            fill: false,
-            tension: 0,
-          },
-          {
-            label: 'Category 3',
-            data: [7, 12, 14, 18, 20],
-            borderColor: 'orange',
-            borderWidth: 2,
-            pointStyle: 'circle',
-            pointRadius: 4,
-            pointBackgroundColor: 'orange',
-            fill: false,
-            tension: 0,
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: false, // Hide legend to match the image
-          },
-          title: {
-            display: false, // Remove the title inside the graph
-          },
-        },
-        scales: {
-          y: {
-            beginAtZero: true,
-            ticks: {
-              stepSize: 5,
-              font: {
-                size: 12,
-              },
-            },
-            grid: {
-              color: 'rgba(0, 0, 0, 0.1)',
-            },
-          },
-          x: {
-            ticks: {
-              font: {
-                size: 12,
-              },
-            },
-            grid: {
-              display: false,
-            },
-          },
-        },
-      }
-    });
-
-
-    // Top Spending Vendors (Horizontal Bar Chart)
-    const ctx2 = document.getElementById('topSpendingVendorsChart').getContext('2d');
-    new Chart(ctx2, {
-      type: 'bar',
-      data: {
-        labels: ['Dresses', 'Sneakers', 'Blouses', 'Rompers', 'Bottoms'],
-        datasets: [{
-          label: 'Amount ($)',
-          data: [498.33, 304.62, 290.93, 280.35, 275.80],
-          backgroundColor: [
-            'rgba(115, 169, 174, 1)',  // Dresses
-            'rgba(115, 169, 174, 1)', // Sneakers
-            'rgba(115, 169, 174, 1)',  // Blouses
-            'rgba(115, 169, 174, 1)', // Rompers
-            'rgba(115, 169, 174, 1)'   // Bottoms
-          ],
-          borderColor: [
-            'rgba(179, 179, 179, 1)',
-            'rgba(179, 179, 179, 1)',
-            'rgba(179, 179, 179, 1)',
-            'rgba(179, 179, 179, 1)',
-            'rgba(179, 179, 179, 1)'
-          ],
-          borderWidth: 1
-        }]
-      },
-      options: {
-        indexAxis: 'y', // Makes the bar chart horizontal
-        responsive: true,
-        scales: {
-          x: {
-            beginAtZero: true
-          }
-        },
-        plugins: {
-          legend: {
-            display: false
-          }
-        }
-      }
-    });
-  </script>
+ 
   <script src="https://unpkg.com/primereact/core/core.min.js"></script>
   <script src="https://unpkg.com/primereact/confirmdialog/confirmdialog.min.js"></script>
 </body>
