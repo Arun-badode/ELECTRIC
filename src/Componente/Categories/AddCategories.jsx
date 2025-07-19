@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../Utilities/axiosInstance';
-
+import {  FaEdit, FaTrash,} from "react-icons/fa";
 const AddCategories = () => {
   const [categories, setCategories] = useState([]);
   const [filteredCategories, setFilteredCategories] = useState([]);
@@ -106,50 +106,63 @@ const AddCategories = () => {
       </div>
 
       {/* Category Table */}
-      <div className="table-responsive">
-        <table className="table table-bordered align-middle">
-          <thead className="table-light">
+     <div className="card shadow-sm border-0">
+  <div className="card-body">
+    <h5 className="card-title mb-3">Categories</h5>
+
+    <div className="table-responsive">
+      <table className="table table-bordered table-hover align-middle text-nowrap mb-0">
+        <thead className="table-light">
+          <tr>
+            <th>#</th>
+            <th>Category Name</th>
+            <th>Image</th>
+            <th style={{ width: '180px' }}>Actions</th>
+          </tr>
+        </thead>
+        <tbody className="bg-white">
+          {filteredCategories.length === 0 ? (
             <tr>
-              <th>#</th>
-              <th>Category Name</th>
-              <th>Image</th>
-              <th style={{ width: '180px' }}>Actions</th>
+              <td colSpan="4" className="text-center text-muted py-4">
+                No Category Found
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {filteredCategories.length === 0 ? (
-              <tr>
-                <td colSpan="4" className="text-center text-muted">
-                  No Category Found
+          ) : (
+            filteredCategories.map((cat, index) => (
+              <tr key={cat._id || index}>
+                <td>{index + 1}</td>
+                <td className="fw-semibold">{cat.name}</td>
+                <td>
+                  <img
+                    src={cat.image}
+                    alt={cat.name}
+                    style={{ width: '60px', height: '60px', objectFit: 'cover' }}
+                    className="rounded border"
+                  />
+                </td>
+                <td>
+                  <button
+                    className="btn btn-sm btn-outline-primary me-2"
+                    onClick={() => handleEdit(cat)}
+                  >
+                    <FaEdit size={14} />
+                  </button>
+                  <button
+                    className="btn btn-sm btn-outline-danger"
+                    onClick={() => handleDelete(cat.id)}
+                  >
+                    <FaTrash size={14} />
+                  </button>
                 </td>
               </tr>
-            ) : (
-              filteredCategories.map((cat, index) => (
-                <tr key={cat._id || index}>
-                  <td>{index + 1}</td>
-                  <td>{cat.name}</td>
-                  <td>
-                    <img
-                      src={cat.image}
-                      alt={cat.name}
-                      style={{ width: '60px', height: '60px', objectFit: 'cover' }}
-                      className="rounded"
-                    />
-                  </td>
-                  <td>
-                    <button className="btn btn-sm btn-warning me-2" onClick={() => handleEdit(cat)}>
-                      Edit
-                    </button>
-                    <button className="btn btn-sm btn-danger" onClick={() => handleDelete(cat.id)}>
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))
-            )}
-          </tbody>
-        </table>
-      </div>
+            ))
+          )}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 
       {/* Modal */}
       {showModal && (
