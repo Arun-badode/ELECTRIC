@@ -36,7 +36,7 @@ function App() {
     setIsSidebarCollapsed((prev) => !prev);
   };
   const location = useLocation();
-  const hideLayout = location.pathname === "/" || location.pathname === "/electricalproducts" || location.pathname === "/contactus" || location.pathname === "/profilepage" || location.pathname === "/productpage" || location.pathname === "/shoppingcart" || location.pathname === "/login" || location.pathname === "/signup" || location.pathname.startsWith("/productpage");
+  const hideLayout = location.pathname === "/" || location.pathname === "/electricalproducts" || location.pathname === "/contactus" || location.pathname === "/profilepage" ||  location.pathname === "/shoppingcart" || location.pathname === "/login" || location.pathname === "/signup" || location.pathname.startsWith("/productpage");
 
   return (
     <>
@@ -48,8 +48,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/electricalproducts" element={<ElectricalProducts />} />
           <Route path="/shoppingcart" element={<ShoppingCart />} />
-          <Route path="/productpage" element={<ProductPage />} />
-          <Route path="/profilepage/:id" element={<ProfilePage />} />
+          <Route path="/productpage/:id" element={<ProductPage />} />
+          <Route path="/profilepage" element={<ProfilePage />} />
           <Route path="/contactus" element={<ContactUs />} />
 
         </Routes>

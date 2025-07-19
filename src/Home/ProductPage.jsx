@@ -3,13 +3,11 @@ import Footer from './Footer';
 import CustomNavbar from './Navbar';
 import axiosInstance from '../Utilities/axiosInstance';
 import { useParams } from 'react-router-dom';
-
 const ProductPage = () => {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [product, setProduct] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(null);
-
+  const [selectedImage, setSelectedImage] = useState(null)
   const increaseQuantity = () => setQuantity((prev) => prev + 1);
   const decreaseQuantity = () =>
     setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
@@ -25,13 +23,12 @@ const ProductPage = () => {
         const data = res.data?.data;
         setProduct(data);
         if (data?.image?.length > 0) {
-          setSelectedImage(data.image[0]); // set first image as default
+          setSelectedImage(data.image[0]); 
         }
       } catch (error) {
         console.error('Error fetching product by ID:', error);
       }
     };
-
     fetchProductById();
   }, [id]);
 
@@ -46,38 +43,17 @@ const ProductPage = () => {
             {/* Product Images */}
             <div className="col-lg-6">
               <div className="position-relative mb-4">
-                <img
-                  src={selectedImage}
-                  alt={product.name}
-                  className="img-fluid rounded bg-light object-contain"
-                  style={{
-                    height: '400px',
-                    width: '100%',
-                    objectFit: 'contain',
-                  }}
-                />
+                <img   src={selectedImage}   alt={product.name}   className="img-fluid rounded bg-light object-contain"
+                  style={{   height: '400px',   width: '100%',   objectFit: 'contain', }} />
               </div>
               <div className="d-flex flex-wrap gap-3">
                 {product?.image?.map((imgSrc, index) => (
-                  <div
-                    key={index}
-                    className={`border rounded ${
-                      selectedImage === imgSrc
-                        ? 'border-primary border-2'
-                        : 'border-light'
-                    }`}
+                  <div key={index} className={`border rounded ${
+                      selectedImage === imgSrc ? 'border-primary border-2' : 'border-light' }`}
                     onClick={() => setSelectedImage(imgSrc)}
-                    style={{
-                      width: '80px',
-                      height: '80px',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    <img
-                      src={imgSrc}
-                      alt={`Product Thumbnail ${index + 1}`}
-                      className="img-fluid h-100 w-100 p-2 object-contain"
-                    />
+                    style={{ width: '80px',  height: '80px',    cursor: 'pointer',  }}>
+                    <img   src={imgSrc}  alt={`Product Thumbnail ${index + 1}`}
+                      className="img-fluid h-100 w-100 p-2 object-contain" />
                   </div>
                 ))}
               </div>
@@ -85,7 +61,7 @@ const ProductPage = () => {
 
             {/* Product Info */}
             <div className="col-lg-6">
-              <h1 className="fw-bold mb-2">{product.name}</h1>
+              <h1 className="fw-bold mb-2">{product?.name}</h1>
               <p className="text-muted mb-3">SKU: {product.sku}</p>
 
               <div className="mb-4">
@@ -93,7 +69,7 @@ const ProductPage = () => {
                   ${parseFloat(product.price).toFixed(2)}
                 </span>
                 <p className="text-muted small mb-0">
-                  Price includes VAT. Free shipping on orders $75+
+               {product?.description}
                 </p>
               </div>
 
