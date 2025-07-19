@@ -243,7 +243,7 @@ const Navbar = () => {
             <img
               src="https://i.ibb.co/KxM9x9Vd/png-clipart-electricity-electric-power-logo-electrical-engineering-energy-saving-and-environmental-p.png"
               alt="logo"
-              className="h-20 w-auto"
+              className="h-10 w-auto"
             />
           </div>
 
