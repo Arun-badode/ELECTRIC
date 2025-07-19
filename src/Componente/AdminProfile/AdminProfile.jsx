@@ -69,7 +69,7 @@ const AdminProfile = () => {
 
   return (
     <div className="container py-4">
-      <h2 className="mb-4">Admin Profile</h2>
+      <h2 className="mb-4 fw-bold">Admin Profile</h2>
       <div className="card p-4 shadow-sm">
         <div className="row mb-3">
           <div className="col-md-6">
