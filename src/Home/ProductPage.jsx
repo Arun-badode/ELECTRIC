@@ -40,42 +40,54 @@ const ProductPage = () => {
   }, [id]);
 
   if (!product) return <div className="text-center p-5">Loading...</div>;
+
 // Handle adding product to cart
 const addtocart = async () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const userId = user?.id;
+  const user = JSON.parse(localStorage.getItem("user"));
+  const userId = user?.id;
 
-    if (!userId) {
-      toast.error("Please log in first to add this product to your cart.", {
+  if (!userId) {
+    toast.error("Please log in first to add this product to your cart.", {
+      position: "top-center",
+      autoClose: 1000,
+    });
+    setTimeout(() => {
+      navigate("/login");
+    }, 2000);
+    return;
+  }
+
+  try {
+    const response = await axiosInstance.post("/cart/addToCart", {
+      userId: parseInt(userId),
+      productId: product.id,
+      price: parseFloat(product.price * quantity),
+      quantity: quantity.toString(),
+    });
+
+    if (response.status === 200) {
+      toast.info("Product added to cart!", {
         position: "top-center",
         autoClose: 1000,
       });
-      setTimeout(() => {
-        navigate("/login");
-      }, 2000);
-      return;
+      
     }
-
-    try {
-      const response = await axiosInstance.post("/cart/addToCart", {
-        userId: parseInt(userId),
-        productId: product.id,
-        price: parseFloat(product.price*quantity),
-        quantity: quantity.toString(),
+  } catch (error) {
+    if (error.response && error.response.status === 409) {
+      toast.info("Product is already in the cart.", {
+        position: "top-center",
+        autoClose: 1000,
       });
-
-      // Handle by HTTP status code
-      if (response.status === 200) {
-        toast.info("Product added to cart!");
-      } else if (response.status === 409) {
-        toast.info("Product is already in the cart.");
-      } else {
-        toast.error("Failed to add to cart.");
-      }
-    } catch (error) {
-      console.error("Add to cart error:", error);
+    } else {
+      toast.error("Failed to add to cart.", {
+        position: "top-center",
+        autoClose: 1000,
+      });
     }
-  };
+    console.error("Add to cart error:", error);
+  }
+};
+
 
 
   return (
@@ -169,6 +181,7 @@ const addtocart = async () => {
             />
           </div>
         </div>
+        
       </div>
       <Footer />
     </>

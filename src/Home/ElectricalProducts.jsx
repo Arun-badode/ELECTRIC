@@ -167,11 +167,12 @@ const ElectricalProducts = () => {
                               {product.category_name}
                             </span>
                           </div>
-                          <h5 className="card-title fw-semibold mb-2 fw-bold">{product.name}</h5>
-                        <p className="card-text mb-3 flex-grow-1">{product.description.length > 100
-                            ? product.description.slice(0, 200) + "..." : product.description}
-                          </p>
+                       <h5 className="card-title fw-semibold mb-2 fw-bold">
+                           {product?.name?.slice(0, 60)}{product?.name?.length > 60 ? "..." : ""}</h5>
 
+                        <p className="card-text mb-3 flex-grow-1">{product.description.length > 100
+                            ? product.description.slice(0, 100) + "..." : product.description}
+                          </p>
                           <div className="d-flex justify-content-between align-items-center">
                             <span className="fw-bold text-primary">${product.price}</span>
                             <Link to={`/productpage/${product.id}`} className="btn btn-primary btn-sm">

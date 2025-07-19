@@ -1,36 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const StatsCards = () => {
-  const statsData = [
-    {
-      title: "Total Products",
-      value: "1,248",
-      change: "5.2% from last month",
-      icon: "bi-box-seam",
-      color: "primary"
-    },
-    {
-      title: "Total Orders",
-      value: "3,847",
-      change: "12.8% from last month",
-      icon: "bi-cart-check",
-      color: "danger"
-    },
-    {
-      title: "Total Users",
-      value: "892",
-      change: "3.5% from last month",
-      icon: "bi-people",
-      color: "warning"
-    },
-    {
-      title: "Total Revenue",
-      value: "$128,492",
-      change: "18.6% from last month",
-      icon: "bi-currency-dollar",
-      color: "success"
-    }
-  ];
+  const [statsData, setStatsData] = useState(null);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const response = await axios.get(
+          "https://inventory-backend-production-6cb7.up.railway.app/api/dashboardOverview/getDashboardOverview"
+        );
+
+        const data = response.data;
+
+        const formattedStats = [
+          {
+            title: "Total Products",
+            value: data.totalProducts?.count || 0,
+            change: `${data.totalProducts?.change || 0}% from last month`,
+            icon: "bi-box-seam",
+            color: "primary",
+          },
+          {
+            title: "Total Orders",
+            value: data.totalOrders?.count || 0,
+            change: `${data.totalOrders?.change || 0}% from last month`,
+            icon: "bi-cart-check",
+            color: "danger",
+          },
+          {
+            title: "Total Users",
+            value: data.totalUsers?.count || 0,
+            change: `${data.totalUsers?.change || 0}% from last month`,
+            icon: "bi-people",
+            color: "warning",
+          },
+          {
+            title: "Total Revenue",
+            value: `$${data.totalRevenue?.count || 0}`,
+            change: `${data.totalRevenue?.change || 0}% from last month`,
+            icon: "bi-currency-dollar",
+            color: "success",
+          },
+        ];
+
+        setStatsData(formattedStats);
+      } catch (error) {
+        console.error("Failed to fetch dashboard data:", error);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
+  if (!statsData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="row mb-4">

@@ -53,7 +53,7 @@ const handleSubmit = async (e) => {
 };
 
   return (
-    <div className="d-flex justify-content-center align-items-center vh-100 bg-light px-3">
+    <div className="d-flex justify-content-center align-items-center vh-100 bg-light px-3 ">
       <ToastContainer />
       <div className="card shadow-lg rounded-4 border-0 w-100" style={{ maxWidth: '900px' }}>
         <div className="row g-0 flex-column flex-md-row">

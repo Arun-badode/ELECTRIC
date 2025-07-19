@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FaFilePdf, FaPlusCircle, FaEye, FaEdit, FaTrash, FaSearch, FaTimes,} from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../Utilities/axiosInstance";
+import EditProduct from "./EditProduct";
 
 const Productes = () => {
   const [products, setProducts] = useState([]);
@@ -43,6 +44,9 @@ const Productes = () => {
       console.error("Error deleting product:", error);
     }
   };
+
+
+ 
 
   return (
     <div className="container-fluid py-4 px-3 px-md-4">
@@ -153,6 +157,37 @@ const Productes = () => {
                     >
                       <FaEdit size={14} />
                     </button>
+                    <div
+  className="modal fade"
+  id="editProductModal"
+  tabIndex="-1"
+  aria-labelledby="editProductModalLabel"
+  aria-hidden="true"
+>
+  <div className="modal-dialog modal-lg">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h5 className="modal-title" id="editProductModalLabel">
+          Edit Product
+        </h5>
+        <button
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div className="modal-body">
+        {/* Form fields yahan aayenge */}
+        <form>
+         <EditProduct/>
+        </form>
+      </div>
+     
+    </div>
+  </div>
+</div>
+
                     <button
                       className="btn btn-sm btn-outline-danger"
                       data-bs-toggle="modal"
