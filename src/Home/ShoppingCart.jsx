@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import CustomNavbar from './Navbar';
 import Footer from './Footer';
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import axiosInstance from '../Utilities/axiosInstance';
 const ShoppingCart = () => {
     const [cartItems, setCartItems] = useState([
         {
@@ -34,13 +35,15 @@ const ShoppingCart = () => {
             image: 'https://readdy.ai/api/search-image?query=Professional%20electrical%20digital%20multimeter%20testing%20instrument%20LCD%20display%20industrial%20measurement%20tool%20white%20background%20product%20photography%20clean%20minimal%20detailed%20view&width=120&height=120&seq=cartitem3&orientation=squarish'
         }
     ]);
-
+ const { id } = useParams();
     const [shippingOption, setShippingOption] = useState('0');
     const [couponCode, setCouponCode] = useState('');
     const [couponMessage, setCouponMessage] = useState('');
     const [couponApplied, setCouponApplied] = useState(false);
     const [couponDiscount, setCouponDiscount] = useState(0);
 
+
+   
     const validCoupons = {
         'SAVE10': { discount: 0.1, type: 'percentage', message: '10% discount applied!' },
         'WELCOME20': { discount: 20, type: 'fixed', message: '$20 off applied!' },
@@ -113,6 +116,27 @@ const ShoppingCart = () => {
             applyCoupon();
         }
     };
+
+   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const userId = user?.id;
+
+    const fetchCartById = async () => {
+      try {
+        const res = await axiosInstance.get(`/cart/getCartByUserId/${userId}`);
+        console.log(res);
+
+        const data = res.data?.data || [];
+        setCartItems(data);
+      } catch (error) {
+        console.error('Error fetching cart data:', error);
+      }
+    };
+
+    if (userId) {
+      fetchCartById();
+    }
+  }, []);
 
     return (
         <>
