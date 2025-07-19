@@ -144,7 +144,7 @@ const Orders = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="row mb-4">
+        {/* <div className="row mb-4">
           <div className="col-md-3">
             <div className="card bg-success text-white">
               <div className="card-body">
@@ -201,7 +201,7 @@ const Orders = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Orders Table */}
         <div className="card shadow-sm">
@@ -219,9 +219,9 @@ const Orders = () => {
               </button>
             </div>
           </div>
-          <div className="card-body p-0">
+          <div className="card-body ">
             <div className="table-responsive" style={{ maxHeight: '400px', overflowY: 'auto' }}>
-              <table className="table table-hover mb-0">
+              <table className="table table-hover mb-0 ">
                 <thead className="table-light">
                   <tr>
                     <th style={{ width: '50px' }}>
@@ -337,18 +337,13 @@ const Orders = () => {
                           >
                             <i className="fas fa-eye"></i>
                           </button>
-                          <button 
+                          {/* <button 
                             className="btn btn-sm btn-outline-info"
                             title="Download Invoice"
                           >
                             <i className="fas fa-download"></i>
-                          </button>
-                          <button 
-                            className="btn btn-sm btn-outline-secondary"
-                            title="Print Order"
-                          >
-                            <i className="fas fa-print"></i>
-                          </button>
+                          </button> */}
+                        
                           <div className="dropdown">
       
                             <ul className="dropdown-menu">
