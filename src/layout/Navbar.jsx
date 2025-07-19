@@ -13,7 +13,7 @@ const Navbar = ({ toggleSidebar }) => {
 
   return (
     <>
-      <nav className="navbar navbar-light bg-light">
+      <nav className="navbar navbar-white bg-white shadow-sm border">
         <div className="container-fluid d-flex justify-content-between align-items-center">
           {/* Left: Logo + Toggle */}
           <div className="d-flex align-items-center gap-3">
