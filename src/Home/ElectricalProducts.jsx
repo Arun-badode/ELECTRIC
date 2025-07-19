@@ -82,9 +82,9 @@ const ElectricalProducts = () => {
   return (
     <>
       <CustomNavbar />
-      <div className="bg-light">
+      <div className="">
         <div className="container-fluid">
-          <div className="row mt-5 g-4 p-4">
+          <div className="row p-4">
             {/* Sidebar */}
             <div className="col-lg-3">
               <div className="card shadow-sm" style={{ borderRadius: '20px' }}>

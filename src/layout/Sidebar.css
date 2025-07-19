@@ -1,6 +1,6 @@
 .sidebar-container {
-  width: 220px;
-  background-color: white;
+  width: 240px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   height: 89vh;
   overflow-y: auto;
   transition: width 0.3s ease;
@@ -8,22 +8,25 @@
   z-index: 1;
   position: fixed;
   scrollbar-width: none;
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #e5e7eb;
+}
+
+.sidebar-container::-webkit-scrollbar {
+  display: none;
 }
 
 .sidebar-container.collapsed {
   width: 80px;
 }
 
-.sidebar-container.collapsed .submenu .submenu-item {
-  /* opacity: 0; */
-  visibility: hidden;
-}
 .sidebar-container.collapsed .menu .menu-text {
   opacity: 0;
   visibility: hidden;
 }
+
 .sidebar {
-  padding: 10px;
+  padding: 15px 10px;
 }
 
 .menu {
@@ -33,94 +36,85 @@
 }
 
 .menu-item {
-  margin-bottom: 10px;
-  border-radius: 12px;
-  font-size: 17px;
-  font-weight: 700;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
 }
+
+.menu-item:hover {
+  transform: translateX(5px);
+}
+
+
 
 .menu-link {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 12px 15px;
   text-decoration: none;
-  color: black;
+  color: #4a5568;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-link:hover {
+  background: linear-gradient(90deg, rgba(37, 129, 243, 0.1) 0%, rgba(37, 129, 243, 0.05) 100%);
+  color: #2581f3;
+  box-shadow: 0 2px 8px rgba(37, 129, 243, 0.1);
+}
+
+.menu-link:hover i {
+  color: #2581f3;
+  transform: scale(1.1);
+}
+
+.menu-link i {
+  font-size: 18px;
+  transition: all 0.3s ease;
+  color: #718096;
+  min-width: 24px;
+  text-align: center;
 }
 
 .menu-text {
-  margin-left: 10px;
+  margin-left: 12px;
+  transition: all 0.3s ease;
 }
 
-.submenu {
-  list-style-type: none;
-  margin: 0;
-  padding-left: 20px;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-}
-
-.submenu.collapsed {
-  max-height: 0;
-  visibility: hidden;
-}
-
-.submenu.expanded {
-  max-height: 410px;
-  visibility: visible;
-  font-size: 17px;
-  background-color: #fff9f1;
-  font-weight: 700;
-  padding-left: 10px;
-}
-
-.submenu-item i {
-  padding: 0 5px;
-}
-.submenu-item {
-  padding: 10px 0;
-  cursor: pointer;
-}
-.submenu-item{
-  color: #578E7E;
-}
-
-.submenu-arrow {
-  margin-left: auto;
-  transition: transform 0.3s ease;
-}
-
-.submenu-arrow.rotated {
-  transform: rotate(360deg);
-}
 .menu-item.active .menu-link {
-  background-color: #2581f3; /* Highlight active menu item */
-  color: white; /* Active text color */
-  border-radius: 12px;
-}
-.sidebar-container.collapsed .submenu .submenu-item i{
-  visibility: visible !important;
-  opacity: 1 !important;
-  padding-left: 0px !important;
+  background: linear-gradient(90deg, #2581f3 0%, #3b82f6 100%);
+  color: white;
+  box-shadow: 0 4px 6px rgba(37, 129, 243, 0.3);
 }
 
-.submenu-item.active {
-  background-color: #578E7E;
+.menu-item.active .menu-link i {
   color: white;
-  border-radius: 12px;
-  padding-left: 20px;
+}
+
+.menu-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: white;
+  border-radius: 4px 0 0 4px;
 }
 
 @media only screen and (max-width: 768px) {
   .sidebar-container.collapsed {
     width: 0px;
-    /* You might also want to add these for proper hiding */
     overflow: hidden;
     min-width: 0;
   }
 }
-
 
 @media only screen and (max-width: 768px) {
   .sidebar-container.collapsed {

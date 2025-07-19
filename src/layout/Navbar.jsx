@@ -5,65 +5,66 @@ const Navbar = ({ toggleSidebar }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // ✅ Clear all localStorage or specific keys as needed
     localStorage.clear();
-    // Navigate to home/login page
     navigate("/");
   };
 
   return (
     <>
-      <nav className="navbar navbar-light">
-        <div className="container-fluid nav-conte">
-          <div className="nav-content">
-            <div className="nav-bran">
-              <img
-                height={65}
-                width={80}
-                src="public/image/logo.png"
-                alt="Logo"
-              />
-              <div className="nav-taggle-icon" onClick={toggleSidebar}>
-                <a href="#">
-                  <i className="fa fa-bars" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
-            <div className="nav-main-icon">
-              <a className="bell-icon" href="#">
-                <i className="fa-regular fa-bell"></i>
-              </a>
-              <div className="dropdown profile-elemen">
-                <div
-                  className="me-2 fw-bold p-1 rounded-4 profile d-flex align-items-center"
-                  style={{ cursor: "pointer" }}
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <div className="profile-element">
-                    <div className="avatar online">
-                      <i className="fa-solid user-icon fa-circle-user"></i>
-                      <span className="text-dark ms-2"></span>
-                    </div>
-                  </div>
-                </div>
-                <ul className="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <Link to="/Admin-Profile" className="dropdown-item">
-                      My Profile
-                    </Link>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    {/* 👇 Logout Link with clear and redirect */}
-                    <button className="dropdown-item" onClick={handleLogout}>
-                      Logout
-                    </button>
-                  </li>
-                </ul>
-              </div>
+      <nav className="navbar navbar-white bg-white shadow-sm border">
+        <div className="container-fluid d-flex justify-content-between align-items-center">
+          {/* Left: Logo + Toggle */}
+          <div className="d-flex align-items-center gap-3">
+            <img
+              height={50}
+              width={40}
+              src="https://i.ibb.co/KxM9x9Vd/png-clipart-electricity-electric-power-logo-electrical-engineering-energy-saving-and-environmental-p.png"
+              alt="Logo"
+            />
+
+            <button
+              className="btn btn-outline-secondary d-lg-none"
+              onClick={toggleSidebar}
+            >
+              <i className="bi bi-list fs-4"></i>
+            </button>
+          </div>
+
+          {/* Right: Bell + Profile */}
+          <div className="d-flex align-items-center gap-3">
+            <button className="btn position-relative p-0 border-0 bg-transparent">
+             <i className="bi bi-bell fs-5 text-secondary"></i>
+
+              {/* Optional badge */}
+              {/* <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span> */}
+            </button>
+
+            <div className="dropdown">
+              <button
+                className="btn d-flex align-items-center gap-2 p-0 border-0 bg-transparent "
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i className="bi bi-person fs-3 text-secondary"></i>
+
+
+
+                
+              </button>
+
+              <ul className="dropdown-menu dropdown-menu-end shadow-sm mt-2">
+                <li>
+                  <Link to="/Admin-Profile" className="dropdown-item">
+                    My Profile
+                  </Link>
+                </li>
+                <li><hr className="dropdown-divider" /></li>
+                <li>
+                  <button className="dropdown-item" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
