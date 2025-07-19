@@ -28,6 +28,10 @@ import AdminProfile from "./Componente/AdminProfile/AdminProfile";
 import ContactUs from "./Home/ContactUs";
 
 import RelatedProducts from "./Home/ProductDetails";
+import AboutUs from "./Policy/AboutUs";
+import PrivacyPolicy from "./Policy/PrivacyPolicy";
+import TermsAndConditions from "./Policy/TermsAndConditions";
+import RefundPolicy from "./Policy/RefundPolicy";
 
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -38,7 +42,7 @@ function App() {
     setIsSidebarCollapsed((prev) => !prev);
   };
   const location = useLocation();
-  const hideLayout = location.pathname === "/" || location.pathname === "/electricalproducts" || location.pathname === "/contactus" || location.pathname === "/profilepage" ||  location.pathname === "/shoppingcart" || location.pathname === "/login" || location.pathname === "/signup" || location.pathname.startsWith("/productpage");
+  const hideLayout = location.pathname === "/" || location.pathname === "/electricalproducts"  || location.pathname === "/contactus" || location.pathname === "/profilepage" || location.pathname === "/productpage" || location.pathname === "/shoppingcart" || location.pathname === "/login" || location.pathname === "/signup" || location.pathname === "/aboutus" || location.pathname === "/privacypolicy" || location.pathname === "/terms" || location.pathname === "/refund" || location.pathname.startsWith("/productpage" );
 
   return (
     <>
@@ -57,6 +61,13 @@ function App() {
           <Route path="/profilepage" element={<ProfilePage />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/productdetails" element={<RelatedProducts />} />
+
+          {/* policy */}
+          <Route path="/aboutus" element={<AboutUs />} />
+          <Route path="/privacypolicy" element={<PrivacyPolicy />} />
+          <Route path="/terms" element={<TermsAndConditions />} />
+          <Route path="/refund" element={<RefundPolicy />} />
+
 
         </Routes>
       ) : (

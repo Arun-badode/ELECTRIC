@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { FaFilePdf, FaPlusCircle, FaEye, FaEdit, FaTrash, FaSearch, FaTimes,} from "react-icons/fa";
+import { FaFilePdf, FaPlusCircle, FaEye, FaEdit, FaTrash, FaSearch, FaTimes, } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../Utilities/axiosInstance";
 import EditProduct from "./EditProduct";
+import EditProductForm from "./EditProduct";
+import { toast } from 'react-toastify';
 
 const Productes = () => {
   const [products, setProducts] = useState([]);
@@ -46,7 +48,31 @@ const Productes = () => {
   };
 
 
- 
+
+  const handleUpdateProduct = async (updatedData) => {
+    try {
+      const response = await axiosInstance.patch(`/product/updateProduct/${updatedData.id}`, updatedData);
+      console.log("Product updated", response.data);
+
+      // Success toast
+      toast.success("Product updated successfully!");
+
+      // Refresh product list
+      fetchProducts();
+
+      // Close modal
+      const modal = bootstrap.Modal.getInstance(document.getElementById("editProductModal"));
+      if (modal) {
+        modal.hide();
+      }
+    } catch (err) {
+      console.error("Error updating product:", err);
+      toast.error("Failed to update product");
+    }
+  };
+
+
+
 
   return (
     <div className="container-fluid py-4 px-3 px-md-4">
@@ -188,84 +214,84 @@ const Productes = () => {
   </div>
 </div>
 
-                    <button
-                      className="btn btn-sm btn-outline-danger"
-                      data-bs-toggle="modal"
-                      data-bs-target="#deleteProductModal"
-                      onClick={() => setDeleteProduct(product.id)}
-                      title="Delete"
-                    >
-                      <FaTrash size={14} />
-                    </button>
-                  </div>
-                </td>
-              </tr>
-            ))
-          ) : (
-            <tr>
-              <td colSpan="8" className="text-center py-5">
-                <FaSearch size={48} className="text-muted mb-3" />
-                <h5 className="fw-semibold">No products found</h5>
-                <p className="text-muted">Try adjusting your search or filter criteria</p>
-              </td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-
-    {/* View Product Modal */}
-<div className="modal fade" id="productDetailModal" tabIndex="-1" aria-hidden="true">
-  <div className="modal-dialog modal-dialog-centered modal-lg">
-    <div className="modal-content">
-      <div className="modal-header border-0 pb-0">
-        <h5 className="modal-title fw-bold">Product Details</h5>
-        <button type="button" className="btn-close" data-bs-dismiss="modal" />
-      </div>
-      <div className="modal-body pt-0">
-        {selectedProduct && (
-          <div className="row g-4">
-            {/* Image Section */}
-            <div className="col-12">
-              <h6 className="fw-bold">Images:</h6>
-              <div className="d-flex flex-wrap gap-3">
-                {selectedProduct.image && selectedProduct.image.length > 0 ? (
-                  selectedProduct.image.map((imgUrl, index) => (
-                    <img
-                      key={index}
-                      src={imgUrl}
-                      alt={`Product ${index + 1}`}
-                      className="img-thumbnail"
-                      style={{ width: "120px", height: "120px", objectFit: "cover" }}
-                    />
+                          <button
+                            className="btn btn-sm btn-outline-danger"
+                            data-bs-toggle="modal"
+                            data-bs-target="#deleteProductModal"
+                            onClick={() => setDeleteProduct(product.id)}
+                            title="Delete"
+                          >
+                            <FaTrash size={14} />
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
                   ))
                 ) : (
-                  <span className="text-muted">No Images Available</span>
+                  <tr>
+                    <td colSpan="8" className="text-center py-5">
+                      <FaSearch size={48} className="text-muted mb-3" />
+                      <h5 className="fw-semibold">No products found</h5>
+                      <p className="text-muted">Try adjusting your search or filter criteria</p>
+                    </td>
+                  </tr>
                 )}
-              </div>
-            </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
-            {/* Product Info */}
-            <div className="col-12">
-              <h4 className="fw-bold mt-4">{selectedProduct.name}</h4>
-              <p><strong>ID:</strong> {selectedProduct.id}</p>
-              <p><strong>Price:</strong> ${selectedProduct.price}</p>
-              <p><strong>Stock:</strong> {selectedProduct.stockQuantity}</p>
-              <p><strong>Category:</strong> {selectedProduct.category_name || "N/A"}</p>
-              <p><strong>Description:</strong> {selectedProduct.description || "N/A"}</p>
+
+      {/* View Product Modal */}
+      <div className="modal fade" id="productDetailModal" tabIndex="-1" aria-hidden="true">
+        <div className="modal-dialog modal-dialog-centered modal-lg">
+          <div className="modal-content">
+            <div className="modal-header border-0 pb-0">
+              <h5 className="modal-title fw-bold">Product Details</h5>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" />
+            </div>
+            <div className="modal-body pt-0">
+              {selectedProduct && (
+                <div className="row g-4">
+                  {/* Image Section */}
+                  <div className="col-12">
+                    <h6 className="fw-bold">Images:</h6>
+                    <div className="d-flex flex-wrap gap-3">
+                      {selectedProduct.image && selectedProduct.image.length > 0 ? (
+                        selectedProduct.image.map((imgUrl, index) => (
+                          <img
+                            key={index}
+                            src={imgUrl}
+                            alt={`Product ${index + 1}`}
+                            className="img-thumbnail"
+                            style={{ width: "120px", height: "120px", objectFit: "cover" }}
+                          />
+                        ))
+                      ) : (
+                        <span className="text-muted">No Images Available</span>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Product Info */}
+                  <div className="col-12">
+                    <h4 className="fw-bold mt-4">{selectedProduct.name}</h4>
+                    <p><strong>ID:</strong> {selectedProduct.id}</p>
+                    <p><strong>Price:</strong> ${selectedProduct.price}</p>
+                    <p><strong>Stock:</strong> {selectedProduct.stockQuantity}</p>
+                    <p><strong>Category:</strong> {selectedProduct.category_name || "N/A"}</p>
+                    <p><strong>Description:</strong> {selectedProduct.description || "N/A"}</p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
-        )}
+        </div>
       </div>
-    </div>
-  </div>
-</div>
 
 
-     
+
       {/* Delete Modal */}
       <div className="modal fade" id="deleteProductModal" tabIndex="-1" aria-hidden="true">
         <div className="modal-dialog modal-dialog-centered">
