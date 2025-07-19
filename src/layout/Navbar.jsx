@@ -11,42 +11,46 @@ const Navbar = ({ toggleSidebar }) => {
 
   return (
     <>
-      <nav className="navbar navbar-light">
-        <div className="container-fluid nav-content">
-          <div className="nav-content">
-            <div className="nav-bran">
-              <img
-                height={50}
-                width={50}
-                src="https://i.ibb.co/KxM9x9Vd/png-clipart-electricity-electric-power-logo-electrical-engineering-energy-saving-and-environmental-p.png"
-                alt="Logo"
-              />
-              <div className="nav-taggle-icon" onClick={toggleSidebar}>
-                <a href="#">
-                  <i className="fa fa-bars" aria-hidden="true"></i>
-                </a>
-              </div>
-            </div>
+      <nav className="navbar navbar-light bg-light">
+        <div className="container-fluid d-flex justify-content-between align-items-center">
+          {/* Left: Logo + Toggle */}
+          <div className="d-flex align-items-center gap-3">
+            <img
+              height={50}
+              width={50}
+              src="https://i.ibb.co/KxM9x9Vd/png-clipart-electricity-electric-power-logo-electrical-engineering-energy-saving-and-environmental-p.png"
+              alt="Logo"
+            />
+
+            <button
+              className="btn btn-outline-secondary d-lg-none"
+              onClick={toggleSidebar}
+            >
+              <i className="bi bi-list fs-4"></i>
+            </button>
           </div>
 
-          {/* Right Section: Notification & Profile */}
+          {/* Right: Bell + Profile */}
           <div className="d-flex align-items-center gap-3">
-            <a className="text-dark position-relative fs-5" href="#">
-              <i className="fa-regular fa-bell"></i>
-              {/* Optional notification badge */}
+            <button className="btn position-relative p-0 border-0 bg-transparent">
+             <i className="bi bi-bell fs-5 text-secondary"></i>
+
+              {/* Optional badge */}
               {/* <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span> */}
-            </a>
+            </button>
 
             <div className="dropdown">
-              <div
-                className="d-flex align-items-center rounded-4 px-2 py-1 profile"
-                style={{ cursor: "pointer" }}
+              <button
+                className="btn d-flex align-items-center gap-2 p-0 border-0 bg-transparent "
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                <i className="fa-solid fa-circle-user fs-4 text-dark me-2"></i>
-                <span className="fw-semibold text-dark d-none d-sm-block">Admin</span>
-              </div>
+                <i className="bi bi-person fs-3 text-secondary"></i>
+
+
+
+                
+              </button>
 
               <ul className="dropdown-menu dropdown-menu-end shadow-sm mt-2">
                 <li>
