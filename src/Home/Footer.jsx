@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {
   FaFacebookF,
   FaTwitter,
@@ -34,25 +35,55 @@ const Footer = () => {
 
           {/* Products */}
           <div>
-            <h6 className="text-lg font-semibold mb-3">Products</h6>
+            <h6 className="text-lg font-semibold mb-3">Company</h6>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li>Wires & Cables</li>
-              <li>Switchgear</li>
-              <li>Tools & Testers</li>
-              <li>Lighting Solutions</li>
-              <li>Safety Equipment</li>
+              <li>
+    <Link to="/" className="text-decoration-none text-gray-400">
+      Home
+    </Link>
+  </li>
+  <li>
+    <Link to="/electricalproducts" className="text-decoration-none text-gray-400">
+      Products
+    </Link>
+  </li>
+  <li>
+    <Link to="/aboutus" className="text-decoration-none text-gray-400">
+      About Us
+    </Link>
+  </li>
+  <li>
+    <Link to="/contactus" className="text-decoration-none text-gray-400">
+      Contact Us
+    </Link>
+  </li>
+              
             </ul>
           </div>
 
           {/* Support */}
           <div>
-            <h6 className="text-lg font-semibold mb-3">Support</h6>
+            <h6 className="text-lg font-semibold mb-3">Policies</h6>
             <ul className="space-y-2 text-sm text-gray-400">
-              <li>Track Order</li>
-              <li>Shipping & Returns</li>
-              <li>Bulk Inquiries</li>
-              <li>Installation Guides</li>
-              <li>Contact Support</li>
+               <li>
+    <Link to="/privacypolicy" className="text-decoration-none text-gray-400">
+      Privacy Policy
+    </Link>
+  </li>
+
+           <li>
+    <Link to="/terms" className="text-decoration-none text-gray-400">
+      Terms & Conditions
+    </Link>
+  </li>
+
+           <li>
+    <Link to="/refund" className="text-decoration-none text-gray-400">
+      Refund Policy
+    </Link>
+  </li>
+            
+              
             </ul>
           </div>
 
