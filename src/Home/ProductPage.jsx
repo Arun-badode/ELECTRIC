@@ -4,6 +4,7 @@ import CustomNavbar from './Navbar';
 import axiosInstance from '../Utilities/axiosInstance';
 import { useParams } from 'react-router-dom';
 import RelatedProducts from './ProductDetails';
+import { toast } from "react-toastify";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -38,6 +39,33 @@ const ProductPage = () => {
 
   if (!product) return <div className="text-center p-5">Loading...</div>;
 
+
+  const addtocart = async () => {
+    const userId = localStorage.getItem("userId"); // ya jahan se aap userId le rahe ho
+
+    if (!userId) {
+      toast.error("Please login first!");
+      return;
+    }
+
+    try {
+      const response = await axiosInstance.post("/cart/addToCart", {
+        userId: parseInt(userId),
+        productId: product.id,
+        price: parseFloat(product.price),
+        quantity: quantity.toString(),
+      });
+
+      if (response.data.success) {
+        toast.success("Product added to cart!");
+      } else {
+        toast.error("Failed to add to cart.");
+      }
+    } catch (error) {
+      console.error("Add to cart error:", error);
+      toast.error("Something went wrong while adding to cart.");
+    }
+  };
   return (
     <>
       <CustomNavbar />
@@ -62,11 +90,10 @@ const ProductPage = () => {
                 {product?.image?.map((imgSrc, index) => (
                   <div
                     key={index}
-                    className={`border rounded ${
-                      selectedImage === imgSrc
+                    className={`border rounded ${selectedImage === imgSrc
                         ? 'border-primary border-2'
                         : 'border-light'
-                    }`}
+                      }`}
                     onClick={() => setSelectedImage(imgSrc)}
                     style={{
                       width: '80px',
@@ -130,9 +157,8 @@ const ProductPage = () => {
               </div>
 
               <div className="d-grid gap-3 mb-4">
-                <button className="btn btn-primary py-3 fw-medium">
-                  Add to Cart - $
-                  {(parseFloat(product.price) * quantity).toFixed(2)}
+                <button className="btn btn-primary py-3 fw-medium" onClick={addtocart}>
+                  Add to Cart - ${(parseFloat(product.price) * quantity).toFixed(2)}
                 </button>
                 <button className="btn btn-outline-primary py-3 fw-medium">
                   Buy Now
@@ -158,19 +184,22 @@ const ProductPage = () => {
             <p className="text-muted">{product.description}</p>
 
             If features were available from backend:
-              <h4 className="fw-semibold mt-4 mb-3">Key Features</h4>
-              <ul className="list-unstyled">
-                {product.features?.map((feature, index) => (
-                  <li key={index} className="mb-2 d-flex align-items-start">
-                    <i className="bi bi-check2 text-success me-2 mt-1"></i>
-                    <span className="text-muted">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-           
+            <h4 className="fw-semibold mt-4 mb-3">Key Features</h4>
+            <ul className="list-unstyled">
+              {product.features?.map((feature, index) => (
+                <li key={index} className="mb-2 d-flex align-items-start">
+                  <i className="bi bi-check2 text-success me-2 mt-1"></i>
+                  <span className="text-muted">{feature}</span>
+                </li>
+              ))}
+            </ul>
+
           </div>
         </div>
-         <RelatedProducts categoryId={product.categoryId} currentProductId={product.id} />
+        <div className='mb-4'>
+          <RelatedProducts categoryId={product.categoryId} currentProductId={product.id} className='' />
+
+        </div>
       </div>
       <Footer />
     </>
