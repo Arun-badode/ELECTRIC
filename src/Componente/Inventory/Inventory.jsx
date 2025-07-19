@@ -75,7 +75,8 @@ const Inventory = () => {
       </div>
 
       {/* Table */}
-      <div className="table-responsive bg-white">
+      <div className="table-responsive bg-white p-3">
+        
         <table className="table align-middle mb-0">
           <thead className="text-muted small">
             <tr>
