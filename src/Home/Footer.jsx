@@ -17,9 +17,9 @@ const Footer = () => {
           {/* Brand Info */}
           <div>
             <img
-              src="https://i.ibb.co/KxM9x9Vd/png-clipart-electricity-electric-power-logo-electrical-engineering-energy-saving-and-environmental-p.png"
+              src="https://i.postimg.cc/zXVchZ1Z/2-removebg-preview-1.png"
               alt="ElectroSupply Logo"
-              className="h-12 mb-3"
+              className="h-14  mb-3"
             />
             <p className="text-sm text-gray-300">
               Your trusted source for electrical components, tools, and industrial supplies.
