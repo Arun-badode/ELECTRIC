@@ -144,7 +144,7 @@ const Orders = () => {
         </div>
 
         {/* Stats Cards */}
-        <div className="row mb-4">
+        {/* <div className="row mb-4">
           <div className="col-md-3">
             <div className="card bg-success text-white">
               <div className="card-body">
@@ -201,7 +201,7 @@ const Orders = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Orders Table */}
         <div className="card shadow-sm">
