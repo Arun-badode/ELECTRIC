@@ -1,22 +1,39 @@
 import React, { useEffect, useState } from "react";
-
-const bannerImages = [
-  "https://i.postimg.cc/zB3QWKSL/0e9c812f40bdac4af33d736255c38afa-1.jpg",
-  "https://i.postimg.cc/x1hDCY72/electric-supply-banner.jpg",
-  "https://i.ibb.co/RkxQXTLm/image-1.png",
-  "https://i.ibb.co/cG1CJNP/image.png",
-  "https://i.ibb.co/tM5Q4Pn1/image.png"
-];
+import axios from "axios";
+import axiosInstance from "../Utilities/axiosInstance";
 
 const HeroSection = () => {
+  const [bannerImages, setBannerImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // 🔽 Fetch banners from API on mount
+  useEffect(() => {
+    const fetchBanners = async () => {
+      try {
+        const response = await axiosInstance.get(`/banner/getAllBanners`);
+        if (response.data.success) {
+          const images = response.data.data.map(b => b.image[0]); // get first image of each banner
+          setBannerImages(images);
+        }
+      } catch (error) {
+        console.error("Failed to fetch banners:", error);
+      }
+    };
+
+    fetchBanners();
+  }, []);
+
+  // 🔁 Auto-slide
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
     }, 3000);
+
     return () => clearInterval(timer);
-  }, []);
+  }, [bannerImages.length]);
+
+  // ✅ Don't render until images are loaded
+  if (bannerImages.length === 0) return null;
 
   return (
     <div className="w-full flex justify-center sm:p-8">
@@ -48,9 +65,7 @@ const HeroSection = () => {
           {bannerImages.map((_, i) => (
             <div
               key={i}
-              className={`w-3 h-3 rounded-full ${
-                i === currentIndex ? "bg-primary" : "bg-white"
-              }`}
+              className={`w-3 h-3 rounded-full ${i === currentIndex ? "bg-primary" : "bg-white"}`}
             />
           ))}
         </div>

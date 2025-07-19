@@ -5,16 +5,14 @@ const Navbar = ({ toggleSidebar }) => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // ✅ Clear all localStorage or specific keys as needed
     localStorage.clear();
-    // Navigate to home/login page
     navigate("/");
   };
 
   return (
     <>
       <nav className="navbar navbar-light">
-        <div className="container-fluid nav-conte">
+        <div className="container-fluid nav-content">
           <div className="nav-content">
             <div className="nav-bran">
               <img
@@ -29,41 +27,40 @@ const Navbar = ({ toggleSidebar }) => {
                 </a>
               </div>
             </div>
-            <div className="nav-main-icon">
-              <a className="bell-icon" href="#">
-                <i className="fa-regular fa-bell"></i>
-              </a>
-              <div className="dropdown profile-elemen">
-                <div
-                  className="me-2 fw-bold p-1 rounded-4 profile d-flex align-items-center"
-                  style={{ cursor: "pointer" }}
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <div className="profile-element">
-                    <div className="avatar online">
-                      <i className="fa-solid user-icon fa-circle-user"></i>
-                      <span className="text-dark ms-2"></span>
-                    </div>
-                  </div>
-                </div>
-                <ul className="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <Link to="/Admin-Profile" className="dropdown-item">
-                      My Profile
-                    </Link>
-                  </li>
-                  <li>
-                    <hr className="dropdown-divider" />
-                  </li>
-                  <li>
-                    {/* 👇 Logout Link with clear and redirect */}
-                    <button className="dropdown-item" onClick={handleLogout}>
-                      Logout
-                    </button>
-                  </li>
-                </ul>
+          </div>
+
+          {/* Right Section: Notification & Profile */}
+          <div className="d-flex align-items-center gap-3">
+            <a className="text-dark position-relative fs-5" href="#">
+              <i className="fa-regular fa-bell"></i>
+              {/* Optional notification badge */}
+              {/* <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3</span> */}
+            </a>
+
+            <div className="dropdown">
+              <div
+                className="d-flex align-items-center rounded-4 px-2 py-1 profile"
+                style={{ cursor: "pointer" }}
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i className="fa-solid fa-circle-user fs-4 text-dark me-2"></i>
+                <span className="fw-semibold text-dark d-none d-sm-block">Admin</span>
               </div>
+
+              <ul className="dropdown-menu dropdown-menu-end shadow-sm mt-2">
+                <li>
+                  <Link to="/Admin-Profile" className="dropdown-item">
+                    My Profile
+                  </Link>
+                </li>
+                <li><hr className="dropdown-divider" /></li>
+                <li>
+                  <button className="dropdown-item" onClick={handleLogout}>
+                    Logout
+                  </button>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

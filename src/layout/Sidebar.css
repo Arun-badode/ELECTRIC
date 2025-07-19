@@ -1,5 +1,5 @@
 .sidebar-container {
-  width: 220px;
+  width: 240px;
   background-color: white;
   height: 89vh;
   overflow-y: auto;
@@ -8,6 +8,8 @@
   z-index: 1;
   position: fixed;
   scrollbar-width: none;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.08);
+  border-right: 1px solid #e5e7eb; /* light border for separation */
 }
 
 .sidebar-container.collapsed {
@@ -15,13 +17,13 @@
 }
 
 .sidebar-container.collapsed .submenu .submenu-item {
-  /* opacity: 0; */
   visibility: hidden;
 }
 .sidebar-container.collapsed .menu .menu-text {
   opacity: 0;
   visibility: hidden;
 }
+
 .sidebar {
   padding: 10px;
 }
@@ -37,6 +39,7 @@
   border-radius: 12px;
   font-size: 17px;
   font-weight: 700;
+  transition: background 0.3s ease;
 }
 
 .menu-link {
@@ -44,9 +47,15 @@
   align-items: center;
   padding: 10px;
   text-decoration: none;
-  color: black;
+  color: #333;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, color 0.3s ease;
+  border-radius: 12px;
+}
+
+.menu-link:hover {
+  background-color: #f3f4f6;
+  color: #2563eb;
 }
 
 .menu-text {
@@ -73,17 +82,25 @@
   background-color: #fff9f1;
   font-weight: 700;
   padding-left: 10px;
+  border-left: 3px solid #facc15;
+  margin-left: 5px;
+}
+
+.submenu-item {
+  padding: 10px 0;
+  cursor: pointer;
+  color: #578E7E;
+  transition: background 0.3s ease;
+}
+
+.submenu-item:hover {
+  background-color: #f1f5f9;
+  border-radius: 10px;
+  padding-left: 12px;
 }
 
 .submenu-item i {
   padding: 0 5px;
-}
-.submenu-item {
-  padding: 10px 0;
-  cursor: pointer;
-}
-.submenu-item{
-  color: #578E7E;
 }
 
 .submenu-arrow {
@@ -94,12 +111,14 @@
 .submenu-arrow.rotated {
   transform: rotate(360deg);
 }
+
 .menu-item.active .menu-link {
-  background-color: #2581f3; /* Highlight active menu item */
-  color: white; /* Active text color */
+  background-color: #2581f3;
+  color: white;
   border-radius: 12px;
 }
-.sidebar-container.collapsed .submenu .submenu-item i{
+
+.sidebar-container.collapsed .submenu .submenu-item i {
   visibility: visible !important;
   opacity: 1 !important;
   padding-left: 0px !important;
@@ -115,12 +134,10 @@
 @media only screen and (max-width: 768px) {
   .sidebar-container.collapsed {
     width: 0px;
-    /* You might also want to add these for proper hiding */
     overflow: hidden;
     min-width: 0;
   }
 }
-
 
 @media only screen and (max-width: 768px) {
   .sidebar-container.collapsed {
