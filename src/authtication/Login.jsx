@@ -4,7 +4,9 @@ import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import BaseUrl from '../Utilities/BaseUrl';
-
+import Navbar from '../Home/Navbar';
+import Footer from '../Home/Footer';
+import { Link } from 'react-router-dom';
 const Login = () => {
   const navigate = useNavigate();
 
@@ -33,7 +35,7 @@ const handleSubmit = async (e) => {
     localStorage.setItem('role', role);
     localStorage.setItem('user', JSON.stringify(response.data.data));
 
-    toast.success('Login successful!', {
+    toast.info('Login successful!', {
       position: 'top-center',
     });
 
@@ -53,6 +55,8 @@ const handleSubmit = async (e) => {
 };
 
   return (
+    <>
+    <Navbar/>
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light px-3 ">
       <ToastContainer />
       <div className="card shadow-lg rounded-4 border-0 w-100" style={{ maxWidth: '900px' }}>
@@ -97,7 +101,7 @@ const handleSubmit = async (e) => {
             </form>
 
             <p className="mt-4 text-center text-muted">
-              Don't have an account? <a href="/signup">Register</a>
+              Don't have an account? < Link to="/signup">Register</Link>
             </p>
           </div>
 
@@ -112,6 +116,8 @@ const handleSubmit = async (e) => {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 };
 

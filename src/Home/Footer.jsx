@@ -18,7 +18,7 @@ const Footer = () => {
           {/* Brand Info */}
           <div>
             <img
-              src="https://i.postimg.cc/zXVchZ1Z/2-removebg-preview-1.png"
+              src="https://i.postimg.cc/h4VQcD7D/2-removebg-preview-2.png"
               alt="ElectroSupply Logo"
               className="h-14  mb-3"
             />

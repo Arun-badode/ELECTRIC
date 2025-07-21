@@ -81,7 +81,8 @@ const HeroSection = () => {
           <span className="carousel-control-next-icon" aria-hidden="true"></span>
         </button>
       </div>
-    </div>
+      </div>
+  
   );
 };
 

@@ -4,7 +4,9 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import BaseUrl from '../Utilities/BaseUrl';
 import { useNavigate } from 'react-router-dom';
-
+import Navbar from '../Home/Navbar';
+import Footer from '../Home/Footer';
+import { Link } from 'react-router-dom';
 const Signup = () => {
   const [formData, setFormData] = useState({
     firstName: '',
@@ -37,7 +39,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(`${BaseUrl}/user/signUp`, payload);
-      toast.success(response.data.message || 'Signup successful');
+      toast.info(response.data.message || 'Signup successful');
 
       setFormData({
         firstName: '',
@@ -57,6 +59,8 @@ const Signup = () => {
   };
 
   return (
+   <>
+   <Navbar/>
     <div className="d-flex justify-content-center align-items-center vh-100 bg-light px-3">
       <ToastContainer position="top-center" />
       <div className="card shadow-lg rounded-4 border-0 w-100" style={{ maxWidth: '900px' }}>
@@ -136,7 +140,7 @@ const Signup = () => {
             </form>
 
             <p className="mt-4 text-center text-muted">
-              Already have an account? <a href="/login">Login</a>
+              Already have an account? <Link to="/login">Login</Link>
             </p>
           </div>
 
@@ -151,6 +155,8 @@ const Signup = () => {
         </div>
       </div>
     </div>
+    <Footer/>
+   </>
   );
 };
 
