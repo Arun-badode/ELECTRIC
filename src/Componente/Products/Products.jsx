@@ -2,16 +2,11 @@ import React, { useEffect, useState } from "react";
 import { FaFilePdf, FaPlusCircle, FaEye, FaEdit, FaTrash, FaSearch, FaTimes, } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../Utilities/axiosInstance";
-import EditProduct from "./EditProduct";
-import EditProductForm from "./EditProduct";
-import { toast } from 'react-toastify';
-
 const Productes = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [editProduct, setEditProduct] = useState(null);
   const [deleteProduct, setDeleteProduct] = useState(null);
 
   useEffect(() => {
@@ -47,33 +42,6 @@ const Productes = () => {
     }
   };
 
-
-
-  const handleUpdateProduct = async (updatedData) => {
-    try {
-      const response = await axiosInstance.patch(`/product/updateProduct/${updatedData.id}`, updatedData);
-      console.log("Product updated", response.data);
-
-      // Success toast
-      toast.success("Product updated successfully!");
-
-      // Refresh product list
-      fetchProducts();
-
-      // Close modal
-      const modal = bootstrap.Modal.getInstance(document.getElementById("editProductModal"));
-      if (modal) {
-        modal.hide();
-      }
-    } catch (err) {
-      console.error("Error updating product:", err);
-      toast.error("Failed to update product");
-    }
-  };
-
-
-
-
   return (
     <div className="container-fluid py-4 px-3 px-md-4">
       <div className="d-flex justify-content-between align-items-center mb-4">
@@ -101,19 +69,10 @@ const Productes = () => {
             <span className="input-group-text bg-white border-end-0">
               <FaSearch className="text-muted" />
             </span>
-            <input
-              type="text"
-              className="form-control border-start-0"
-              placeholder="Search by name, ID or SKU..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
+            <input   type="text"   className="form-control border-start-0"   placeholder="Search by name, ID or SKU..."
+              value={searchTerm}   onChange={(e) => setSearchTerm(e.target.value)}  />
             {searchTerm && (
-              <button
-                className="btn btn-outline-secondary"
-                type="button"
-                onClick={() => setSearchTerm("")}
-              >
+              <button   className="btn btn-outline-secondary"   type="button"   onClick={() => setSearchTerm("")} >
                 <FaTimes />
               </button>
             )}
@@ -149,16 +108,8 @@ const Productes = () => {
                 <td>{product?.category_name || "N/A"}</td>
                 <td>
                   {product?.image && product.image.length > 0 ? (
-                    <img
-                      src={product.image[0]}
-                      alt="Product"
-                      style={{
-                        width: "60px",
-                        height: "60px",
-                        objectFit: "cover",
-                      }}
-                      className="rounded border"
-                    />
+                    <img src={product.image[0]}  alt="Product"  style={{ width: "60px", height: "60px", objectFit: "cover", }}
+                      className="rounded border" />
                   ) : (
                     <span className="text-muted">No Image</span>
                   )}
@@ -174,53 +125,13 @@ const Productes = () => {
                     >
                       <FaEye size={14} />
                     </button>
-                    <button
-                      className="btn btn-sm btn-outline-primary"
-                      data-bs-toggle="modal"
-                      data-bs-target="#editProductModal"
-                      onClick={() => setEditProduct({ ...product })}
-                      title="Edit"
-                    >
-                      <FaEdit size={14} />
-                    </button>
-                    <div
-  className="modal fade"
-  id="editProductModal"
-  tabIndex="-1"
-  aria-labelledby="editProductModalLabel"
-  aria-hidden="true"
->
-  <div className="modal-dialog modal-lg">
-    <div className="modal-content">
-      <div className="modal-header">
-        <h5 className="modal-title" id="editProductModalLabel">
-          Edit Product
-        </h5>
-        <button
-          type="button"
-          className="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div className="modal-body">
-        {/* Form fields yahan aayenge */}
-        <form>
-         <EditProduct/>
-        </form>
-      </div>
-     
-    </div>
-  </div>
-</div>
+                <Link to={`/editproducts/${product.id}`} className="btn btn-sm btn-outline-primary">
+  <FaEdit size={14} />
+</Link>
 
-                          <button
-                            className="btn btn-sm btn-outline-danger"
-                            data-bs-toggle="modal"
-                            data-bs-target="#deleteProductModal"
-                            onClick={() => setDeleteProduct(product.id)}
-                            title="Delete"
-                          >
+                   
+                          <button  className="btn btn-sm btn-outline-danger"  data-bs-toggle="modal"
+                            data-bs-target="#deleteProductModal" onClick={() => setDeleteProduct(product.id)}  title="Delete" >
                             <FaTrash size={14} />
                           </button>
                         </div>
@@ -289,8 +200,6 @@ const Productes = () => {
           </div>
         </div>
       </div>
-
-
 
       {/* Delete Modal */}
       <div className="modal fade" id="deleteProductModal" tabIndex="-1" aria-hidden="true">

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axiosInstance from '../Utilities/axiosInstance';
+import Search from './Search';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -11,30 +12,48 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+//use useEffect to check if user is logged in and set redirect path
   useEffect(() => {
     const token = localStorage.getItem("token");
     const userData = JSON.parse(localStorage.getItem("user"));
     if (token && userData?.role) {
       if (userData.role === "admin") {
-        setRedirectPath("/admin-dashboard");
+        setRedirectPath("/admin/dashboard");
       } else if (userData.role === "user") {
         setRedirectPath("/profilepage");
       }
-        // ✅ Fetch cart count
-    fetchCartCount(userData.id);
     } else {
       setRedirectPath("/login");
     }
   }, []);
-const fetchCartCount = async (userId) => {
-  try {
-    const res = await axiosInstance.get(`/cart/getCartByUserId/${userId}`);
-    const cartItems = res.data?.data || [];
-    setCartCount(cartItems.length);
-  } catch (error) {
-    console.error("Failed to fetch cart count", error);
-  }
-};
+
+  // Fetch cart count for the logged-in user
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user?.id;
+
+    const fetchCartCount = async () => {
+      if (!userId) return;
+      try {
+        const res = await axiosInstance.get(`/cart/getCartByUserId/${userId}`);
+        const count = res.data?.data?.length || 0;
+        setCartCount(count);
+        localStorage.setItem("cartCount", count);
+      } catch (err) {
+        console.error("Cart fetch error", err);
+      }
+    };
+
+    // 👇 Poll every 2 seconds
+    const interval = setInterval(() => {
+      fetchCartCount();
+    }, 2000);
+
+    // initial call
+    fetchCartCount();
+
+    return () => clearInterval(interval); // cleanup on unmount
+  }, []);
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
@@ -60,10 +79,8 @@ const fetchCartCount = async (userId) => {
           {/* Right Side Icons - Desktop */}
           <div className="flex items-center space-x-4 ml-auto">
             <div className="hidden md:block relative mx-4">
-              <input   type="text"    placeholder="Search..." 
-                className="px-4 py-1.5 border rounded-full focus:outline-none focus:ring-1 focus:ring-blue-500 w-40 lg:w-64"
-              />
-              <svg   className="absolute right-3 top-2 h-4 w-4 text-gray-400"   xmlns="http://www.w3.org/2000/svg" 
+              <Search/>
+              <svg className="absolute right-3 top-2 h-4 w-4 text-gray-400"   xmlns="http://www.w3.org/2000/svg" 
               fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
@@ -106,10 +123,7 @@ const fetchCartCount = async (userId) => {
       {/* Mobile Navigation */}
       <div className={`md:hidden ${isMenuOpen ? 'block' : 'hidden'}`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white shadow-lg">
-          <div className="px-3 py-2">
-            <input  type="text"  placeholder="Search..."
-              className="px-4 py-2 border rounded-full w-full focus:outline-none focus:ring-1 focus:ring-blue-500"
-            /> </div>
+          <div className="px-3 py-2"><Search/> </div>
           <Link   to="/" 
           className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
             onClick={toggleMenu} >

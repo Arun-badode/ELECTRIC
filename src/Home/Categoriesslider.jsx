@@ -13,7 +13,7 @@ const Categoriesslider = () => {
       try {
         setLoading(true);
         const res = await axiosInstance.get('/category/getAllCategories');
-        setCategories(res.data.data || []);
+        setCategories(res?.data?.data || []);
         setError(null);
       } catch (error) {
         console.error('Category fetch error:', error);
@@ -68,11 +68,7 @@ const Categoriesslider = () => {
           Browse by Categories
         </h2>
 
-        <div 
-          className="overflow-hidden relative" 
-          ref={scrollRef}
-          style={{ cursor: 'grab' }}
-        >
+        <div className="overflow-hidden relative"   ref={scrollRef}  style={{ cursor: 'grab' }} >
           <div className="flex mb-4 space-x-6 transition-all duration-700 ease-in-out w-max">
             {loading ? (
               <div className="min-w-[250px] bg-white rounded-2xl shadow-md p-4 animate-pulse">
@@ -83,19 +79,11 @@ const Categoriesslider = () => {
               <p className="text-red-500">{error}</p>
             ) : categories.length > 0 ? (
               categories.map((cat, index) => (
-                <div
-                  key={cat._id || index}
-                  className="min-w-[250px] bg-white rounded-2xl shadow-md hover:shadow-xl transition p-4"
-                >
-                  <img
-                    src={cat.image}
-                    alt={cat.name}
+                <div key={cat._id || index}
+                  className="min-w-[250px] bg-white rounded-2xl shadow-md hover:shadow-xl transition p-4" >
+                  <img  src={cat.image}   alt={cat.name}
                     className="w-full h-40 object-cover rounded-xl"
-                    onError={(e) => {
-                      e.target.onerror = null;
-                      e.target.src = 'https://via.placeholder.com/250';
-                    }}
-                  />
+                    onError={(e) => {  e.target.onerror = null;  e.target.src = 'https://via.placeholder.com/250'; }}/>
                   <h3 className="text-lg font-semibold mt-4 text-gray-700">
                     {cat.name}
                   </h3>

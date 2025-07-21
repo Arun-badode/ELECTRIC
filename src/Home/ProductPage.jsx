@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import RelatedProducts from './ProductDetails';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loader from '../Loader/Loader';
 const ProductPage = () => {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
@@ -39,7 +40,7 @@ const ProductPage = () => {
     fetchProductById();
   }, [id]);
 
-  if (!product) return <div className="text-center p-5">Loading...</div>;
+  if (!product) return <div className="text-center p-5"><Loader/></div>;
 
 // Handle adding product to cart
 const addtocart = async () => {
@@ -87,8 +88,6 @@ const addtocart = async () => {
     console.error("Add to cart error:", error);
   }
 };
-
-
 
   return (
     <>

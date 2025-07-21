@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import axiosInstance from "../../Utilities/axiosInstance";
 
 const StatsCards = () => {
   const [statsData, setStatsData] = useState(null);
@@ -7,8 +8,8 @@ const StatsCards = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await axios.get(
-          "https://inventory-backend-production-6cb7.up.railway.app/api/dashboardOverview/getDashboardOverview"
+        const response = await axiosInstance.get(
+          `/dashboardOverview/getDashboardOverview`
         );
 
         const data = response.data;

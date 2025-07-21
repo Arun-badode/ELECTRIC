@@ -1,21 +1,53 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import axiosInstance from '../../Utilities/axiosInstance';
 
-const EditProductForm = ({ productData, onSave }) => {
+const EditProductForm = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     name: '',
     price: '',
     sku: '',
-    category: '',
+    categoryId: '',
     quantity: '',
     description: '',
-    image: null
+    image: null,
   });
 
   useEffect(() => {
-    if (productData) {
-      setFormData({ ...productData });
+    fetchCategories();
+    fetchProductById();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const res = await axiosInstance.get('/category/getAllCategories');
+      setCategories(res.data?.data || []);
+    } catch (error) {
+      console.error('Error fetching categories:', error);
     }
-  }, [productData]);
+  };
+
+  const fetchProductById = async () => {
+    try {
+      const res = await axiosInstance.get(`/product/getProductById/${id}`);
+      const product = res.data?.data;
+
+      setFormData({
+        name: product.name || '',
+        price: product.price || '',
+        sku: product.sku || '',
+        categoryId: product.categoryId || '', // Use categoryId here
+        quantity: product.stockQuantity || '',
+        description: product.description || '',
+        image: null,
+      });
+    } catch (error) {
+      console.error('Error fetching product:', error);
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -26,16 +58,40 @@ const EditProductForm = ({ productData, onSave }) => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSave(formData); // Call the save handler passed as prop
+    try {
+      const updatedData = new FormData();
+      updatedData.append('name', formData.name);
+      updatedData.append('price', formData.price);
+      updatedData.append('sku', formData.sku);
+      updatedData.append('categoryId', formData.categoryId); // Important
+      updatedData.append('stockQuantity', formData.quantity); // Match backend key
+      updatedData.append('description', formData.description);
+
+      if (formData.image) {
+        updatedData.append('image', formData.image);
+      }
+      // Adjust the PUT endpoint if your backend is `/product/updateProduct/:id`
+      await axiosInstance.patch(`/product/updateProduct/${id}`, updatedData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      alert('Product updated successfully!');
+      navigate('/products');
+    } catch (error) {
+      console.error('Error updating product:', error);
+      alert('Failed to update product');
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="row mb-3">
         <div className="col">
-          <label className='text-start d-block'>Product Name *</label>
+          <label className="text-start d-block">Product Name *</label>
           <input
             type="text"
             className="form-control"
@@ -46,7 +102,7 @@ const EditProductForm = ({ productData, onSave }) => {
           />
         </div>
         <div className="col">
-          <label className='text-start d-block'>Price ($) *</label>
+          <label className="text-start d-block">Price ($) *</label>
           <input
             type="number"
             className="form-control"
@@ -60,7 +116,7 @@ const EditProductForm = ({ productData, onSave }) => {
 
       <div className="row mb-3">
         <div className="col">
-          <label className='text-start d-block'>SKU *</label>
+          <label className="text-start d-block">SKU *</label>
           <input
             type="text"
             className="form-control"
@@ -70,25 +126,27 @@ const EditProductForm = ({ productData, onSave }) => {
             required
           />
         </div>
-        <div className="col">
-          <label className='text-start d-block'>Category *</label>
+        <div className="col-md-6">
+          <label className="form-label">Category *</label>
           <select
             className="form-select"
-            name="category"
-            value={formData.category}
+            name="categoryId"
+            value={formData.categoryId}
             onChange={handleChange}
             required
           >
             <option value="">Select Category</option>
-            <option value="Wires">Wires</option>
-            <option value="Breakers">Breakers</option>
-            <option value="Panels">Panels</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
           </select>
         </div>
       </div>
 
       <div className="mb-3">
-        <label className='text-start d-block'>Stock Quantity *</label>
+        <label className="text-start d-block">Stock Quantity *</label>
         <input
           type="number"
           className="form-control"
@@ -100,7 +158,7 @@ const EditProductForm = ({ productData, onSave }) => {
       </div>
 
       <div className="mb-3">
-        <label className='text-start d-block'>Description</label>
+        <label className="text-start d-block">Description</label>
         <textarea
           className="form-control"
           name="description"
@@ -111,7 +169,7 @@ const EditProductForm = ({ productData, onSave }) => {
       </div>
 
       <div className="mb-3">
-        <label className='text-start d-block'>Product Image</label>
+        <label className="text-start d-block">Product Image</label>
         <input
           type="file"
           className="form-control"
@@ -121,11 +179,7 @@ const EditProductForm = ({ productData, onSave }) => {
       </div>
 
       <div className="modal-footer">
-        <button
-          type="button"
-          className="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >
+        <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">
           Cancel
         </button>
         <button type="submit" className="btn btn-primary">

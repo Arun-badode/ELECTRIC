@@ -3,6 +3,7 @@ import Footer from './Footer';
 import CustomNavbar from './Navbar';
 import { Link } from "react-router-dom";
 import axiosInstance from "../Utilities/axiosInstance";
+import Loader from "../Loader/Loader";
 
 const ElectricalProducts = () => {
   const [products, setProducts] = useState([]);
@@ -184,7 +185,7 @@ const ElectricalProducts = () => {
                     </div>
                   ))
                 ) : (
-                  <p className="text-center">No products match your filters.</p>
+                  <p className="text-center"><Loader/></p>
                 )}
               </div>
             </div>
