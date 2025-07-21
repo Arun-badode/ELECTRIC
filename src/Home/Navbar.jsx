@@ -63,7 +63,7 @@ const Navbar = () => {
           {/* Logo - Left Side */}
           <div className="flex-shrink-0">
             <Link to="/">
-              <img  src="https://i.postimg.cc/zXVchZ1Z/2-removebg-preview-1.png"  alt="logo"  className="h-14 " />
+              <img  src="https://i.postimg.cc/qBKyqcWd/1-removebg-preview.png"  alt="logo"  className="h-14 " />
             </Link>
           </div>
 
