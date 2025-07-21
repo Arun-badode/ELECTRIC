@@ -9,7 +9,7 @@ const AboutUs = () => {
     <section className="container py-5">
       <div className="row justify-content-center">
         <div className="col-lg-8 text-center">
-          <h1 className="mb-4 fw-bold text-center">About Us</h1>
+          <h1 className= "mb-4 fw-bold text-center">About Us</h1>
           <p className="lead text-muted mb-4">
             Welcome to <strong>ElectroSupply</strong> — your trusted online store for high-quality electrical supplies.
           </p>
