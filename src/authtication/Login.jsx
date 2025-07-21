@@ -7,6 +7,9 @@ import BaseUrl from '../Utilities/BaseUrl';
 import Navbar from '../Home/Navbar';
 import Footer from '../Home/Footer';
 import { Link } from 'react-router-dom';
+import { auth, provider } from "../Utilities/firebase"; 
+import { signInWithPopup } from "firebase/auth";
+
 const Login = () => {
   const navigate = useNavigate();
 
@@ -18,7 +21,7 @@ const Login = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
-
+//handle submit
 const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -51,6 +54,36 @@ const handleSubmit = async (e) => {
     toast.error(error.response?.data?.message || 'Login failed', {
       position: 'top-center',
     });
+  }
+};
+
+
+const handleGoogleSignIn = async () => {
+  try {
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    const response = await axios.post(`${BaseUrl}/user/google-login`, {
+      email: user.email,
+      name: user.displayName,
+      uid: user.uid,
+    });
+
+    const { token, role } = response.data.data;
+
+    localStorage.setItem('token', token);
+    localStorage.setItem('role', role);
+    localStorage.setItem('user', JSON.stringify(response.data.data));
+
+    toast.success("Google login successful!", { position: "top-center" });
+
+    setTimeout(() => {
+      if (role === 'admin') navigate('/admin/dashboard');
+      else navigate('/');
+    }, 1500);
+  } catch (error) {
+    console.error("Google Sign In Error:", error.message);
+    toast.error("Google Sign-in failed", { position: "top-center" });
   }
 };
 
@@ -100,18 +133,20 @@ const handleSubmit = async (e) => {
               </button>
             </form>
 
+        {/* <button type="button" onClick={handleGoogleSignIn} className="d-flex align-items-center justify-content-center w-100 rounded-pill mt-3"
+           style={{ backgroundColor: "#fff", color: "#5f6368", fontWeight: 500,
+           border: "1px solid #dadce0", borderRadius: "4px", padding: "10px 24px", gap: "10px"  }}>
+        <i className="fab fa-google"></i> Continue with Google </button> */}
+
             <p className="mt-4 text-center text-muted">
               Don't have an account? < Link to="/signup">Register</Link>
             </p>
           </div>
 
           <div className="col-md-6 d-none d-md-flex align-items-center justify-content-center bg-light rounded-bottom rounded-md-end">
-            <img
-              src="https://i.postimg.cc/x1hDCY72/9ec3f58b834b966a8b7e5f399aa44692.jpg"
-              alt="Login Visual"
-              className="img-fluid rounded-bottom rounded-md-end"
-              style={{ objectFit: 'cover', maxHeight: '100%', width: '100%' }}
-            />
+            <img src="https://i.postimg.cc/x1hDCY72/9ec3f58b834b966a8b7e5f399aa44692.jpg"
+              alt="Login Visual" className="img-fluid rounded-bottom rounded-md-end"
+              style={{ objectFit: 'cover', maxHeight: '100%', width: '100%' }} />
           </div>
         </div>
       </div>

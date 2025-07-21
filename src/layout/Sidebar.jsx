@@ -15,9 +15,9 @@ const Sidebar = ({ collapsed }) => {
     { name: "Manage Users", path: "/users", icon: "fa-solid fa-users" },
     { name: "Manage Inventory", path: "/inventory", icon: "fa-solid fa-warehouse" },
     { name: "Manage Banner", path: "/bannermanager", icon: "fa-solid fa-image" },
-    { name: "Report Analytics", path: "/reportanalytics", icon: "fa-solid fa-chart-line" },
-    { name: "Support", path: "/support", icon: "fa-solid fa-headset" },
-    // { name: "Setting", path: "/settings", icon: "fa-solid fa-gear" }
+    { name: "Report Analytics", path: "/MainReport", icon: "fa-solid fa-chart-line" },
+     { name: "Profile", path: "/Admin-Profile", icon: "fa-solid fa-user-circle" }
+
   ];
 
   const isActive = (path) => location.pathname === path;

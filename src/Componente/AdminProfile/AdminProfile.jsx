@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../Utilities/axiosInstance";
 import { Modal, Button } from "react-bootstrap";
+import Loader from "../../Loader/Loader";
 
 const AdminProfile = () => {
   const [profile, setProfile] = useState({
@@ -65,7 +66,7 @@ const AdminProfile = () => {
     }
   };
 
-  if (loading) return <div className="p-4">Loading profile...</div>;
+  if (loading) return <div className="p-4"><Loader/></div>;
 
   return (
     <div className="container py-4">

@@ -50,10 +50,10 @@ const Productes = () => {
           <p className="text-muted">View and manage all your products</p>
         </div>
         <div className="d-flex gap-2 flex-wrap">
-          <button className="btn btn-outline-danger d-flex align-items-center gap-1">
+          {/* <button className="btn btn-outline-danger d-flex align-items-center gap-1">
             <FaFilePdf />
             <span>Export PDF</span>
-          </button>
+          </button> */}
           <Link to="/addproducts">
             <button className="btn btn-primary d-flex align-items-center gap-2">
               <FaPlusCircle />

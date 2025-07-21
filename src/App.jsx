@@ -8,9 +8,6 @@ import Orders from "./Componente/Orders/Orders";
 import BannerManager from "./Componente/Banner/BannerManager";
 import Users from "./Componente/Users/Users";
 import Productes from "./Componente/Products/Products";
-import ReportAnalytics from "./Componente/ReportAnalytics/ReportAnalytics";
-import Support from "./Componente/Support/Support";
-import Settings from "./Componente/Settings/Settings";
 import Inventory from "./Componente/Inventory/Inventory";
 import Home from "./Home/Home";
 import ElectricalProducts from "./Home/ElectricalProducts";
@@ -30,6 +27,7 @@ import TermsAndConditions from "./Policy/TermsAndConditions";
 import RefundPolicy from "./Policy/RefundPolicy";
 import ScrollToTop from "./Utilities/ScrollToTop";
 import EditProductForm from "./Componente/Products/EditProduct";
+import MainReport from "./Componente/ReportAnalytics/MainReport";
 
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -51,15 +49,12 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/electricalproducts" element={<ElectricalProducts />} />
-         <Route path="/shoppingcart" element={<ShoppingCart />} />
-         <Route path="/productpage/:id" element={<ProductPage />} />
-           <Route path="/profilepage" element={<ProfilePage />} />
           <Route path="/shoppingcart" element={<ShoppingCart />} />
           <Route path="/productpage/:id" element={<ProductPage />} />
+           <Route path="/profilepage" element={<ProfilePage />} />
           <Route path="/profilepage" element={<ProfilePage />} />
           <Route path="/contactus" element={<ContactUs />} />
           <Route path="/productdetails" element={<RelatedProducts />} />
-          {/* policy */}
           <Route path="/aboutus" element={<AboutUs />} />
           <Route path="/privacypolicy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsAndConditions />} />
@@ -78,14 +73,12 @@ function App() {
                 <Route path="/orders" element={<Orders />} />
                 <Route path="/users" element={<Users />} />
                 <Route path="/bannermanager" element={<BannerManager />} />
-
                 {/* products */}
                 <Route path="/products" element={<Productes />} />
                 <Route path="/addproducts" element={<AddProduct />} />
                 <Route path="/editproducts/:id" element={<EditProductForm />} />
-                <Route path="/reportanalytics" element={<ReportAnalytics />} />
-                <Route path="/support" element={<Support />} />
-                <Route path="/settings" element={<Settings />} />
+                <Route path="/MainReport" element={<MainReport />} />
+
                 <Route path="/inventory" element={<Inventory />} />
                 <Route path="/Admin-Profile" element={<AdminProfile />} />
               </Routes>

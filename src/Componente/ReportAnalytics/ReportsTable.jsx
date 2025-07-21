@@ -1,116 +1,107 @@
-import React from 'react';
-import { FaSearch } from 'react-icons/fa';
+
+
+import React, { useState } from 'react';
+import { FaDownload, FaEye } from 'react-icons/fa';
 
 const ReportsTable = () => {
-  const reportsData = [
-    {
-      id: 'RPT001',
-      title: 'Monthly Sales Report',
-      department: 'Sales',
-      status: 'Approved',
-      createdBy: 'John Doe',
-      date: '2025-07-18',
-      time: '2 days'
-    },
-    {
-      id: 'RPT002',
-      title: 'HR Attendance',
-      department: 'HR',
-      status: 'Pending',
-      createdBy: 'Jane Smith',
-      date: '2025-07-17',
-      time: '--'
-    },
-    {
-      id: 'RPT003',
-      title: 'IT Infrastructure',
-      department: 'IT',
-      status: 'Approved',
-      createdBy: 'Mike Johnson',
-      date: '2025-07-16',
-      time: '1 day'
-    },
-    {
-      id: 'RPT004',
-      title: 'Financial Q2 Report',
-      department: 'Finance',
-      status: 'Rejected',
-      createdBy: 'Sarah Williams',
-      date: '2025-07-15',
-      time: '3 days'
-    },
+  const [reportType, setReportType] = useState("order");
+
+  const orderReports = [
+    { id: 'ORD001', product: 'Smartphone', quantity: 10, total: '₹1,20,000', status: 'Delivered', date: '2025-07-20' },
+    { id: 'ORD002', product: 'LED TV', quantity: 5, total: '₹75,000', status: 'Pending', date: '2025-07-19' },
+  ];
+
+  const productReports = [
+    { id: 'PRD001', name: 'Microwave', stock: 25, price: '₹7,000', status: 'In Stock' },
+    { id: 'PRD002', name: 'Bluetooth Speaker', stock: 0, price: '₹2,200', status: 'Out of Stock' },
   ];
 
   return (
     <div className="card shadow-sm">
-      <div className="card-header bg-white border-bottom-0 d-flex justify-content-between align-items-center">
-        <h5 className="mb-0">Detailed Reports</h5>
-        <div>
-          <select className="form-select form-select-sm me-2" style={{ width: '150px' }}>
-            <option>All Status</option>
-            <option>Approved</option>
-            <option>Pending</option>
-            <option>Rejected</option>
-          </select>
-          <button className="btn btn-sm btn-outline-secondary">
-            Filter
-          </button>
-        </div>
+      <div className="card-header bg-white d-flex justify-content-between align-items-center">
+        <h5 className="mb-0">Reports</h5>
+        <select
+          className="form-select form-select-sm"
+          style={{ width: '200px' }}
+          value={reportType}
+          onChange={(e) => setReportType(e.target.value)}
+        >
+          <option value="order">Order Reports</option>
+          <option value="product">Product Reports</option>
+        </select>
       </div>
+
       <div className="card-body">
         <div className="table-responsive">
-          <table className="table table-hover">
+          <table className="table table-bordered align-middle text-center">
             <thead className="table-light">
-              <tr>
-                <th>Report ID</th>
-                <th>Title</th>
-                <th>Department</th>
-                <th>Status</th>
-                <th>Created By</th>
-                <th>Created Date</th>
-                <th>Processing Time</th>
-                <th>Actions</th>
-              </tr>
+              {reportType === 'order' ? (
+                <tr>
+                  <th>Order ID</th>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              ) : (
+                <tr>
+                  <th>Product ID</th>
+                  <th>Name</th>
+                  <th>Stock</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              )}
             </thead>
             <tbody>
-              {reportsData.map((report, index) => (
-                <tr key={index}>
-                  <td>{report.id}</td>
-                  <td>{report.title}</td>
-                  <td>{report.department}</td>
-                  <td>
-                    <span className={`badge bg-${
-                      report.status === 'Approved' ? 'success' : 
-                      report.status === 'Rejected' ? 'danger' : 'warning'
-                    }`}>
-                      {report.status}
-                    </span>
-                  </td>
-                  <td>{report.createdBy}</td>
-                  <td>{report.date}</td>
-                  <td>{report.time}</td>
-                  <td>
-                    <button className="btn btn-sm btn-outline-primary me-1">View</button>
-                    <button className="btn btn-sm btn-outline-secondary">Download</button>
-                  </td>
-                </tr>
-              ))}
+              {reportType === 'order' ? (
+                orderReports.map((order) => (
+                  <tr key={order.id}>
+                    <td>{order.id}</td>
+                    <td>{order.product}</td>
+                    <td>{order.quantity}</td>
+                    <td>{order.total}</td>
+                    <td>
+                      <span className={`badge bg-${
+                        order.status === 'Delivered' ? 'success' : 'warning'
+                      }`}>
+                        {order.status}
+                      </span>
+                    </td>
+                    <td>{order.date}</td>
+                    <td>
+                      <button className="btn btn-sm btn-outline-primary me-1"><FaEye /></button>
+                      <button className="btn btn-sm btn-outline-success"><FaDownload /></button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                productReports.map((product) => (
+                  <tr key={product.id}>
+                    <td>{product.id}</td>
+                    <td>{product.name}</td>
+                    <td>{product.stock}</td>
+                    <td>{product.price}</td>
+                    <td>
+                      <span className={`badge bg-${
+                        product.status === 'In Stock' ? 'success' : 'danger'
+                      }`}>
+                        {product.status}
+                      </span>
+                    </td>
+                    <td>
+                      <button className="btn btn-sm btn-outline-primary me-1"><FaEye /></button>
+                      <button className="btn btn-sm btn-outline-success"><FaDownload /></button>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>
-        <nav aria-label="Table pagination" className="mt-3">
-          <ul className="pagination justify-content-end">
-            <li className="page-item disabled">
-              <a className="page-link" href="#" tabIndex="-1">Previous</a>
-            </li>
-            <li className="page-item active"><a className="page-link" href="#">1</a></li>
-            <li className="page-item"><a className="page-link" href="#">2</a></li>
-            <li className="page-item"><a className="page-link" href="#">3</a></li>
-            <li className="page-item">
-              <a className="page-link" href="#">Next</a>
-            </li>
-          </ul>
-        </nav>
       </div>
     </div>
   );

@@ -1,10 +1,12 @@
 import React from 'react';
 import { FaSearch } from 'react-icons/fa';
+import ReportCard from './ReportCard';
 
-const PageHeader = () => {
+const MainReport = () => {
   return (
+    <>
     <div className="d-flex justify-content-between align-items-center mb-4">
-      <h2 className="mb-0">Report Analytics Dashboard</h2>
+      <h2  className="mb-0 fw-bold">Report Analytics Dashboard</h2>
       <div className="d-flex">
         <div className="input-group" style={{ width: '250px' }}>
           <input type="text" className="form-control" placeholder="Search reports..." />
@@ -16,8 +18,11 @@ const PageHeader = () => {
           Export Data
         </button>
       </div>
-    </div>
+     </div>
+       <ReportCard/>
+     
+       </>
   );
 };
 
-export default PageHeader;
+export default MainReport;

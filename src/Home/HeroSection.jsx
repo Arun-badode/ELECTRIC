@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../Utilities/axiosInstance";
 import "./HeroSection.css"; // Optional for custom styles
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   const [bannerImages, setBannerImages] = useState([]);
@@ -10,7 +11,7 @@ const HeroSection = () => {
       try {
         const response = await axiosInstance.get("/banner/getAllBanners");
         if (response.data.success) {
-          const images = response.data.data.map((b) => b.image[0]);
+          const images = response?.data?.data?.map((b) => b.image[0]);
           setBannerImages(images);
         }
       } catch (err) {
@@ -25,6 +26,7 @@ const HeroSection = () => {
 
   return (
     <div className="container my-4">
+     <Link to="/electricalproducts" >
       <div
         id="heroCarousel"
         className="carousel slide carousel-fade rounded-4 overflow-hidden position-relative"
@@ -81,6 +83,7 @@ const HeroSection = () => {
           <span className="carousel-control-next-icon" aria-hidden="true"></span>
         </button>
       </div>
+     </Link>
       </div>
   
   );

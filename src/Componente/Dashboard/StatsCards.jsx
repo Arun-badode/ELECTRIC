@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import axiosInstance from "../../Utilities/axiosInstance";
+import Loader from "../../Loader/Loader";
 
 const StatsCards = () => {
   const [statsData, setStatsData] = useState(null);
@@ -8,12 +9,9 @@ const StatsCards = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await axiosInstance.get(
-          `/dashboardOverview/getDashboardOverview`
-        );
-
+        const response = await axiosInstance.get(`/dashboardOverview/getDashboardOverview`);
         const data = response.data;
-
+           console.log(data)
         const formattedStats = [
           {
             title: "Total Products",
@@ -55,7 +53,7 @@ const StatsCards = () => {
   }, []);
 
   if (!statsData) {
-    return <div>Loading...</div>;
+    return <div><Loader/></div>;
   }
 
   return (

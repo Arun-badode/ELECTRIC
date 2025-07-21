@@ -89,11 +89,11 @@ const ElectricalProducts = () => {
             {/* Sidebar */}
             <div className="col-lg-3">
               <div className="card shadow-sm" style={{ borderRadius: '20px' }}>
-                <div className="card-body">
+                <div className="card-body" >
                   <h2 className="h4 fw-semibold mb-4">Filter Products</h2>
 
                   {/* Categories */}
-                  <div className="mb-4">
+                      <div className="mb-4" >
                     <h3 className="h6 fw-semibold mb-3">Categories</h3>
                     {categories.map((category, index) => (
                       <div className="form-check mb-2" key={index}>

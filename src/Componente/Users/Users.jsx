@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaTrash, FaEye } from "react-icons/fa";
 import axiosInstance from "../../Utilities/axiosInstance";
+import Loader from "../../Loader/Loader";
 
 const Users = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -81,7 +82,7 @@ const Users = () => {
 
       <div className="table-responsive bg-white rounded shadow-sm p-3">
         {loading ? (
-          <div className="text-center py-4 ">Loading users...</div>
+          <div className="text-center py-4 "><Loader/></div>
         ) : (
           <table className="table table-hover align-middle mb-0 ">
             <thead className="table-light">

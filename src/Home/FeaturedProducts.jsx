@@ -35,7 +35,7 @@ const FeaturedProducts = () => {
                 <div
                   className="card-img-top rounded-top-3"
                   style={{
-                    backgroundImage: `url(${product.image})`,
+                    backgroundImage: `url(${product.image[0]})`,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
                     height: '14rem',
