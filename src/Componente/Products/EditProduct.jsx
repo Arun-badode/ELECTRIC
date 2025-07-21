@@ -88,7 +88,11 @@ const EditProductForm = () => {
   };
 
   return (
+      <div className="card shadow-sm p-4">
     <form onSubmit={handleSubmit}>
+       <div className="mb-4 text-center text-md-start">
+        <h2 className="fw-bold">Edit Product</h2>
+      </div>
       <div className="row mb-3">
         <div className="col">
           <label className="text-start d-block">Product Name *</label>
@@ -187,6 +191,7 @@ const EditProductForm = () => {
         </button>
       </div>
     </form>
+     </div>
   );
 };
 
