@@ -17,8 +17,11 @@ const Navbar = ({ toggleSidebar }) => {
         <div className="container-fluid d-flex justify-content-between align-items-center">
           {/* Left: Logo + Toggle */}
           <div className="d-flex align-items-center gap-3">
+
+           <Link to="/">
             <img  height={60}   width={80}
               src="https://i.postimg.cc/zXVchZ1Z/2-removebg-preview-1.png" alt="Logo" />
+           </Link>
             <button   className="btn btn-outline-secondary d-lg-none"    onClick={toggleSidebar} >
               <i className="bi bi-list fs-4"></i>
             </button>

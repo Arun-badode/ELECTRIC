@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import axiosInstance from "../Utilities/axiosInstance";
 
 const HeroSection = () => {
   const [bannerImages, setBannerImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // 🔽 Fetch banners from API on mount
   useEffect(() => {
     const fetchBanners = async () => {
       try {
         const response = await axiosInstance.get(`/banner/getAllBanners`);
         if (response.data.success) {
-          const images = response.data.data.map(b => b.image[0]); // get first image of each banner
+          const images = response.data.data.map(b => b.image[0]);
           setBannerImages(images);
         }
       } catch (error) {
@@ -23,7 +21,6 @@ const HeroSection = () => {
     fetchBanners();
   }, []);
 
-  // 🔁 Auto-slide
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
@@ -32,45 +29,79 @@ const HeroSection = () => {
     return () => clearInterval(timer);
   }, [bannerImages.length]);
 
-  // ✅ Don't render until images are loaded
   if (bannerImages.length === 0) return null;
 
   return (
-    <div className="w-full flex justify-center sm:p-8">
-      <div className="relative w-full max-w-8xl h-[60vh] sm:h-[50vh] rounded-2xl overflow-hidden shadow-xl">
-        {/* Image Carousel */}
-        <img
-          src={bannerImages[currentIndex]}
-          alt="Banner"
-          className="w-full h-full object-cover transition-all duration-1000"
-        />
+    <>
+      <style>
+        {`
+          .hero-banner-wrapper {
+            max-width: 1920px;
+            height: 60vh;
+          }
 
-        {/* Overlay */}
-        {/* <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center rounded-2xl">
-          <div className="text-center text-white px-4 md:px-10">
-            <h1 className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-wider mb-3 drop-shadow-lg">
-              Powering the Future of Electricity
-            </h1>
-            <p className="text-sm sm:text-base md:text-lg text-gray-300 max-w-2xl mx-auto">
-              Shop high-quality electrical supplies, tools, meters, and more from trusted brands.
-            </p>
-            <button className="mt-5 px-6 py-2 rounded-full bg-primary font-semibold shadow-lg transition">
-              Shop Now
-            </button>
+          @media (max-width: 768px) {
+            .hero-banner-wrapper {
+            
+              height: 30vh;
+            }
+          }
+
+          @media (max-width: 576px) {
+            .hero-banner-wrapper {
+              height: 30vh;
+            }
+          }
+        `}
+      </style>
+
+      <div className="container-fluid d-flex justify-content-center py-4 px-sm-4">
+        <div className="position-relative w-100 hero-banner-wrapper" >
+          <div
+            id="heroCarousel"
+            className="carousel slide h-100"
+            
+            data-bs-ride="carousel"
+          >
+            <div className="carousel-inner h-100 rounded-4 shadow-lg overflow-hidden" style={{ borderRadius: "20px" }}>
+              {bannerImages.map((img, index) => (
+                <div
+                  className={`carousel-item h-100 ${index === currentIndex ? "active" : ""}`}
+                  key={index}
+                >
+                  <img
+                    src={img}
+                    className="d-block w-100 h-100"
+                    alt={`Slide ${index}`}
+                    style={{ objectFit: "cover", transition: "all 1s ease-in-out" }}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Slide Indicators */}
+            <div className="carousel-indicators position-absolute bottom-0 mb-3">
+              {bannerImages.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  className={i === currentIndex ? "active" : ""}
+                  style={{
+                    width: "12px",
+                    height: "12px",
+                    borderRadius: "50%",
+                    backgroundColor: i === currentIndex ? "#0d6efd" : "#ffffff",
+                    border: "1px solid #ccc",
+                    margin: "0 4px"
+                  }}
+                  onClick={() => setCurrentIndex(i)}
+                />
+              ))}
+            </div>
           </div>
-        </div> */}
-
-        {/* Slide Indicators */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-          {bannerImages.map((_, i) => (
-            <div
-              key={i}
-              className={`w-3 h-3 rounded-full ${i === currentIndex ? "bg-primary" : "bg-white"}`}
-            />
-          ))}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
