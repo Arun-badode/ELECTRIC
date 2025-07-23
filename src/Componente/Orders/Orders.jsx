@@ -1,210 +1,177 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from "react";
+import { Modal, Button } from "react-bootstrap";
+import axiosInstance from "../../Utilities/axiosInstance";
+import { FaEye, FaTrash } from "react-icons/fa";
 
 const Orders = () => {
-  const [selectedOrders, setSelectedOrders] = useState([]);
-  const [selectAll, setSelectAll] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [sortField, setSortField] = useState('date');
-  const [sortDirection, setSortDirection] = useState('desc');
+  const [orders, setOrders] = useState([]);
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
-  const paymentStatuses = ['Successful', 'Pending', 'Incomplete'];
-  const orders = [
-    {
-      id: 'ORD-7895',
-      customer: 'Emma Wilson',
-      date: '2025-06-10',
-      products: 'Silk Blouse, Summer Hat',
-      amount: '$129.99',
-      status: 'Delivered',
-      payment: paymentStatuses[Math.floor(Math.random() * 3)],
-    },
-    {
-      id: 'ORD-7891',
-      customer: 'Olivia Smith',
-      date: '2025-06-06',
-      products: 'Slim Fit Jeans, Cotton T-shirt',
-      amount: '$89.99',
-      status: 'Delivered',
-      payment: paymentStatuses[Math.floor(Math.random() * 3)],
-    },
-    {
-      id: 'ORD-7889',
-      customer: 'Ava Martinez',
-      date: '2025-06-04',
-      products: 'Floral Dress, Straw Hat',
-      amount: '$109.99',
-      status: 'Delivered',
-      payment: paymentStatuses[Math.floor(Math.random() * 3)],
-    },
-  ];
+  // Fetch data on mount
+  useEffect(() => {
+    fetchOrders();
+  }, []);
 
-  const filteredOrders = orders.filter((order) =>
-    [order.id, order.customer, order.products]
-      .some((field) =>
-        field.toLowerCase().includes(searchQuery.toLowerCase())
-      )
-  );
-
-  const sortedOrders = [...filteredOrders].sort((a, b) => {
-    if (sortField === 'date') {
-      return sortDirection === 'asc'
-        ? new Date(a.date) - new Date(b.date)
-        : new Date(b.date) - new Date(a.date);
-    }
-    if (sortField === 'amount') {
-      const numA = parseFloat(a.amount.replace('$', ''));
-      const numB = parseFloat(b.amount.replace('$', ''));
-      return sortDirection === 'asc' ? numA - numB : numB - numA;
-    }
-    return sortDirection === 'asc'
-      ? a[sortField].localeCompare(b[sortField])
-      : b[sortField].localeCompare(a[sortField]);
-  });
-
-  const handleSort = (field) => {
-    if (sortField === field) {
-      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSortField(field);
-      setSortDirection('asc');
+  const fetchOrders = async () => {
+    try {
+      const res = await axiosInstance.get(`/stripe/getAllUserCartPaymentData`);
+      if (res.data.success) {
+        setOrders(res.data.data);
+      }
+    } catch (error) {
+      console.error("Error fetching orders", error);
     }
   };
 
-  const handleSelectAll = () => {
-    if (selectAll) {
-      setSelectedOrders([]);
-    } else {
-      setSelectedOrders(sortedOrders.map((order) => order.id));
-    }
-    setSelectAll(!selectAll);
+  const handleView = (order) => {
+    setSelectedOrder(order);
+    setShowModal(true);
   };
 
-  const handleSelectOrder = (id) => {
-    const isSelected = selectedOrders.includes(id);
-    const updated = isSelected
-      ? selectedOrders.filter((item) => item !== id)
-      : [...selectedOrders, id];
-
-    setSelectedOrders(updated);
-    setSelectAll(updated.length === sortedOrders.length);
-  };
-
-  const getStatusBadgeColor = (status) => {
-    switch (status) {
-      case 'Delivered':
-        return 'bg-success text-white';
-      case 'Cancelled':
-        return 'bg-danger text-white';
-      case 'Returned':
-        return 'bg-warning text-dark';
-      default:
-        return 'bg-secondary text-white';
-    }
-  };
-
-  const getPaymentBadgeColor = (payment) => {
-    switch (payment) {
-      case 'Successful':
-        return 'bg-success text-white';
-      case 'Pending':
-        return 'bg-warning text-dark';
-      case 'Incomplete':
-        return 'bg-danger text-white';
-      default:
-        return 'bg-secondary text-white';
+  const handleDelete = async (paymentId) => {
+    try {
+      const res = await axiosInstance.delete(
+        `/stripe/deletePaymentById/${paymentId}`
+      );
+      if (res.data.success) {
+        alert("Order deleted successfully!");
+        fetchOrders(); // Refresh order list
+      } else {
+        alert("Failed to delete order.");
+      }
+    } catch (error) {
+      console.error("Delete error:", error);
+      alert("Something went wrong while deleting.");
     }
   };
 
   return (
-    <div className="card  p-4">
-      {/* Header */}
+    <div className="card p-4">
       <div className="d-flex justify-content-between mb-4">
         <h4 className="fw-bold">Orders</h4>
-        <input
+        {/* <input
           type="text"
           placeholder="Search orders..."
           className="form-control w-auto"
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
+        /> */}
       </div>
 
-      {/* Orders Table */}
       <div className="table-responsive shadow-sm">
         <table className="table table-hover table-bordered align-middle">
           <thead className="table-light">
             <tr>
-              <th>
-                <input
-                  type="checkbox"
-                  checked={selectAll}
-                  onChange={handleSelectAll}
-                />
-              </th>
-              {['id', 'customer', 'date', 'products', 'amount', 'status'].map((field) => (
-                <th
-                  key={field}
-                  onClick={() => handleSort(field)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  {field.charAt(0).toUpperCase() + field.slice(1)}{' '}
-                  {sortField === field && (
-                    <i className={`fas fa-sort-${sortDirection === 'asc' ? 'up' : 'down'}`}></i>
-                  )}
-                </th>
-              ))}
-              <th>Payment</th>
+              <th>#</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Amount</th>
+              <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {sortedOrders.map((order) => (
-              <tr key={order.id}>
-                <td>
-                  <input
-                    type="checkbox"
-                    checked={selectedOrders.includes(order.id)}
-                    onChange={() => handleSelectOrder(order.id)}
-                  />
-                </td>
-                <td>{order.id}</td>
-                <td>
-                  <div className="d-flex align-items-center">
-                    <div
-                      className="bg-primary text-white rounded-circle d-flex justify-content-center align-items-center me-2"
-                      style={{ width: 30, height: 30 }}
-                    >
-                      {order.customer.charAt(0)}
-                    </div>
-                    {order.customer}
-                  </div>
-                </td>
-                <td>{new Date(order.date).toLocaleDateString()}</td>
-                <td>{order.products}</td>
-                <td>{order.amount}</td>
-                <td>
-                  <span className={`badge ${getStatusBadgeColor(order.status)}`}>
-                    {order.status}
-                  </span>
-                </td>
-                <td>
-                  <span className={`badge ${getPaymentBadgeColor(order.payment)}`}>
-                    {order.payment}
-                  </span>
-                </td>
-                <td>
-                  <button className="btn btn-sm btn-outline-primary me-2">
-                    <i className="fas fa-eye"></i>
-                  </button>
-                  <button className="btn btn-sm btn-outline-danger">
-                    <i className="fas fa-trash-alt"></i>
-                  </button>
+            {orders.length === 0 ? (
+              <tr>
+                <td colSpan="6" className="text-center py-3">
+                  No orders found.
                 </td>
               </tr>
-            ))}
+            ) : (
+              orders.map((order, index) => (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>
+                    {order.userInfo?.firstName} {order.userInfo?.lastName}
+                  </td>
+                  <td>{order.userInfo?.email}</td>
+                  <td>${order.payments[0]?.amount}</td>
+                  <td>
+                    <span
+                      className={`badge ${
+                        order.payments[0]?.status === "success"
+                          ? "bg-success"
+                          : "bg-warning text-dark"
+                      }`}
+                    >
+                      {order.payments[0]?.status}
+                    </span>
+                  </td>
+                  <td>
+                    <button
+                      className="btn btn-sm btn-outline-secondary me-2"
+                      onClick={() => handleView(order)}
+                    >
+                     <FaEye size={14} />
+                    </button>
+                    <button
+                      className="btn btn-sm btn-danger"
+                      onClick={() => handleDelete(order.payments[0]?.id)}
+                    >
+                     <FaTrash size={14} />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
+
+      {/* Modal for View */}
+      <Modal show={showModal} onHide={() => setShowModal(false)} size="lg">
+        <Modal.Header closeButton>
+          <Modal.Title>Order Details</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {selectedOrder && (
+            <>
+              <p>
+                <strong>Name:</strong>{" "}
+                {selectedOrder.userInfo?.firstName}{" "}
+                {selectedOrder.userInfo?.lastName}
+              </p>
+              <p>
+                <strong>Email:</strong> {selectedOrder.userInfo?.email}
+              </p>
+
+              <h6 className="mb-2 mt-2 fw-bold"> Order  Information:</h6>
+              <table className="table table-sm table-bordered">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {selectedOrder.cart.map((item, i) => (
+                    <tr key={i}>
+                      <td>{i + 1}</td>
+                      <td>{item.productName || "N/A"}</td>
+                      <td>{item.quantity}</td>
+                      <td>${item.price}</td>
+                    </tr>
+                  ))}
+                  <tr>
+                    <td colSpan="3" className="text-end fw-bold">
+                      Total:
+                    </td>
+                    <td className="fw-bold">
+                      ${selectedOrder.payments[0]?.amount}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </>
+          )}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowModal(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

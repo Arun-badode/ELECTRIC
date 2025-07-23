@@ -12,14 +12,7 @@ const Dashboard = () => {
           <h2 className="h4 fw-bold mb-1">Dashboard Overview</h2>
           <p className="text-muted mb-0">Welcome back! Here's what's happening with your store.</p>
         </div>
-        <div>
-          <button className="btn btn-primary me-2">
-            <i className="bi bi-download me-2"></i>Export Report
-          </button>
-          <button className="btn btn-outline-secondary">
-            <i className="bi bi-gear me-2"></i>Settings
-          </button>
-        </div>
+      
       </div>
 
       {/* Components */}

@@ -44,15 +44,15 @@ const Navbar = () => {
       }
     };
 
-    // 👇 Poll every 2 seconds
+  
     const interval = setInterval(() => {
       fetchCartCount();
     }, 2000);
 
-    // initial call
+    
     fetchCartCount();
 
-    return () => clearInterval(interval); // cleanup on unmount
+    return () => clearInterval(interval); 
   }, []);
 
   return (

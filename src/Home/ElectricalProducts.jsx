@@ -147,8 +147,10 @@ const ElectricalProducts = () => {
               </div>
 
               <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                {filteredProducts.length > 0 ? (
-                  filteredProducts.map((product) => (
+                {filteredProducts?.length > 0 ? (
+                  filteredProducts?.map((product) => (
+                    <>
+                     <Link to={`/productpage/${product.id}`}>
                     <div className="col" key={product.id}>
                       <div className="card h-100 shadow-sm" style={{ borderRadius: "20px" }}>
                         <div
@@ -176,13 +178,15 @@ const ElectricalProducts = () => {
                           </p>
                           <div className="d-flex justify-content-between align-items-center">
                             <span className="fw-bold text-primary">${product.price}</span>
-                            <Link to={`/productpage/${product.id}`} className="btn btn-primary btn-sm">
+                            <button  className="btn btn-primary btn-sm">
                               View
-                            </Link>
+                            </button>
                           </div>
                         </div>
                       </div>
                     </div>
+                    </Link>
+                    </>
                   ))
                 ) : (
                   <p className="text-center"><Loader/></p>

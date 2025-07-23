@@ -123,7 +123,7 @@ const addtocart = async () => {
             <div className="col-lg-6">
               <h1 className="fw-bold mb-2">{product?.name}</h1>
               <p className="text-muted mb-2">SKU: {product.sku}</p>
-              <p className="text-muted mb-2">Category: {product.category_name}</p>
+              <p className="text-muted mb-2">Category : {product.category_name}</p>
                 <p className="text-muted small mb-0">  {product?.description} {product?.category_name} </p>
                  
               <div className="mb-3 mt-2">
@@ -157,17 +157,6 @@ const addtocart = async () => {
                 <button className="btn btn-primary py-3 fw-medium" onClick={addtocart}>
                   Add to Cart - ${(parseFloat(product.price) * quantity).toFixed(2)}
                 </button>
-              </div>
-
-              <div className="d-flex justify-content-between small text-muted pt-3 border-top">
-                <div className="d-flex align-items-center gap-2">
-                  <i className="bi bi-truck"></i>
-                  <span>Free shipping on orders $75+</span>
-                </div>
-                <div className="d-flex align-items-center gap-2">
-                  <i className="bi bi-arrow-counterclockwise"></i>
-                  <span>30-day returns</span>
-                </div>
               </div>
             </div>
           </div>

@@ -29,8 +29,10 @@ const FeaturedProducts = () => {
         </div>
 
         <div className="row">
-          {products.slice(0, 8).map((product, index) => (
+          {products?.slice(0, 8).map((product, index) => (
+            <>
             <div key={index} className="col-12 col-sm-6 col-lg-3 mb-4 d-flex">
+            <Link  to={`/productpage/${product.id}`}>
               <div className="card shadow-lg w-100  d-flex flex-column" style={{ borderRadius: "20px" }}>
                 <div
                   className="card-img-top rounded-top-3"
@@ -55,16 +57,15 @@ const FeaturedProducts = () => {
 
                   <div className="mt-auto d-flex justify-content-between align-items-center">
                     <span className="text-primary fw-bold">${product.price}</span>
-                    <Link
-                      to={`/productpage/${product.id}`}
-                      className="btn btn-primary btn-sm rounded-pill"
-                    >
+                    <button className="btn btn-primary btn-sm rounded-pill">
                       View
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>
+            </Link>
             </div>
+            </>
           ))}
         </div>
       </div>

@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import  { useEffect, useRef, useState } from 'react';
 import axiosInstance from '../Utilities/axiosInstance';
+import { Link } from 'react-router-dom';
 
 const Categoriesslider = () => {
   const [categories, setCategories] = useState([]);
@@ -79,7 +80,9 @@ const Categoriesslider = () => {
               <p className="text-red-500">{error}</p>
             ) : categories.length > 0 ? (
               categories.map((cat, index) => (
-                <div key={cat._id || index}
+              <>
+      <Link to="/electricalproducts">
+          <div key={cat._id || index}
                   className="min-w-[250px] bg-white rounded-2xl shadow-md hover:shadow-xl transition p-4" >
                   <img  src={cat.image}   alt={cat.name}
                     className="w-full h-40 object-cover rounded-xl"
@@ -88,6 +91,8 @@ const Categoriesslider = () => {
                     {cat.name}
                   </h3>
                 </div>
+           </Link>
+              </>
               ))
             ) : (
               <p className="text-gray-500">No categories found</p>

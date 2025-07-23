@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Line, Doughnut } from "react-chartjs-2";
+import { Doughnut, Bar } from "react-chartjs-2";
 import axiosInstance from "../../Utilities/axiosInstance";
 import {
   Chart as ChartJS,
@@ -8,102 +8,144 @@ import {
   Legend,
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
 } from "chart.js";
 
-// Register ChartJS modules
+// Register chart components
 ChartJS.register(
   ArcElement,
   Tooltip,
   Legend,
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement
+  BarElement
 );
 
 const DashboardCharts = () => {
-  const [dashboardData, setDashboardData] = useState(null);
+  const [dashboardData, setDashboardData] = useState({
+    totalUsers: { count: 0 },
+    totalProducts: { count: 0 },
+  });
+
+  const [stockData, setStockData] = useState({
+    total: 0,
+    inStock: 0,
+    lowStock: 0,
+    outOfStock: 0,
+  });
+
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchAllData = async () => {
       try {
-        const response = await axiosInstance.get("/dashboardOverview/getDashboardOverview");
-        setDashboardData(response.data);
+        // Fetch dashboard overview
+        const dashboardRes = await axiosInstance.get("/dashboardOverview/getDashboardOverview");
+        const dashboard = dashboardRes?.data || {
+          totalUsers: { count: 0 },
+          totalProducts: { count: 0 },
+        };
+        setDashboardData(dashboard);
+
+        // Fetch inventory product data
+        const inventoryRes = await axiosInstance.get("/product/getAllInventoryProducts");
+        const products = inventoryRes?.data?.data || [];
+
+        const inStock = products.filter(p => Number(p?.stockQuantity || 0) > 15).length;
+        const lowStock = products.filter(p => Number(p?.stockQuantity || 0) <= 15 && Number(p?.stockQuantity || 0) > 0).length;
+        const outOfStock = products.filter(p => Number(p?.stockQuantity || 0) === 0).length;
+
+        setStockData({
+          total: products.length,
+          inStock,
+          lowStock,
+          outOfStock,
+        });
+
       } catch (error) {
-        console.error("Error fetching dashboard data:", error);
+        console.error("Dashboard Chart Fetch Error:", error);
+        // Optional: Set fallback data or flags here
+      } finally {
+        setLoading(false);
       }
     };
 
-    fetchData();
+    fetchAllData();
   }, []);
 
-  if (!dashboardData) return <div>Loading charts...</div>;
+  if (loading) return <div>Loading charts...</div>;
 
-  // Line Chart for Revenue Trends
-  const stockTrendsData = {
-    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
-    datasets: [{
-      label: "Revenue ($)",
-      data: [5000, 6200, 7000, 8000, 7500, 8200, dashboardData.totalRevenue?.count || 0],
-      fill: true,
-      backgroundColor: "rgba(75, 192, 192, 0.2)",
-      borderColor: "rgba(75, 192, 192, 1)",
-      tension: 0.4,
-    }]
+  // Bar chart for stock overview
+  const stockOverviewChart = {
+    labels: ["In Stock", "Low Stock", "Out of Stock"],
+    datasets: [
+      {
+        label: "Stock Overview",
+        data: [
+          stockData.inStock || 0,
+          stockData.lowStock || 0,
+          stockData.outOfStock || 0,
+        ],
+        backgroundColor: ["#4CAF50", "#FFC107", "#F44336"],
+        borderRadius: 5,
+      },
+    ],
   };
 
-  // Doughnut Chart for Users vs Products
+  const stockOverviewOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: { precision: 0 },
+      },
+    },
+  };
+
+  // Doughnut chart for user vs product
   const userProductData = {
     labels: ["Users", "Products"],
-    datasets: [{
-      data: [
-        dashboardData.totalUsers?.count || 0,
-        dashboardData.totalProducts?.count || 0
-      ],
-      backgroundColor: ["#36A2EB", "#FF6384"],
-      borderWidth: 1
-    }]
+    datasets: [
+      {
+        data: [
+          dashboardData?.totalUsers?.count || 0,
+          dashboardData?.totalProducts?.count || 0,
+        ],
+        backgroundColor: ["#36A2EB", "#FF6384"],
+        borderWidth: 1,
+      },
+    ],
   };
 
   return (
     <div className="row mb-4">
-      {/* Revenue Line Chart */}
+      {/* Bar Chart: Stock Overview */}
       <div className="col-lg-6 mb-4">
         <div className="card h-100">
           <div className="card-header d-flex justify-content-between align-items-center">
-            <h5 className="mb-0">Revenue Trends</h5>
-            <div className="btn-group btn-group-sm">
-              <button className="btn btn-primary">7 Months</button>
-              <button className="btn btn-outline-secondary">Year</button>
-            </div>
+            <h5 className="mb-0">Inventory Stock Overview</h5>
+            <span className="badge bg-secondary">Total: {stockData.total}</span>
           </div>
           <div className="card-body">
             <div style={{ height: "250px" }}>
-              <Line
-                data={stockTrendsData}
-                options={{
-                  responsive: true,
-                  maintainAspectRatio: false,
-                  plugins: { legend: { display: false } },
-                }}
-              />
+              <Bar data={stockOverviewChart} options={stockOverviewOptions} />
             </div>
           </div>
         </div>
       </div>
 
-   
-
-      {/* Users vs Products Doughnut */}
+      {/* Doughnut Chart: Users vs Products */}
       <div className="col-lg-6 mb-4">
         <div className="card h-100">
           <div className="card-header d-flex justify-content-between align-items-center">
-            <h5 className="mb-0">Top Product</h5>
-            <button className="btn btn-sm btn-outline-secondary">
+            <h5 className="mb-0">Users vs Products</h5>
+            {/* <button className="btn btn-sm btn-outline-secondary">
               <i className="bi bi-bar-chart"></i>
-            </button>
+            </button> */}
           </div>
           <div className="card-body">
             <div style={{ height: "250px" }}>
@@ -113,7 +155,9 @@ const DashboardCharts = () => {
                   responsive: true,
                   maintainAspectRatio: false,
                   cutout: "70%",
-                  plugins: { legend: { position: "bottom" } },
+                  plugins: {
+                    legend: { position: "bottom" },
+                  },
                 }}
               />
             </div>
